@@ -1,0 +1,36 @@
+.ButtonStyle{
+    width:fitcontent;
+}
+
+.loginformcontainerdiv{
+    flex: 1 1 0%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      justify-content: space-around;
+      padding-top: 5%;
+  }
+
+  .loginformdiv{
+    width: 25%;
+    display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+  }
+  
+  .alreadyhavacc{
+    display: flex;
+      flex: 0.1;
+  }
+  
+  
+  .alreadyhavacc a{
+    align-content: center;
+    text-decoration: underline;
+  }
+  

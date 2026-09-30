@@ -1,0 +1,76 @@
+.realmsmenuelement{
+    font: inherit;
+    color: rgb(67, 24, 255);
+    text-decoration: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+}
+
+.realmsmenuelement:hover{
+    background-color: #00ffff;
+    cursor: pointer;
+    
+  }
+
+  
+.realmsmenusearch{
+    padding: 40px 36px 36px;
+  }
+  
+  .realmsmenusearchbox{
+    width: 100%;
+    height: 20px;
+  }
+  
+  .realmsmenusearchlogofont{
+     margin: 0px;
+     font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.167;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: Poppins, sans-serif;
+      font-weight: 800;
+  }
+
+  .homebuttonlink{
+    font: inherit;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .homebutton{
+    padding: 40px 36px 36px;
+  }
+
+  
+.realmsmenucontainer {
+    list-style: none;
+    margin: 20px 0px 80px;
+    position: relative;
+    padding: 0px 0px 0px 24px;
+  }
+
+  .realmsmenutable{
+    width: 100%;  
+  }
+

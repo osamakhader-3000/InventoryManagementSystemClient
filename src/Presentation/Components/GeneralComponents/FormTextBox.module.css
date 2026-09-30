@@ -1,0 +1,152 @@
+  
+  .innerDivStyle {
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(244, 247, 254);
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    gap: 5px;
+    
+    
+  }
+
+  .innerDivStyleInvalid{
+    border-color:salmon;
+    border: 2px solid;
+   
+  }
+  
+  .innerDivStyleActive {
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(188, 108, 241); 
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    gap: 5px;
+  }
+
+  
+.outerDivStyle{
+    display: flex;
+  }
+
+  .outerContainerStyle{
+    position: relative;
+    width: 80%;
+  }
+
+
+.textInputStyle {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0px;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0px;
+    width: 100%;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    padding: 0px;
+    outline: 0px;
+  }
+
+    .divTextboxInvalid{
+    background-color: salmon;
+   
+  }
+
+  .validmessage {position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: salmon;
+    min-height:100%;
+    border-radius: 10px;
+    box-shadow: rgba(10, 10, 10, 0.2) 2px 2px 10px 2px;
+  }
+
+    .validMessageContainer {position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    background-color: salmon;
+    height:100%;
+    border-radius: 10px;
+  }
+
+  .textbox{    
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0px;
+    display: block;
+    min-width: 0px;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    outline: 0px;
+    border-style: solid;    
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-color: rgb(204 208 217);
+    padding: 11.6px 12px 11.6px 16px;    
+    transition: background-color 200ms 
+    cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    width: 80%;
+  }
+
+  .multiline{
+    height: 20%;
+  }
+
+  .textbox:focus {
+    border-color: rgb(188, 108, 241); 
+  }
+
+  .invalid{
+    border-color: salmon;
+    border: 2px solid;
+  }
+
+  .outerDivStyle {
+    justify-content: space-evenly;
+    width: 100%;
+    display: flex;
+    position: relative;
+  }

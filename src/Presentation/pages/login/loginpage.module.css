@@ -1,0 +1,140 @@
+  :root {
+  /* Default theme (e.g., light theme) */
+  --background-color: #cff;
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --background-color: #1a1a1a; 
+}
+  
+  
+  
+  .socialbtn {
+    position: relative;
+    width: 320px;
+    border: 1px solid #c2c8d0;
+    border-radius: 6px;
+    font-size: 16px;
+    align-items: center;
+    background-color: #fff;
+    height: 52px;
+    transition: box-shadow .15 ease-in-out, background-color .15s ease-in-out;
+    cursor: pointer;
+    color: #2d333a;
+    margin-bottom: 8px;
+    display: flex;
+    outline: 0;
+    background-color: #ffffff80;
+    display: inline-flex;
+    align-items: center; 
+    padding: 0 8px 0 52px;
+  }
+
+  .sociallogowrapper {
+    position: absolute;
+    left: 26px;
+    top: 50%;
+    transform: translate(-50%) translateY(-50%);
+    display: flex;
+    align-items: center;
+  }
+
+  
+  .sociallogo {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+
+  .middle {
+     display: flex;
+     flex: 1;
+     background-size: contain;
+     border-radius: 30px;
+     flex-direction: column;
+     background-size: contain;
+     background-repeat: round;
+}
+
+.loginroot {
+    background-color: var(--background-color);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    min-height: 60vh;
+    border-radius: 30px;
+    max-height: 60vh;
+    background: #fff;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+
+  .logodiv{
+    display: flex;
+    flex:0.5;
+    flex-direction: column;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: bottom;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+  
+
+  .logodiv .title{
+      margin-top: 90%;
+      font-family: sans-serif;
+      font-size: x-large;
+  }
+
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+
+
+  .logo h4{
+    font-size: x-large;
+  }
+
+
+  .buttons{
+    display: flex;
+    flex: 1;    
+    flex-direction: column;
+  }
+
+
+  .quarter1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    min-height: 30%;
+  }
+
+
+  .quarter2{    
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }

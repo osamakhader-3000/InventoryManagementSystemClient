@@ -1,0 +1,102 @@
+:root {
+  /* Default theme (e.g., light theme) */
+  --background-color: #cff;
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --background-color: #1a1a1a;
+}
+
+.realmsmenuelement{
+    font: inherit;
+    color: rgb(67, 24, 255);
+    text-decoration: none;  
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+}
+
+.realmsmenuelement:hover{
+    background-color: var(--background-color);
+    cursor: pointer;
+  }
+
+
+  
+.realmsmenurealmtext{
+    flex: 1 1 auto;
+    min-width: 0px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .realmsmenurealmtextspan{ 
+      font-weight: 500;
+      margin-top: 1.2px;
+      color: rgb(163, 174, 208);
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0px;
+      font-size: 1rem;
+      font-weight: 400;
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.5;
+      display: block;
+  }
+
+  .realmsmenurealmimg
+{
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  margin-right: 14px;
+  color: rgb(163, 174, 208);
+  font-size: 1.25rem;
+  min-width: 0px !important;
+}
+
+.realmsmenurelmlink{
+    font: inherit;
+    color: rgb(67, 24, 255);
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+  
+
+  .realmsmenurelmlink > div{
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    display: flex;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    min-width: 0px;
+    box-sizing: border-box;
+    text-align: left;
+    color: rgb(163, 174, 208);
+    outline: 0px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    margin: 0px;
+    text-decoration: none;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 7px 10px;
+    border-radius: 5px; 
+  }

@@ -1,0 +1,66 @@
+.mainviewheader{
+    display:flex;
+    margin:20px;
+  }
+  
+  .searchDiv {
+    flex-grow: 1;
+  }
+
+  .innerDivStyle{
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(244, 247, 254);
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    gap: 5px;
+    width: 20%;
+
+  }
+
+   .innerDivStyleActive{
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(188, 108, 241); 
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    gap: 5px;
+     width: 40%;
+
+  }
+
+  .profileButton{
+    margin-left: auto;
+        display: contents;
+  }
+
+  .username{
+       align-content: center;
+       font-weight: 600;
+  }

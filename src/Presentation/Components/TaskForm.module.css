@@ -1,0 +1,106 @@
+.taskformcontainer {
+  margin: 20px;
+  width: 50%;
+  background-color: white;
+  border-radius: 13px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.taskformelementcontainer {
+  width: 80%;
+  padding: 20px;
+}
+
+
+
+.taskformelementbuttoncontainer {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+
+.formtextboxdiv {
+  width: 100%;
+  font-weight: 400;
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.4375em;
+  box-sizing: border-box;
+  cursor: text;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: rgb(112, 126, 174);
+  letter-spacing: 0.5px;
+  position: relative;
+  background-color: rgb(255, 255, 255) !important;
+  border-width: 1px;
+  border-image: initial;
+  border-style: solid;
+  border-color: rgb(244, 247, 254);
+  padding: 11.6px 12px 11.6px 16px;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 13px;
+  border-color: #00ffff;
+}
+
+.formtextbox {
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentcolor;
+  border: 0px;
+  box-sizing: content-box;
+  background: none;
+  height: 1.4375em;
+  margin: 0px;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0px;
+  width: 100%;
+  animation-name: mui-auto-fill-cancel;
+  animation-duration: 10ms;
+  padding: 0px;
+  outline: 0px;
+}
+
+.formtextarea {
+  height: 20em;
+  resize: none;
+}
+
+.taskformbutton {
+  font-weight: bold;
+  font-size: large;
+  border: 0px;
+  border-radius: 13px;
+  overflow: hidden;
+  height: 44px;
+  width: 150px;
+  object-fit: cover;
+  cursor: pointer;
+  background-color: rgb(224, 229, 242);
+  color: rgb(43, 54, 116);
+  margin: 0px 4px;
+}
+
+.taskformbutton:hover {
+  background-color: rgb(177, 184, 202);
+}
+
+.taskformokbutton {
+  background-color: rgb(253 135 135);
+}
+
+.taskformokbutton:hover {
+  background-color: rgb(224, 79, 79);
+}
+
+
+.maincontainer {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

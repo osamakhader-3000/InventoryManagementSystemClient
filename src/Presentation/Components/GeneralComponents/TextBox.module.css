@@ -1,0 +1,71 @@
+
+
+.outerDivTextbox {
+    display: flex;
+  }
+  
+  .divTextbox {
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(244, 247, 254);
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+  }
+
+  .divTextboxInvalid{
+    background-color: salmon;
+  }
+
+  
+  .divTextboxActive {
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(188, 108, 241); 
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+  }
+  
+  .inputTextbox {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0px;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0px;
+    width: 100%;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    padding: 0px;
+    outline: 0px;
+  }

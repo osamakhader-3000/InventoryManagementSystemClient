@@ -1,0 +1,20 @@
+.backbuttonclass{
+    font-weight: bold;
+    font-size: large;
+    border: 0px;
+    border-radius: 13px;
+    overflow: hidden;
+    height: 44px;
+    width: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    background-color: rgb(224, 229, 242);
+    color: rgb(43, 54, 116);
+    margin: 0px 4px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.backbuttonclass:hover {
+  background-color: rgb(024, 229, 242);
+}

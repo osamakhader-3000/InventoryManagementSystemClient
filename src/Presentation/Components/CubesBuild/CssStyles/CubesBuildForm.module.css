@@ -1,0 +1,100 @@
+.maincontainer {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elementcontainer {
+  width: 80%;
+  padding: 20px; 
+}
+
+.formcontainer {
+  margin: 20px;
+  width: 50%;
+  background-color: white;
+  border-radius: 13px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.clientContainer {
+ display: flex;
+ flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.clientInnerContainer {
+  width: 50%;
+  display: flex;
+  gap: 2%;
+}
+
+.elementbuttoncontainer {
+  margin-top: 10%;
+  margin-bottom: 2%;
+}
+
+.formbutton {
+  font-weight: bold;
+  font-size: large;
+  border: 0px;
+  border-radius: 13px;
+  overflow: hidden;
+  height: 44px;
+  width: 150px;
+  object-fit: cover;
+  cursor: pointer;
+  background-color: rgb(224, 229, 242);
+  color: rgb(43, 54, 116);
+  margin: 0px 4px;
+}
+
+.formbutton:hover {
+  background-color: rgb(177, 184, 202);
+}
+
+.formokbutton {
+  background-color: rgb(253 135 135);
+}
+
+.formokbutton:hover {
+  background-color: rgb(224, 79, 79);
+}
+
+.spanClientName {
+  cursor: default;
+}
+
+.clientListItem {
+  width: 80%;
+  background-color: rgb(224, 229, 242);
+  border-radius: 13px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.clientsContainer {
+  width: 50%;
+  margin-top: 10%;
+}
+
+.clientList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

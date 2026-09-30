@@ -1,0 +1,41 @@
+.profileimagemenu .menu {
+    box-shadow: rgba(10, 10, 10, 0.2) 2px 2px 10px 0px;
+    border-radius: 10px;
+    position: absolute;
+    z-Index:1;
+    padding: 8px;
+    width: 230px;
+    right: 0;
+    top: calc(100% + 10px);
+    background-color: rgb(255, 255, 255);
+}
+
+.profileimagemenu{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: relative;
+}
+
+.menuitem{
+    padding: 8px 10px;
+    cursor: pointer;
+    color: rgb(163, 174, 208);
+}
+.menuitem:hover{
+    background-color: #ccffff;
+}
+
+.userbuttonclass{
+    border: 0px;
+    background: rgba(0, 0, 0, 0);
+  }
+  
+  .userimgclass{
+    border-radius: 50%;
+    overflow: hidden;
+    height: 44px;
+    width: 44px;
+    object-fit: cover;
+      color: transparent;
+  }
