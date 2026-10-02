@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import RealmsMenuItem from './MainSidebarMenuItem';
-import SearchBox from './GeneralComponents/SearchBox';
+import SearchBox from '../../shared/ui/GeneralComponents/SearchBox';
 import Realm from '../../Domain/Entities/Realm';
 import styles from './RealmsMenu.module.css'
 import { useListRealmsByName } from '../Hooks/useListRealmsByName';

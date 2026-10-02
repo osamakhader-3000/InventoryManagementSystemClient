@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { UserEmailVerificationStatus } from '../../../Domain/Entities/User';
 import { DependencyContext } from '../../../context/DependencyContext';
 import GeneralStyles from '../../GeneralStyles.module.css';
-import { LoadingButton } from "../../Components/GeneralComponents/LoadingButton.tsx"
+import { LoadingButton } from "../../../shared/ui/GeneralComponents/LoadingButton.tsx"
 
 
 

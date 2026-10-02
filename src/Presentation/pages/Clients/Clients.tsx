@@ -3,12 +3,12 @@ import { DependencyContext } from "../../../context/DependencyContext";
 import Client from "../../../Domain/Entities/Client";
 import styles from './CssStyles/Clients.module.css';
 import { Link } from "react-router";
-import { EditIconSvg } from "../../Components/GeneralComponents/EditIconSvg";
-import { DeleteIconSvg } from "../../Components/GeneralComponents/DeleteIconSvg";
-import { ButtonPreloader } from "../../Components/GeneralComponents/ButtonPreloader";
+import { EditIconSvg } from "../../../shared/ui/GeneralComponents/EditIconSvg";
+import { DeleteIconSvg } from "../../../shared/ui/GeneralComponents/DeleteIconSvg";
+import { ButtonPreloader } from "../../../shared/ui/GeneralComponents/ButtonPreloader";
 import { UserRole } from "../../../Domain/Entities/User";
-import { ViewIconSvg } from "../../Components/GeneralComponents/ViewIconSvg";
-import { DeleteConfirmation } from "../../Components/GeneralComponents/DeleteConfirmation";
+import { ViewIconSvg } from "../../../shared/ui/GeneralComponents/ViewIconSvg";
+import { DeleteConfirmation } from "../../../shared/ui/GeneralComponents/DeleteConfirmation";
 
 export default function Clients() {
 

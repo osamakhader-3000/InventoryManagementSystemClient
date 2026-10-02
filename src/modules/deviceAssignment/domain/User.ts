@@ -13,4 +13,8 @@ export default class User {
         this.name = name;
         this.department = department;
     }
+
+    static fromId(id: string): User {
+        return new User(id, "", new Department(null, ""));
+    }
 }

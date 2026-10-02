@@ -2,11 +2,11 @@ import React, { useContext,useState,useEffect, useRef } from "react";
 import AuthForm from "./AuthForm";
 import styles from './LoginForm.module.css'
 import { DependencyContext } from '../../context/DependencyContext';
-import { ErrorMessageBox } from './GeneralComponents/ErrorMessageBox';
-import {TextBox} from './GeneralComponents/TextBox' 
+import { ErrorMessageBox } from '../../shared/ui/GeneralComponents/ErrorMessageBox';
+import {TextBox} from '../../shared/ui/GeneralComponents/TextBox' 
 import { useNavigate } from "react-router";
 import { User } from "../../Domain/Entities/User";
-import { LoadingButton } from "./GeneralComponents/LoadingButton";
+import { LoadingButton } from "../../shared/ui/GeneralComponents/LoadingButton";
 
 
 interface LoginFormProps {

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef } from "react";
 import AuthForm from "./AuthForm";
-import { TextBox } from './GeneralComponents/TextBox'
+import { TextBox } from '../../shared/ui/GeneralComponents/TextBox'
 import styles from './CreateAccountForm.module.css'
 import { DependencyContext } from '../../context/DependencyContext';
-import { ErrorMessageBox } from './GeneralComponents/ErrorMessageBox';
+import { ErrorMessageBox } from '../../shared/ui/GeneralComponents/ErrorMessageBox';
 import { useNavigate } from "react-router";
-import { LoadingButton } from "./GeneralComponents/LoadingButton";
+import { LoadingButton } from "../../shared/ui/GeneralComponents/LoadingButton";
 import Account from "../../Domain/Entities/Account";
 
 interface CreateAccountFormProps {

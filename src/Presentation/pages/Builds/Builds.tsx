@@ -3,11 +3,11 @@ import { DependencyContext } from "../../../context/DependencyContext";
 import Build from "../../../Domain/Entities/Build";
 import styles from './CssStyles/Builds.module.css'
 import { Link } from "react-router";
-import { ButtonPreloader } from "../../Components/GeneralComponents/ButtonPreloader";
-import { DeleteIconSvg } from "../../Components/GeneralComponents/DeleteIconSvg";
-import { EditIconSvg } from "../../Components/GeneralComponents/EditIconSvg";
+import { ButtonPreloader } from "../../../shared/ui/GeneralComponents/ButtonPreloader";
+import { DeleteIconSvg } from "../../../shared/ui/GeneralComponents/DeleteIconSvg";
+import { EditIconSvg } from "../../../shared/ui/GeneralComponents/EditIconSvg";
 import { UserRole } from "../../../Domain/Entities/User";
-import { ViewIconSvg } from "../../Components/GeneralComponents/ViewIconSvg";
+import { ViewIconSvg } from "../../../shared/ui/GeneralComponents/ViewIconSvg";
 
 export default function Builds() {
 

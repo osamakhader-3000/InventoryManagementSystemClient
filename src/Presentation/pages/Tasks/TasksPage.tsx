@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Task from '../../../Domain/Entities/Task';
 import styles from './TasksPage.module.css'
 import { DependencyContext } from '../../../context/DependencyContext';
-import {ButtonPreloader} from '../../Components/GeneralComponents/ButtonPreloader';
+import {ButtonPreloader} from '../../../shared/ui/GeneralComponents/ButtonPreloader';
 
 
 export default function TasksPage() {

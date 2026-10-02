@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { DependencyContext } from "../../../context/DependencyContext";
 import style from './CssStyles/Profile.module.css'
-import { TextBox } from '../../../Presentation/Components/GeneralComponents/TextBox'
-import { ErrorMessageBox } from '../../../Presentation/Components/GeneralComponents/ErrorMessageBox';
-import { LoadingButton } from '../../Components/GeneralComponents/LoadingButton.tsx'
+import { TextBox } from '../../../shared/ui/GeneralComponents/TextBox.tsx'
+import { ErrorMessageBox } from '../../../shared/ui/GeneralComponents/ErrorMessageBox.tsx';
+import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton.tsx'
 
 export default function Profile() {
 

@@ -1,6 +1,6 @@
 import { DependencyContext } from '../../../context/DependencyContext';
 import { useContext, useEffect, useRef, useState } from 'react';
-import {ErrorMessageBox} from '../GeneralComponents/ErrorMessageBox';
+import {ErrorMessageBox} from '../../../shared/ui/GeneralComponents/ErrorMessageBox';
 
 
 export function ErrorMessageListener() {

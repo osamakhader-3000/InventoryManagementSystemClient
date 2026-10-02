@@ -29,4 +29,9 @@ export default class Device {
         this.price = price;
         this.soldPrice = soldPrice;
     }
+
+    // Reference to a device known only by its serial number (until the form has a device picker).
+    static fromSerialNumber(serialNumber: string): Device {
+        return new Device(null, "", serialNumber.trim(), "", "", null, null, 0, 0);
+    }
 }

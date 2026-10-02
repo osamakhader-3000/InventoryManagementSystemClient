@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { TextBox } from '../GeneralComponents/TextBox';
+import { TextBox } from '../../../shared/ui/GeneralComponents/TextBox';
 import style from './CssStyles/CubesBuildForm.module.css';
-import { LoadingButton } from '../GeneralComponents/LoadingButton';
+import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../context/DependencyContext';
 import Build from '../../../Domain/Entities/Build';

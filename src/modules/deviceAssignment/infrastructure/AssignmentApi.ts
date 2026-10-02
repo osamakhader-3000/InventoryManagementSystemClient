@@ -1,10 +1,9 @@
 import Assignment from "../domain/Assignment";
-import { ITaskApi } from "../Interfaces/ITaskApi";
 import urls from '../../../shared/infrastructure/http/urls.json'
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
-import { GeneralApiResult } from "../../DataTransferObjects/GeneralApiResult";
+import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 
-export class AssignmentApi extends GeneralApi implements IAssignmentApi{
+export class AssignmentApi extends GeneralApi {
     private baseUrl:string;
 
     constructor(){
@@ -18,8 +17,8 @@ export class AssignmentApi extends GeneralApi implements IAssignmentApi{
         return result;
     }
 
-    async GetAssignment(assignmentID: string): Promise<GeneralApiResult<Assignment>> {
-        let url = `${this.baseUrl}/${urls['assignment-get']}/${assignmentID}`;
+    async GetAssignment(assignmentID: bigint): Promise<GeneralApiResult<Assignment>> {
+        let url = `${this.baseUrl}/${urls['assignment-get']}/${assignmentID.toString()}`;
         let result = await this.GeneralApiCaller<Assignment>('GET', url);
         return result;
         
@@ -37,8 +36,8 @@ export class AssignmentApi extends GeneralApi implements IAssignmentApi{
         return result;
     }
 
-    async DeleteAssignment(assignmentID: string): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['assignment-delete']}/${assignmentID}`;
+    async DeleteAssignment(assignmentID: bigint): Promise<GeneralApiResult<boolean>> {
+        let url = `${this.baseUrl}/${urls['assignment-delete']}/${assignmentID.toString()}`;
         let result = await this.GeneralApiCaller<boolean>('DELETE', url);
         return result;
     }

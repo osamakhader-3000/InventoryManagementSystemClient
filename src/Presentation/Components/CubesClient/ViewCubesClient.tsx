@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Client from "../../../Domain/Entities/Client";
 import { DependencyContext } from "../../../context/DependencyContext";
 import styles from "./CssStyles/ViewCubesClient.module.css";
-import { BackButton } from "../GeneralComponents/BackButton";
+import { BackButton } from "../../../shared/ui/GeneralComponents/BackButton";
 
 export default function ViewCubesClient() {
 

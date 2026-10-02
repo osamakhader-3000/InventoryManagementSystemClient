@@ -1,8 +1,9 @@
 import Assignment from "./Assignment";
 
 export interface IAssignmentRepository {
-    GetAssignment(assignmentId: string): Promise<Assignment>;
-    CreateAssignment(assignment: Assignment): Promise<Assignment>;
-    UpdateAssignment(assignment: Assignment): Promise<Assignment>;
-    DeleteAssignment(assignmentId: string): Promise<void>;
+    GetAssignment(assignmentId: bigint): Promise<Assignment | null>;
+    ListAssignments(): Promise<Assignment[]>;
+    CreateAssignment(assignment: Assignment): Promise<boolean>;
+    UpdateAssignment(assignment: Assignment): Promise<boolean>;
+    DeleteAssignment(assignmentId: bigint): Promise<boolean>;
 }

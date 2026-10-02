@@ -33,6 +33,12 @@ import { IClientService } from '../Application/Interfaces/IClientService.ts';
 import { ClientService } from '../Application/Services/ClientService.ts';
 import { ClientRepository } from '../Data/Repositories/ClientRepository.ts';
 import { ClientApi } from '../Data/api/Implementation/ClientApi.ts';
+import { IAssignmentRepository } from '../modules/deviceAssignment/domain/IAssignmentRepository';
+import { HttpAssignmentRepository } from '../modules/deviceAssignment/infrastructure/HttpAssignmentRepository';
+import { IUserRepository as IAssignmentUserRepository } from '../modules/deviceAssignment/domain/IUserRepository';
+import { HttpUserRepository } from '../modules/deviceAssignment/infrastructure/HttpUserRepository';
+import IAccessoryRepository from '../modules/deviceAssignment/domain/IAccessoryRepository';
+import { HttpAccessoryRepository } from '../modules/deviceAssignment/infrastructure/HttpAccessoryRepository';
 
 
 
@@ -73,6 +79,10 @@ const clientApi = new ClientApi();
 const clientRepo = new ClientRepository(clientApi, authService);
 const clientServ = new ClientService(clientRepo);
 
+const assignmentRepo = new HttpAssignmentRepository();
+const assignmentUserRepo = new HttpUserRepository();
+const accessoryRepo = new HttpAccessoryRepository();
+
 const authListener = new AuthListener(authEventBus, userServ);
 authListener.StartListening();
 
@@ -85,6 +95,9 @@ interface DependencyContextType {
   buildService: IBuildService;
   userService: IUserService;
   clientService: IClientService;
+  assignmentRepository: IAssignmentRepository;
+  assignmentUserRepository: IAssignmentUserRepository;
+  accessoryRepository: IAccessoryRepository;
   relocationService:IRelocationService;
   authStorage:IAuthStorage;
   errorHandlingBus:ErrorHandlingBus;
@@ -99,6 +112,9 @@ export const DependencyContext = createContext<DependencyContextType>({
   buildService:buildServ,
   userService:userServ,
   clientService:clientServ,
+  assignmentRepository:assignmentRepo,
+  assignmentUserRepository:assignmentUserRepo,
+  accessoryRepository:accessoryRepo,
   relocationService:navigateServ,
   authStorage:authStorage,
   errorHandlingBus:errorHandlingBus,
@@ -107,7 +123,7 @@ export const DependencyContext = createContext<DependencyContextType>({
 });
 
 export const DependencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,taskService:taskServ,buildService:buildServ,userService:userServ,clientService:clientServ,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
+  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,taskService:taskServ,buildService:buildServ,userService:userServ,clientService:clientServ,assignmentRepository:assignmentRepo,assignmentUserRepository:assignmentUserRepo,accessoryRepository:accessoryRepo,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
     {children}
   </DependencyContext.Provider>
 );

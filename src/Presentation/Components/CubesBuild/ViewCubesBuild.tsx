@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Build from "../../../Domain/Entities/Build";
 import { DependencyContext } from "../../../context/DependencyContext";
 import styles from "./CssStyles/ViewCubesBuild.module.css";
-import { BackButton } from "../GeneralComponents/BackButton";
+import { BackButton } from "../../../shared/ui/GeneralComponents/BackButton";
 
 export default function ViewCubesBuild() {
 
