@@ -28,8 +28,11 @@ export default function EditAssignmentForm() {
             editMode={true}
             assignmentId={assignment ? assignmentId : null}
             serialNumber={assignment?.device.serialNumber ?? null}
-            assignmentDescription={assignment?.remarks ?? null}
+            assignmentRemarks={assignment?.remarks ?? null}
             assignedUserId={assignment?.assignedUser.id ?? null}
+            accessoryIds={assignment?.accessories
+                .map(accessory => accessory.id)
+                .filter((id): id is number => id !== null)}
         />
     );
 }

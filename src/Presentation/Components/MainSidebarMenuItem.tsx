@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import styles from './RealmsMenuItem.module.css'
+import styles from './MainSidebarMenuItem.module.css'
 
-interface RealmsMenuItemProps{
+interface MainSidebarMenuItemProps{
   ID:string,
   Name:string
 }
 
-export default function RealmsMenuItem({ID,Name}:RealmsMenuItemProps){
+export default function MainSidebarMenuItem({ID,Name}:MainSidebarMenuItemProps){
 
 return(
 <div>

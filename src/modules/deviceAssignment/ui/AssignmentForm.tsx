@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../context/DependencyContext';
 import AssignmentValidationError from '../domain/AssignmentValidationError';
 import styles from './AssignmentForm.module.css'
-import { TextBox } from '../../../shared/ui/GeneralComponents/TextBox';
 import { MultiLineTextBox } from '../../../shared/ui/GeneralComponents/MultiLineTextBox';
 import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton';
 import { useListUsers } from '../application/user/useListUsers';
 import { useListAccessories } from '../application/accessory/useListAccessories';
+import { useListDevices } from '../application/device/useListDevices';
 import { useCreateAssignment } from '../application/assignment/useCreateAssignment';
 import { useUpdateAssignment } from '../application/assignment/useUpdateAssignment';
 import { OperatingSystem } from '../domain/OperatingSystem';
@@ -17,50 +17,53 @@ import { OperatingSystem } from '../domain/OperatingSystem';
 interface AssignmentFormProps {
   assignmentId?: bigint | null;
   serialNumber?: string | null;
-  assignmentDescription?: string | null;
+  assignmentRemarks?: string | null;
   assignedUserId?: string | null;
+  accessoryIds?: number[];
   editMode?: boolean;
 }
 
 
-export default function AssignmentForm({ assignmentId = null, serialNumber = null, assignmentDescription = null, assignedUserId = null, editMode: editMode = false }: AssignmentFormProps) {
+export default function AssignmentForm({ assignmentId = null, serialNumber = null, assignmentRemarks = null, assignedUserId = null,accessoryIds = [], editMode: editMode = false }: AssignmentFormProps) {
 
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
-  const [deviceSerialNumber, setDeviceSerialNumber] = useState(serialNumber ?? "");
-  const [remarks, setRemarks] = useState(assignmentDescription ?? "");
+  const [remarks, setRemarks] = useState(assignmentRemarks ?? "");
   const [selectedUserId, setSelectedUserId] = useState(assignedUserId ?? "");
-  const [selectedAccessoryId, setSelectedAccessoryId] = useState("");
   const { data: users, isLoading: isLoadingUsers } = useListUsers();
-  const { data: accessories, isLoading: isLoadingAccessories } = useListAccessories();
+  const { data: allAccessories, isLoading: isLoadingAccessories } = useListAccessories();
+  const { data: allDevices, isLoading: isLoadingDevices } = useListDevices();
   const { createAssignment, isSaving: isCreating } = useCreateAssignment();
   const { updateAssignment, isSaving: isUpdating } = useUpdateAssignment();  
   const [selectedOperatingSystem, setSelectedOperatingSystem] = useState("");
   const [specs, setSpecs] = useState("");
   const isSaving = isCreating || isUpdating;
+  const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<number[]>(accessoryIds ?? []);
+  const [selectedDeviceSerialNumber, setSelectedDeviceSerialNumber] = useState(serialNumber ?? "");
+
 
   useEffect(() => {
-    setDeviceSerialNumber(serialNumber ?? "");
-    setRemarks(assignmentDescription ?? "");
+    setRemarks(assignmentRemarks ?? "");
     setSelectedUserId(assignedUserId ?? "");
     setSelectedOperatingSystem("");
     setSpecs("");
-  }, [serialNumber, assignmentDescription, assignedUserId]);
+    setSelectedAccessoryIds(accessoryIds ?? []);
+    setSelectedDeviceSerialNumber(serialNumber ?? "");
+  }, [serialNumber, assignmentRemarks, assignedUserId, accessoryIds]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDeviceSerialNumber(e.target.value);
-  };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedUserId(e.target.value);
   };
 
-  const handleAccessorySelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAccessoryId(e.target.value);
+  const handleAccessorySelectChange = (id: number) => {
+    setSelectedAccessoryIds(prev =>
+      prev.includes(id) ? prev.filter(a => a !== id) : [...prev, id]
+    );
   };
 
-  const handleTextAreaInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleRemarksChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRemarks(e.target.value);
   };
 
@@ -72,16 +75,17 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
     setSelectedOperatingSystem(e.target.value);
   };
 
+  const handleSerialNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDeviceSerialNumber(e.target.value);
+  }; 
+
   // Quick UX checks only; business rules are enforced by the Assignment entity.
   const validateForm = (): boolean => {
     if (selectedUserId === "") {
       errorHandlingBus.ErrorOccured("Please select a user");
       return false;
     }
-    if (deviceSerialNumber.trim() === "") {
-      errorHandlingBus.ErrorOccured("Serial Number cannot be empty");
-      return false;
-    }
+
     return true;
   };
 
@@ -99,7 +103,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
   };
 
   const handleAdd = () => save(
-    () => createAssignment({ assignedUserId: selectedUserId, deviceSerialNumber, remarks: remarks }),
+    () => createAssignment({ assignedUserId: selectedUserId, deviceSerialNumber: selectedDeviceSerialNumber ?? "", remarks: remarks, accessoryIds : selectedAccessoryIds??[] }),
     "Assignment added successfully"
   );
 
@@ -109,7 +113,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
       return;
     }
     return save(
-      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId, deviceSerialNumber, remarks: remarks }),
+      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceSerialNumber: selectedDeviceSerialNumber ?? "", remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
       "Assignment updated successfully"
     );
   };
@@ -139,21 +143,32 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
             ))}
           </select>
         </div>
-        <div className={styles.assignmentformelementcontainer}>
-          <TextBox onChange={handleInputChange} value={deviceSerialNumber} placeholder="Serial Number"></TextBox>
-        </div>
 
         <div className={styles.assignmentformelementcontainer}>
-          <select onChange={handleAccessorySelectChange} value={selectedAccessoryId} disabled={isLoadingAccessories}>
+         <select onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
             <option value="" disabled>
-              {isLoadingAccessories ? "Loading accessories..." : "Select an accessory"}
+              {isLoadingDevices ? "Loading devices..." : "Select a device"}
             </option>
-            {accessories.filter((accessory) => accessory.id !== null).map((accessory) => (
-              <option key={accessory.id!} value={accessory.id!}>
-                {accessory.name}
+            {allDevices.filter((device) => device.serialNumber !== null).map((device) => (
+              <option key={device.serialNumber!} value={device.serialNumber!}>
+                {device.serialNumber}
               </option>
             ))}
           </select>
+        </div>
+
+       
+        <div className={styles.accessoriesContainer}>
+          <h3>Accessories</h3>
+          <div className={styles.accessoryList}>
+              {isLoadingAccessories && <p>Loading accessories...</p>}
+              {!isLoadingAccessories && allAccessories.filter(accessory => accessory.id !== null).map(accessory => (
+                  <div key={accessory.id!} className={styles.accessoryListItem}>
+                      <input type="checkbox" checked={selectedAccessoryIds.includes(accessory.id!)} onChange={() => handleAccessorySelectChange(accessory.id!)} />
+                      <span className={styles.spanBuildVersion} onClick={() => handleAccessorySelectChange(accessory.id!)}>{accessory.name}</span>
+                  </div>
+              ))}
+          </div>
         </div>
 
         <div className={styles.assignmentformelementcontainer}>
@@ -171,7 +186,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
         </div>
 
         <div className={styles.assignmentformelementcontainer}>
-          <MultiLineTextBox rows={20} onChange={handleTextAreaInputChange} value={remarks} placeholder="Remarks"></MultiLineTextBox>
+          <MultiLineTextBox rows={20} onChange={handleRemarksChange} value={remarks} placeholder="Remarks"></MultiLineTextBox>
         </div>
 
         <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformelementbuttoncontainer}`}>

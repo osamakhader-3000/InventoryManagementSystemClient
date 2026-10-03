@@ -1,9 +1,9 @@
 import Task from "../../../Domain/Entities/Task";
 import { ITaskApi } from "../Interfaces/ITaskApi";
-import urls from '../urls.json'
+import urls from '../../../shared/infrastructure/http/urls.json';
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
-
+/*
 export class TaskApi extends GeneralApi implements ITaskApi{
     private baseUrl:string;
 
@@ -43,4 +43,4 @@ export class TaskApi extends GeneralApi implements ITaskApi{
         return result;
     }
 
-}
+}*/

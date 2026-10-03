@@ -1,6 +1,6 @@
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
 import { IAuthApi } from "../Interfaces/IAuthApi";
-import urls from '../urls.json'
+import urls from '../../../shared/infrastructure/http/urls.json';
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 
 export class AuthApi extends GeneralApi implements IAuthApi {

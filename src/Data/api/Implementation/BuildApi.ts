@@ -1,7 +1,7 @@
 import Build from "../../../Domain/Entities/Build";
 import { IBuildApi } from "../Interfaces/IBuildApi";
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
-import urls from '../urls.json';
+import urls from '../../../shared/infrastructure/http/urls.json';
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 
 export class BuildApi extends GeneralApi implements IBuildApi {

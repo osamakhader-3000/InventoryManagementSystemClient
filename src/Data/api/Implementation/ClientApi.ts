@@ -1,7 +1,7 @@
 import Client from "../../../Domain/Entities/Client";
 import { IClientApi } from "../Interfaces/IClientApi";
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
-import urls from '../urls.json';
+import urls from '../../../shared/infrastructure/http/urls.json';
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 
 export class ClientApi extends GeneralApi implements IClientApi {

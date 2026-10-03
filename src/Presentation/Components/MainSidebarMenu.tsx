@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import RealmsMenuItem from './MainSidebarMenuItem';
 import SearchBox from '../../shared/ui/GeneralComponents/SearchBox';
 import Realm from '../../Domain/Entities/Realm';
-import styles from './RealmsMenu.module.css'
+import styles from './MainSidebarMenu.module.css'
 import { useListRealmsByName } from '../Hooks/useListRealmsByName';
 import { DependencyContext } from '../../context/DependencyContext';
 import { User, UserAccountStatus, UserEmailVerificationStatus } from '../../Domain/Entities/User';
 
 
-export default function RealmsMenu() {
+export default function MainSidebarMenu() {
 
   const listRealms = useListRealmsByName();
   const [_realmname, setRealmName] = useState('');

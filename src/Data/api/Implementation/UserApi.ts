@@ -1,7 +1,7 @@
 import { User } from '../../../Domain/Entities/User.ts'
 import { LoginRequest } from '../../DataTransferObjects/LoginRequest.ts'
 import { IUserApi } from '../Interfaces/IUserApi.ts'
-import urls from '../urls.json'
+import urls from '../../../shared/infrastructure/http/urls.json';
 import { GeneralApi } from '../../../shared/infrastructure/http/GeneralApi.ts';
 import axios from 'axios';
 import { GeneralApiResult } from '../../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts';

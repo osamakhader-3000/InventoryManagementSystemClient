@@ -2,9 +2,6 @@ import { createContext } from 'react';
 import { RealmRepository } from '../Data/Repositories/RealmRepository';
 import { RealmStorage } from '../Data/LocalData/Implemetation/RealmStorage.ts';
 import {RealmService} from '../Application/Services/RealmService';
-import { TaskService } from '../Application/Services/TaskService';
-import { TaskRepository } from '../Data/Repositories/TaskRepository';
-import { TaskApi } from '../Data/api/Implementation/TaskApi';
 import { ProfileImageMenuService } from '../Application/Services/ProfileImageMenuService';
 import { ProfileImageMenuRepository } from '../Data/Repositories/ProfileImageMenuRepository';
 import { UserService } from '../Application/Services/UserService.ts';
@@ -12,7 +9,6 @@ import { UserApi } from '../Data/api/Implementation/UserApi.ts';
 import { UserRepository } from '../Data/Repositories/UserRepository.ts';
 import { AuthStorage } from '../Data/LocalData/Implemetation/AuthStorage';
 import { IUserService } from '../Application/Interfaces/IUserService.ts';
-import { ITaskService } from '../Application/Interfaces/ITaskService';
 import { IProfileImageMenuService } from '../Application/Interfaces/IProfileImageMenuService';
 import { IRealmService } from '../Application/Interfaces/IRealmService';
 import { IRelocationService } from '../Application/Interfaces/IRelocationService.ts';
@@ -39,6 +35,8 @@ import { IUserRepository as IAssignmentUserRepository } from '../modules/deviceA
 import { HttpUserRepository } from '../modules/deviceAssignment/infrastructure/HttpUserRepository';
 import IAccessoryRepository from '../modules/deviceAssignment/domain/IAccessoryRepository';
 import { HttpAccessoryRepository } from '../modules/deviceAssignment/infrastructure/HttpAccessoryRepository';
+import { IDeviceRepository } from '../modules/deviceAssignment/domain/IDeviceRepository';
+import { HttpDeviceRepository } from '../modules/deviceAssignment/infrastructure/HttpDeviceRepository';
 
 
 
@@ -67,9 +65,6 @@ const navigateServ = new RelocationService(navigateRepo);
 
 const profileImgMenuServ = new ProfileImageMenuService(profImgMenuRepo, userRepository);
 
-const taskapi = new TaskApi();
-const taskRepo = new TaskRepository(taskapi, authService);
-const taskServ = new TaskService(taskRepo);
 
 const buildApi = new BuildApi();
 const buildRepo = new BuildRepository(buildApi, authService);
@@ -82,6 +77,7 @@ const clientServ = new ClientService(clientRepo);
 const assignmentRepo = new HttpAssignmentRepository();
 const assignmentUserRepo = new HttpUserRepository();
 const accessoryRepo = new HttpAccessoryRepository();
+const deviceRepo = new HttpDeviceRepository();
 
 const authListener = new AuthListener(authEventBus, userServ);
 authListener.StartListening();
@@ -91,13 +87,13 @@ authListener.StartListening();
 interface DependencyContextType {
   realmService: IRealmService;
   profileImgMenuService: IProfileImageMenuService;
-  taskService: ITaskService;
   buildService: IBuildService;
   userService: IUserService;
   clientService: IClientService;
   assignmentRepository: IAssignmentRepository;
   assignmentUserRepository: IAssignmentUserRepository;
   accessoryRepository: IAccessoryRepository;
+  deviceRepository: IDeviceRepository;
   relocationService:IRelocationService;
   authStorage:IAuthStorage;
   errorHandlingBus:ErrorHandlingBus;
@@ -108,14 +104,14 @@ interface DependencyContextType {
 export const DependencyContext = createContext<DependencyContextType>({
   realmService: realmServ,
   profileImgMenuService:profileImgMenuServ,
-  taskService:taskServ,
   buildService:buildServ,
   userService:userServ,
   clientService:clientServ,
   assignmentRepository:assignmentRepo,
   assignmentUserRepository:assignmentUserRepo,
   accessoryRepository:accessoryRepo,
-  relocationService:navigateServ,
+  deviceRepository:deviceRepo,
+ relocationService:navigateServ,
   authStorage:authStorage,
   errorHandlingBus:errorHandlingBus,
   authEventBus:authEventBus,
@@ -123,7 +119,7 @@ export const DependencyContext = createContext<DependencyContextType>({
 });
 
 export const DependencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,taskService:taskServ,buildService:buildServ,userService:userServ,clientService:clientServ,assignmentRepository:assignmentRepo,assignmentUserRepository:assignmentUserRepo,accessoryRepository:accessoryRepo,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
+  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,buildService:buildServ,userService:userServ,clientService:clientServ,assignmentRepository:assignmentRepo,assignmentUserRepository:assignmentUserRepo,accessoryRepository:accessoryRepo,deviceRepository:deviceRepo,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
     {children}
   </DependencyContext.Provider>
 );

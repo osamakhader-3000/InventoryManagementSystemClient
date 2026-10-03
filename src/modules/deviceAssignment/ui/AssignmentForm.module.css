@@ -104,3 +104,31 @@
   flex-direction: column;
   align-items: center;
 }
+
+.accessoriesContainer {
+  width: 50%;
+  margin-top: 10%;
+}
+
+.accessoryList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accessoryListItem {
+  width: 80%;
+  background-color: rgb(224, 229, 242);
+  border-radius: 13px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spanBuildVersion {
+  cursor: default;
+}

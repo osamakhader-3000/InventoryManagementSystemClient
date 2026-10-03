@@ -7,23 +7,23 @@ export default class Assignment {
     id: bigint|null;
     device: Device;
     assignedUser: User;
-    assignmentDate: Date;
+    assignmentDate: Date|null;
     returnDate: Date|null;
     oldUser: User|null;
     accessories: Accessory[];
     remarks: string;
-    headset: string;
+    headset: string|null;
     lastUpdateDate: Date|null;
     constructor(
         id: bigint|null,
         device: Device,
         assignedUser: User,
-        assignmentDate: Date,
+        assignmentDate: Date|null,
         returnDate: Date|null,
         oldUser: User|null,
         accessories: Accessory[],
         remarks: string,
-        headset: string,
+        headset: string|null,
         lastUpdateDate: Date|null
     ) {
         this.id = id;
@@ -44,19 +44,18 @@ export default class Assignment {
         device: Device;
         remarks: string;
         accessories?: Accessory[];
-        headset?: string;
     }): Assignment {
         Assignment.ensureValid(props.assignedUser, props.device);
         return new Assignment(
             null,
             props.device,
             props.assignedUser,
-            new Date(),
+            null,
             null,
             null,
             props.accessories ?? [],
             props.remarks,
-            props.headset ?? "",
+            null,
             null
         );
     }
@@ -65,6 +64,7 @@ export default class Assignment {
         assignedUser: User;
         device: Device;
         remarks: string;
+        accessories?: Accessory[];
     }): Assignment {
         Assignment.ensureValid(changes.assignedUser, changes.device);
         const isReassigned = existing.assignedUser.id !== changes.assignedUser.id;
@@ -75,7 +75,7 @@ export default class Assignment {
             existing.assignmentDate,
             existing.returnDate,
             isReassigned ? existing.assignedUser : existing.oldUser,
-            existing.accessories,
+            changes.accessories ?? [],
             changes.remarks,
             existing.headset,
             new Date()

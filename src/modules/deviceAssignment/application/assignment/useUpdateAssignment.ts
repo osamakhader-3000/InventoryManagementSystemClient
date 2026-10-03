@@ -4,12 +4,14 @@ import Assignment from "../../domain/Assignment";
 import AssignmentValidationError from "../../domain/AssignmentValidationError";
 import Device from "../../domain/Device";
 import User from "../../domain/User";
+import Accessory from "../../domain/Accessory";
 
 export interface UpdateAssignmentCommand {
     assignmentId: bigint;
     assignedUserId: string;
     deviceSerialNumber: string;
     remarks: string;
+    accessoryIds?: number[];
 }
 
 export function useUpdateAssignment() {
@@ -38,6 +40,7 @@ export function useUpdateAssignment() {
                 assignedUser,
                 device,
                 remarks: command.remarks,
+                accessories: command.accessoryIds?.map(id => Accessory.fromId(id)) ?? []
             });
             return await assignmentRepository.UpdateAssignment(assignment);
         } finally {

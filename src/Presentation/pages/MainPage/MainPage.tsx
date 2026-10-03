@@ -1,8 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router';
-import RealmsMenu from '../../Components/MainSidebarMenu.tsx'
+import MainSidebarMenu from '../../Components/MainSidebarMenu.tsx'
 import TasksPage from '../Tasks/TasksPage.tsx';
 import MainViewHeader from '../../Components/MainViewHeader.tsx';
-import AddTaskForm from '../../Components/AddTaskForm.tsx';
 import styles from './MainPage.module.css'
 import { EmailVerifiedRoute } from '../../Routes/EmailVerifiedRoute.tsx';
 import { TempAccountRoute } from '../../Routes/TempAccountRoute.tsx';
@@ -11,7 +10,6 @@ import Profile from '../User/Profile.tsx';
 import Users from '../AdminPages/Users.tsx';
 import { TempAccountMessage } from '../auth/TempAccountMessage.tsx';
 import { AdminAccountRoute } from '../../Routes/AdminAccountRoute.tsx';
-import EditTaskForm from '../../Components/EditTaskForm.tsx';
 import AddCubesBuild from '../../Components/CubesBuild/AddCubesBuild.tsx';
 import EditCubesBuild from '../../Components/CubesBuild/EditCubesBuild.tsx';
 import Builds from '../Builds/Builds.tsx';
@@ -22,6 +20,9 @@ import EditCubesClient from '../../Components/CubesClient/EditCubesClient.tsx';
 import AddCubesClient from '../../Components/CubesClient/AddCubesClient.tsx';
 import ViewCubesClient from '../../Components/CubesClient/ViewCubesClient.tsx';
 import ViewCubesBuild from '../../Components/CubesBuild/ViewCubesBuild.tsx';
+import AddAssignmentForm from '../../../modules/deviceAssignment/ui/AddAssignmentForm.tsx';
+import EditAssignmentForm from '../../../modules/deviceAssignment/ui/EditAssignmentForm.tsx';
+
 
 function MainPage() {
 
@@ -33,7 +34,7 @@ function MainPage() {
           <tbody>
             <tr>
               <td className={styles.realmsmenucontainer}>
-                <RealmsMenu />
+                <MainSidebarMenu />
               </td>
 
               <td className={styles.mainlistcell}>
@@ -60,8 +61,8 @@ function MainPage() {
                               <Route element={<AdminAccountRoute />}>
                                 <Route path="/users" element={<Users />} />
                               </Route>
-                              <Route path="/addtask" element={<AddTaskForm />} />
-                              <Route path="/task/:id" element={<EditTaskForm />} />
+                              <Route path="/addassignment" element={<AddAssignmentForm />} />
+                              <Route path="/assignment/:id" element={<EditAssignmentForm />} />
                               <Route path="/viewcubesclient/:id" element={<ViewCubesClient />} />
                               <Route path="/viewcubesbuild/:id" element={<ViewCubesBuild />} />
                               <Route element={<TechnicalSupportAccountRoute />}>

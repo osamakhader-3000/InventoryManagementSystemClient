@@ -4,11 +4,13 @@ import Assignment from "../../domain/Assignment";
 import AssignmentValidationError from "../../domain/AssignmentValidationError";
 import Device from "../../domain/Device";
 import User from "../../domain/User";
+import Accessory from "../../domain/Accessory";
 
 export interface CreateAssignmentCommand {
     assignedUserId: string;
     deviceSerialNumber: string;
     remarks: string;
+    accessoryIds?: number[];
 }
 
 export function useCreateAssignment() {
@@ -25,6 +27,7 @@ export function useCreateAssignment() {
                 assignedUser: User.fromId(command.assignedUserId),
                 device: Device.fromSerialNumber(command.deviceSerialNumber),
                 remarks: command.remarks,
+                accessories: command.accessoryIds?.map(id => Accessory.fromId(id)) ?? []
             });
             return await assignmentRepository.CreateAssignment(assignment);
         } finally {

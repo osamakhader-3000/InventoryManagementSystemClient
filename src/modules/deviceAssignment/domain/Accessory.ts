@@ -14,4 +14,9 @@ export default class Accessory {
         this.quantity = quantity;
         this.date = date;
     }
+
+    static fromId(id: number): Accessory {
+        return new Accessory(id, "", 0, null);
+    }
+
 }
