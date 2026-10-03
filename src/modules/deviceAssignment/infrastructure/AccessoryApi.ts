@@ -15,7 +15,7 @@ export default class AccessoryApi extends GeneralApi {
 
     async ListAccessories(): Promise<GeneralApiResult<Accessory[]>> {
         let url = `${this.baseUrl}${urls['accessories-list']}`;
-        let result = await this.GeneralApiCaller<Accessory[]>('GET', url);
+        let result = await this.GeneralApiCaller<Accessory[]>('GET', url);   
         return result;
     }
 

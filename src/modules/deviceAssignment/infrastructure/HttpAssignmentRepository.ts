@@ -32,6 +32,8 @@ export class HttpAssignmentRepository implements IAssignmentRepository {
 
     async ListAssignments(): Promise<Assignment[]> {
         var result = await this.assignmentApi.ListAssignments();
+        if (!Array.isArray(result.data)) 
+            return [];
         return result.data ?? [];
     }
 }

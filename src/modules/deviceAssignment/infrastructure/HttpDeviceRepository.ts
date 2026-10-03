@@ -12,6 +12,8 @@ export class HttpDeviceRepository implements IDeviceRepository {
 
     async ListDevices(): Promise<Device[]> {
         let result = await this.deviceApi.ListDevices();
+        if (!Array.isArray(result.data)) 
+            return [];
         return result.data??new Array<Device>();
     }
 

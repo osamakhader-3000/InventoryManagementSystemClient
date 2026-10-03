@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../context/DependencyContext';
 import AssignmentValidationError from '../domain/AssignmentValidationError';
 import styles from './AssignmentForm.module.css'
+import '../../../shared/ui/GeneralCss/Select.css';
 import { MultiLineTextBox } from '../../../shared/ui/GeneralComponents/MultiLineTextBox';
 import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton';
 import { useListUsers } from '../application/user/useListUsers';
@@ -10,8 +11,6 @@ import { useListAccessories } from '../application/accessory/useListAccessories'
 import { useListDevices } from '../application/device/useListDevices';
 import { useCreateAssignment } from '../application/assignment/useCreateAssignment';
 import { useUpdateAssignment } from '../application/assignment/useUpdateAssignment';
-import { OperatingSystem } from '../domain/OperatingSystem';
-
 
 
 interface AssignmentFormProps {
@@ -50,7 +49,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
     setSpecs("");
     setSelectedAccessoryIds(accessoryIds ?? []);
     setSelectedDeviceSerialNumber(serialNumber ?? "");
-  }, [serialNumber, assignmentRemarks, assignedUserId, accessoryIds]);
+  }, []);
 
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,13 +66,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
     setRemarks(e.target.value);
   };
 
-  const handleSpecsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSpecs(e.target.value);
-  };
-
-  const handleOperatingSystemSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOperatingSystem(e.target.value);
-  };
+ 
 
   const handleSerialNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedDeviceSerialNumber(e.target.value);
@@ -131,12 +124,13 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
         <h2>
           {editMode ? "Edit Assignment" : "Add Assignment"}
         </h2>
-        <div>
-          <select onChange={handleSelectChange} value={selectedUserId} disabled={isLoadingUsers}>
+         <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
+          <span style={{ width: "20%" }}>Assigned User:</span>
+          <select name="userId" className="selectBox" onChange={handleSelectChange} value={selectedUserId} disabled={isLoadingUsers}>
             <option value="" disabled>
               {isLoadingUsers ? "Loading users..." : "Select a user"}
             </option>
-            {users.filter((user) => user.id !== null).map((user) => (
+            {users.length > 0 && users.filter((user) => user.id !== null).map((user) => (
               <option key={user.id!} value={user.id!}>
                 {user.name}
               </option>
@@ -144,8 +138,9 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
           </select>
         </div>
 
-        <div className={styles.assignmentformelementcontainer}>
-         <select onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
+         <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
+          <span style={{ width: "20%" }}>Device:</span>
+         <select name="serialNumber" className="selectBox" onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
             <option value="" disabled>
               {isLoadingDevices ? "Loading devices..." : "Select a device"}
             </option>
@@ -158,8 +153,8 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
         </div>
 
        
-        <div className={styles.accessoriesContainer}>
-          <h3>Accessories</h3>
+        <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
+          <span style={{ width: "20%" }}>Accessories</span>
           <div className={styles.accessoryList}>
               {isLoadingAccessories && <p>Loading accessories...</p>}
               {!isLoadingAccessories && allAccessories.filter(accessory => accessory.id !== null).map(accessory => (
@@ -171,22 +166,10 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
           </div>
         </div>
 
-        <div className={styles.assignmentformelementcontainer}>
-         <select onChange={handleOperatingSystemSelectChange} value={selectedOperatingSystem}>
-            <option value="" disabled>Select an operating system</option>
-            {Object.values(OperatingSystem).map((os) => (
-              <option key={os} value={os}>{os}</option>
-            ))}
-          </select>
-        </div>
 
-        <div className={styles.assignmentformelementcontainer}>
-                    <MultiLineTextBox rows={20} onChange={handleSpecsChange} value={specs} placeholder="Specs"></MultiLineTextBox>
-
-        </div>
-
-        <div className={styles.assignmentformelementcontainer}>
-          <MultiLineTextBox rows={20} onChange={handleRemarksChange} value={remarks} placeholder="Remarks"></MultiLineTextBox>
+        <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
+          <span style={{ width: "20%" }}>Remarks:</span>
+          <MultiLineTextBox rows={20} onChange={handleRemarksChange} value={remarks} placeholder="Remarks and general notes"></MultiLineTextBox>
         </div>
 
         <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformelementbuttoncontainer}`}>

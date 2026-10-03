@@ -22,6 +22,8 @@ import ViewCubesClient from '../../Components/CubesClient/ViewCubesClient.tsx';
 import ViewCubesBuild from '../../Components/CubesBuild/ViewCubesBuild.tsx';
 import AddAssignmentForm from '../../../modules/deviceAssignment/ui/AddAssignmentForm.tsx';
 import EditAssignmentForm from '../../../modules/deviceAssignment/ui/EditAssignmentForm.tsx';
+import AddDeviceForm from '../../../modules/deviceAssignment/ui/AddDeviceForm.tsx';
+import EditDeviceForm from '../../../modules/deviceAssignment/ui/EditDeviceForm.tsx';
 
 
 function MainPage() {
@@ -63,6 +65,8 @@ function MainPage() {
                               </Route>
                               <Route path="/addassignment" element={<AddAssignmentForm />} />
                               <Route path="/assignment/:id" element={<EditAssignmentForm />} />
+                              <Route path="/adddevice" element={<AddDeviceForm />} />
+                              <Route path="/editdevice/:id" element={<EditDeviceForm />} />
                               <Route path="/viewcubesclient/:id" element={<ViewCubesClient />} />
                               <Route path="/viewcubesbuild/:id" element={<ViewCubesBuild />} />
                               <Route element={<TechnicalSupportAccountRoute />}>

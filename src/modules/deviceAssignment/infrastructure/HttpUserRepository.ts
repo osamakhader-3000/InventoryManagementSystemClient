@@ -13,6 +13,8 @@ export class HttpUserRepository implements IUserRepository {
 
     async ListUsers(): Promise<User[]> {
         let result = await this.userApi.ListUsers();
+        if (!Array.isArray(result.data)) 
+            return [];
         return result.data??new Array<User>();
     }
     async GetUser(userID: bigint): Promise<User|null> {

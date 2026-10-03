@@ -11,8 +11,9 @@ export function useListAccessories() {
 
     useEffect(() => {
         let cancelled = false;
-        accessoryRepository.GetAllAccessories()
+        accessoryRepository.ListAccessories()
             .then((accessories) => {
+                debugger;
                 if (!cancelled) setData(accessories);
             })
             .catch((err) => {

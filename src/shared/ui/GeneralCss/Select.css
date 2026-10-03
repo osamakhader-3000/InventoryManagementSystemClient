@@ -1,0 +1,25 @@
+    .selectBox 
+    {
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0px;
+    display: block;
+    min-width: 0px;
+    animation-name: _mui-auto-fill-cancel_1bhwv_1;
+    animation-duration: 10ms;
+    outline: 0px;
+    border-style: solid;
+    font-size: 0.875rem;
+    color: rgb(112, 126, 174);
+    letter-spacing: 0.5px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-color: rgb(204 208 217);
+    padding: 11.6px 12px 11.6px 16px;
+    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 13px;
+    width: 80%;
+    }

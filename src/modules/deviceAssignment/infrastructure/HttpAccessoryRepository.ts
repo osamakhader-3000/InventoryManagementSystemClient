@@ -15,9 +15,40 @@ export class HttpAccessoryRepository implements IAccessoryRepository {
        return result.data ?? null;
     }
 
-    async GetAllAccessories(): Promise<Accessory[]> {
+    async ListAccessories(): Promise<Accessory[]> {
         var result = await this.accessoryApi.ListAccessories();
-        return result.data ?? [];
+        
+        //fake data for testing purposes
+        /*
+        Mouse	1	12/3/2025
+Keyboard + Mouse	0	2/24/2026
+HS	0	10/3/2025
+H.S - Jabra	0	5/5/2026
+HDMI	3	10/3/2025
+USB Hub	2	9/7/2025
+Bags	5	10/3/2025
+Docking	0	10/3/2025
+Pointers	2	10/3/2025
+Keyboard	4	10/3/2025*/
+
+var fakeData = [
+    new Accessory(1, 'Mouse', 1, new Date('12/3/2025')),
+    new Accessory(2, 'Keyboard + Mouse', 0, new Date('2/24/2026')),
+    new Accessory(3, 'HS', 0, new Date('10/3/2025')),
+    new Accessory(4, 'H.S - Jabra', 0, new Date('5/5/2026')),
+    new Accessory(5, 'HDMI', 3, new Date('10/3/2025')),
+    new Accessory(6, 'USB Hub', 2, new Date('9/7/2025')),
+    new Accessory(7, 'Bags', 5, new Date('10/3/2025')),
+    new Accessory(8, 'Docking', 0, new Date('10/3/2025')),
+    new Accessory(9, 'Pointers', 2, new Date('10/3/2025')),
+    new Accessory(10, 'Keyboard', 4, new Date('10/3/2025'))
+];
+/*
+        if (!Array.isArray(result.data)) 
+            return [];
+*/
+        //return result.data ?? [];
+        return fakeData;
     }
 
     async AddAccessory(accessory: Accessory): Promise<boolean> {
