@@ -1,16 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../context/DependencyContext';
-import AssignmentValidationError from '../domain/AssignmentValidationError';
+import { DependencyContext } from '../../../../context/DependencyContext';
+import AssignmentValidationError from '../../domain/AssignmentValidationError';
 import styles from './AssignmentForm.module.css'
-import '../../../shared/ui/GeneralCss/Select.css';
-import { MultiLineTextBox } from '../../../shared/ui/GeneralComponents/MultiLineTextBox';
-import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton';
-import { useListUsers } from '../application/user/useListUsers';
-import { useListAccessories } from '../application/accessory/useListAccessories';
-import { useListDevices } from '../application/device/useListDevices';
-import { useCreateAssignment } from '../application/assignment/useCreateAssignment';
-import { useUpdateAssignment } from '../application/assignment/useUpdateAssignment';
+import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiLineTextBox';
+import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
+import { useListUsers } from '../../application/user/useListUsers';
+import { useListAccessories } from '../../application/accessory/useListAccessories';
+import { useListDevices } from '../../application/device/useListDevices';
+import { useCreateAssignment } from '../../application/assignment/useCreateAssignment';
+import { useUpdateAssignment } from '../../application/assignment/useUpdateAssignment';
+import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 
 interface AssignmentFormProps {
@@ -126,7 +126,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
         </h2>
          <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
           <span style={{ width: "20%" }}>Assigned User:</span>
-          <select name="userId" className="selectBox" onChange={handleSelectChange} value={selectedUserId} disabled={isLoadingUsers}>
+          <SelectBox name="userId" className="selectBox" onChange={handleSelectChange} value={selectedUserId} disabled={isLoadingUsers}>
             <option value="" disabled>
               {isLoadingUsers ? "Loading users..." : "Select a user"}
             </option>
@@ -135,12 +135,12 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
                 {user.name}
               </option>
             ))}
-          </select>
+          </SelectBox>
         </div>
 
          <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
           <span style={{ width: "20%" }}>Device:</span>
-         <select name="serialNumber" className="selectBox" onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
+         <SelectBox name="serialNumber" className="selectBox" onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
             <option value="" disabled>
               {isLoadingDevices ? "Loading devices..." : "Select a device"}
             </option>
@@ -149,7 +149,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
                 {device.serialNumber}
               </option>
             ))}
-          </select>
+          </SelectBox>
         </div>
 
        

@@ -1,5 +1,5 @@
 import AssignmentForm from "./AssignmentForm";
-import { useGetAssignment } from "../application/assignment/useGetAssignment";
+import { useGetAssignment } from "../../application/assignment/useGetAssignment";
 import styles from "./EditAssignmentForm.module.css";
 
 function getAssignmentIdFromPath(): bigint | null {

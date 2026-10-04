@@ -18,21 +18,21 @@ export class DeviceApi extends GeneralApi{
         return result;
     }
 
-    async CreateDevice(device: Device): Promise<GeneralApiResult<Device>> {
+    async CreateDevice(device: Device): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['device-create']}`;
-        let result = await this.GeneralApiCaller<Device>('POST', url, device);
+        let result = await this.GeneralApiCaller<boolean>('POST', url, device);
         return result;
     }
     
-    async UpdateDevice(device: Device): Promise<GeneralApiResult<Device>> {
+    async UpdateDevice(device: Device): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['device-update']}`;
-        let result = await this.GeneralApiCaller<Device>('PUT', url, device);
+        let result = await this.GeneralApiCaller<boolean>('PUT', url, device);
         return result;
     }
 
-    async DeleteDevice(deviceId: string): Promise<GeneralApiResult<void>> {
+    async DeleteDevice(deviceId: string): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['device-delete']}`;
-        let result = await this.GeneralApiCaller<void>('DELETE', url, { id: deviceId });
+        let result = await this.GeneralApiCaller<boolean>('DELETE', url, { id: deviceId });
         return result;
     }
 

@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router';
-import Assignment from '../domain/Assignment';
-import styles from '../../../Presentation/pages/Assignments/AssignmentsMenu.module.css'
-import { DependencyContext } from '../../../context/DependencyContext';
-import {ButtonPreloader} from '../../../shared/ui/GeneralComponents/ButtonPreloader';
-import { useListAssignments } from '../application/assignment/useListAssignments';
-import { useDeleteAssignment } from '../application/assignment/useDeleteAssignment';
+import Assignment from '../../domain/Assignment';
+import styles from './AssignmentsList.module.css'
+import { DependencyContext } from '../../../../context/DependencyContext';
+import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
+import { useListAssignments } from '../../application/assignment/useListAssignments';
+import { useDeleteAssignment } from '../../application/assignment/useDeleteAssignment';
 
 
 export default function AssignmentsList() {
@@ -50,7 +50,7 @@ export default function AssignmentsList() {
     return (
       <div className={styles.loadingcontainer}>
         <h3>Please wait</h3>
-        <h3>Loading your assignments ...</h3>
+        <h3>Loading assignments ...</h3>
       </div>
     )
 
@@ -70,16 +70,16 @@ export default function AssignmentsList() {
       <div className={styles.maincontainer}>
         <div className={styles.assignmentpagebuttonspanel}>
           <Link to={'../addassignment/'} >
-            <button type="button" className={styles.addassignmentbuttonclass}>+ Add Assignment</button>
+            <button type="button" className={styles.addassignmentbuttonclass}>+ Add</button>
           </Link>
         </div>
 
         <div className={styles.assignmentspanel}>
           <h5 className={styles.assignmentstatustitle}>
-            My Assignments
+            Assignments
           </h5>
 
-          {assignments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.assignmentstatustitle}>No assignments assigned to you</h5></div>}
+          {assignments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.assignmentstatustitle}>No assignments</h5></div>}
 
           {assignments.length > 0 && assignments.map((assignment: Assignment, index) => (
             <div key={index} className={styles.assignmentcontainer}>

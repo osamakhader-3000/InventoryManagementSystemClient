@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import DeviceForm from './DeviceForm';
-import { useGetDevice } from '../application/device/useGetDevice';
+import { useGetDevice } from '../../application/device/useGetDevice';
 import styles from './EditDeviceForm.module.css';
 
 export default function EditDeviceForm() {

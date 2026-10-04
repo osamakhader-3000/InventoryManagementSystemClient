@@ -37,6 +37,8 @@ import IAccessoryRepository from '../modules/deviceAssignment/domain/IAccessoryR
 import { HttpAccessoryRepository } from '../modules/deviceAssignment/infrastructure/HttpAccessoryRepository';
 import { IDeviceRepository } from '../modules/deviceAssignment/domain/IDeviceRepository';
 import { HttpDeviceRepository } from '../modules/deviceAssignment/infrastructure/HttpDeviceRepository';
+import { IDepartmentRepository } from '../modules/deviceAssignment/domain/IDepartmentRepository';
+import { HttpDepartmentRepository } from '../modules/deviceAssignment/infrastructure/HttpDepartmentRepository';
 
 
 
@@ -78,6 +80,7 @@ const assignmentRepo = new HttpAssignmentRepository();
 const assignmentUserRepo = new HttpUserRepository();
 const accessoryRepo = new HttpAccessoryRepository();
 const deviceRepo = new HttpDeviceRepository();
+const departmentRepo = new HttpDepartmentRepository();
 
 const authListener = new AuthListener(authEventBus, userServ);
 authListener.StartListening();
@@ -94,6 +97,7 @@ interface DependencyContextType {
   assignmentUserRepository: IAssignmentUserRepository;
   accessoryRepository: IAccessoryRepository;
   deviceRepository: IDeviceRepository;
+  departmentRepository: IDepartmentRepository;
   relocationService:IRelocationService;
   authStorage:IAuthStorage;
   errorHandlingBus:ErrorHandlingBus;
@@ -111,6 +115,7 @@ export const DependencyContext = createContext<DependencyContextType>({
   assignmentUserRepository:assignmentUserRepo,
   accessoryRepository:accessoryRepo,
   deviceRepository:deviceRepo,
+  departmentRepository:departmentRepo,
  relocationService:navigateServ,
   authStorage:authStorage,
   errorHandlingBus:errorHandlingBus,
@@ -119,7 +124,7 @@ export const DependencyContext = createContext<DependencyContextType>({
 });
 
 export const DependencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,buildService:buildServ,userService:userServ,clientService:clientServ,assignmentRepository:assignmentRepo,assignmentUserRepository:assignmentUserRepo,accessoryRepository:accessoryRepo,deviceRepository:deviceRepo,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
+  <DependencyContext.Provider value={{ realmService: realmServ,profileImgMenuService:profileImgMenuServ,buildService:buildServ,userService:userServ,clientService:clientServ,assignmentRepository:assignmentRepo,assignmentUserRepository:assignmentUserRepo,accessoryRepository:accessoryRepo,deviceRepository:deviceRepo,departmentRepository:departmentRepo,relocationService:navigateServ,authStorage:authStorage,errorHandlingBus:errorHandlingBus,authEventBus:authEventBus,notificationHandlingBus:notificationHandlingBus}}>
     {children}
   </DependencyContext.Provider>
 );

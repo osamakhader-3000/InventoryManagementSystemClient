@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../context/DependencyContext';
-import DeviceValidationError from '../domain/DeviceValidationError';
-import { OperatingSystem } from '../domain/OperatingSystem';
+import { DependencyContext } from '../../../../context/DependencyContext';
+import DeviceValidationError from '../../domain/DeviceValidationError';
+import { OperatingSystem } from '../../domain/OperatingSystem';
 import styles from './DeviceForm.module.css';
-import '../../../shared/ui/GeneralCss/Select.css';
-import { TextBox } from '../../../shared/ui/GeneralComponents/TextBox';
-import { MultiLineTextBox } from '../../../shared/ui/GeneralComponents/MultiLineTextBox';
-import { LoadingButton } from '../../../shared/ui/GeneralComponents/LoadingButton';
-import { useCreateDevice } from '../application/device/useCreateDevice';
-import { useUpdateDevice } from '../application/device/useUpdateDevice';
+import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
+import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiLineTextBox';
+import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
+import { useCreateDevice } from '../../application/device/useCreateDevice';
+import { useUpdateDevice } from '../../application/device/useUpdateDevice';
+import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 interface DeviceFormProps {
     deviceId?: string | null;
@@ -133,12 +133,14 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
       
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
           <span className={styles.deviceformlabel}>Operating System:</span>
-          <select name="operatingSystem" className="selectBox" onChange={(e) => setSelectedOperatingSystem(e.target.value)} value={selectedOperatingSystem}>
-            <option value="" disabled>Select an operating system</option>
-            {Object.values(OperatingSystem).map((operatingSystem) => (
-              <option key={operatingSystem} value={operatingSystem}>{operatingSystem}</option>
-            ))}
-          </select>
+          <div className="selectBoxContainer">
+            <SelectBox name="operatingSystem" className="selectBox" onChange={(e) => setSelectedOperatingSystem(e.target.value)} value={selectedOperatingSystem}>
+              <option value="" disabled>Select an operating system</option>
+              {Object.values(OperatingSystem).map((operatingSystem) => (
+                <option key={operatingSystem} value={operatingSystem}>{operatingSystem}</option>
+              ))}
+            </SelectBox>
+          </div>
         </div>
 
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>

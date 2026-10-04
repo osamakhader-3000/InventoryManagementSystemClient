@@ -1,3 +1,11 @@
+import AccessoryValidationError from "./AccessoryValidationError";
+
+export interface AccessoryProps {
+    name: string;
+    quantity: number;
+    date: Date|null;
+}
+
 export default class Accessory {
     id: number|null;
     name: string;
@@ -13,6 +21,25 @@ export default class Accessory {
         this.name = name;
         this.quantity = quantity;
         this.date = date;
+    }
+
+    static create(props: AccessoryProps): Accessory {
+        Accessory.ensureValid(props);
+        return new Accessory(null, props.name.trim(), props.quantity, props.date);
+    }
+
+    static update(existing: Accessory, changes: AccessoryProps): Accessory {
+        Accessory.ensureValid(changes);
+        return new Accessory(existing.id, changes.name.trim(), changes.quantity, changes.date);
+    }
+
+    private static ensureValid(props: AccessoryProps): void {
+        if (!props.name.trim())
+            throw new AccessoryValidationError("An accessory must have a name");
+        if (!Number.isInteger(props.quantity))
+            throw new AccessoryValidationError("Quantity must be a whole number");
+        if (props.quantity < 0)
+            throw new AccessoryValidationError("Quantity cannot be negative");
     }
 
     static fromId(id: number): Accessory {

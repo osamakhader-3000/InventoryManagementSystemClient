@@ -20,10 +20,17 @@ import EditCubesClient from '../../Components/CubesClient/EditCubesClient.tsx';
 import AddCubesClient from '../../Components/CubesClient/AddCubesClient.tsx';
 import ViewCubesClient from '../../Components/CubesClient/ViewCubesClient.tsx';
 import ViewCubesBuild from '../../Components/CubesBuild/ViewCubesBuild.tsx';
-import AddAssignmentForm from '../../../modules/deviceAssignment/ui/AddAssignmentForm.tsx';
-import EditAssignmentForm from '../../../modules/deviceAssignment/ui/EditAssignmentForm.tsx';
-import AddDeviceForm from '../../../modules/deviceAssignment/ui/AddDeviceForm.tsx';
-import EditDeviceForm from '../../../modules/deviceAssignment/ui/EditDeviceForm.tsx';
+import AddAssignmentForm from '../../../modules/deviceAssignment/ui/Assignment/AddAssignmentForm.tsx';
+import EditAssignmentForm from '../../../modules/deviceAssignment/ui/Assignment/EditAssignmentForm.tsx';
+import AddDeviceForm from '../../../modules/deviceAssignment/ui/Device/AddDeviceForm.tsx';
+import EditDeviceForm from '../../../modules/deviceAssignment/ui/Device/EditDeviceForm.tsx';
+import AddAccessoryForm from '../../../modules/deviceAssignment/ui/Accessory/AddAccessoryForm.tsx';
+import EditAccessoryForm from '../../../modules/deviceAssignment/ui/Accessory/EditAccessoryForm.tsx';
+import AddDepartmentForm from '../../../modules/deviceAssignment/ui/Department/AddDepartmentForm.tsx';
+import EditDepartmentForm from '../../../modules/deviceAssignment/ui/Department/EditDepartmentForm.tsx';
+import AddUserForm from '../../../modules/deviceAssignment/ui/User/AddUserForm.tsx';
+import EditUserForm from '../../../modules/deviceAssignment/ui/User/EditUserForm.tsx';
+import AssignmentsList from '../../../modules/deviceAssignment/ui/Assignment/AssignmentsList.tsx';
 
 
 function MainPage() {
@@ -63,10 +70,17 @@ function MainPage() {
                               <Route element={<AdminAccountRoute />}>
                                 <Route path="/users" element={<Users />} />
                               </Route>
+                              <Route path="/assignments" element={<AssignmentsList />} />
                               <Route path="/addassignment" element={<AddAssignmentForm />} />
                               <Route path="/assignment/:id" element={<EditAssignmentForm />} />
                               <Route path="/adddevice" element={<AddDeviceForm />} />
                               <Route path="/editdevice/:id" element={<EditDeviceForm />} />
+                              <Route path="/addaccessory" element={<AddAccessoryForm />} />
+                              <Route path="/editaccessory/:id" element={<EditAccessoryForm />} />
+                              <Route path="/adddepartment" element={<AddDepartmentForm />} />
+                              <Route path="/editdepartment/:id" element={<EditDepartmentForm />} />
+                              <Route path="/adduser" element={<AddUserForm />} />
+                              <Route path="/edituser/:id" element={<EditUserForm />} />
                               <Route path="/viewcubesclient/:id" element={<ViewCubesClient />} />
                               <Route path="/viewcubesbuild/:id" element={<ViewCubesBuild />} />
                               <Route element={<TechnicalSupportAccountRoute />}>

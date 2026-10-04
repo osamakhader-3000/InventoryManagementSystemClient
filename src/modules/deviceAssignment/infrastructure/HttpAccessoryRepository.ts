@@ -1,5 +1,5 @@
 import Accessory from '../domain/Accessory';
-import  IAccessoryRepository  from '../domain/IAccessoryRepository';
+import IAccessoryRepository  from '../domain/IAccessoryRepository';
 import AccessoryApi from './AccessoryApi';
 
 export class HttpAccessoryRepository implements IAccessoryRepository {
