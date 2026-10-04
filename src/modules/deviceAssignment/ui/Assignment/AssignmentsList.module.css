@@ -1,9 +1,10 @@
 .assignmentpagebuttonspanel {
   text-align: left;
-  margin: 20px;
-  padding: 20px;
+  margin: 20px 20px 0px 20px;
+  padding: 0px;
   border-radius: 13px;
-  width: 50%;
+  width: 95%;
+  box-sizing: border-box;
 }
 
 .assignmentspanel {
@@ -11,8 +12,75 @@
   margin: 20px;
   padding: 20px;
   border-radius: 13px;
-  width: 50%;
+  width: 95%;
+  box-sizing: border-box;
   background: white;
+}
+
+.tablewrapper {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.assignmentstable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  color: black;
+}
+
+.assignmentstable th {
+  background-color: rgb(224, 229, 242);
+  color: rgb(43, 54, 116);
+  font-weight: 700;
+  text-align: left;
+  padding: 14px 12px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+.assignmentstable th:first-child,
+.assignmentstable td:first-child {
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+  padding-left: 20px;
+}
+
+.assignmentstable th:last-child,
+.assignmentstable td:last-child {
+  border-top-right-radius: 13px;
+  border-bottom-right-radius: 13px;
+  padding-right: 20px;
+}
+
+.assignmentstable td {
+  background-color: rgb(239, 244, 251);
+  padding: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.assignmentrow:hover td {
+  background-color: rgb(224, 229, 242);
+}
+
+.usercell {
+  font-weight: 700;
+  color: rgb(43, 54, 116);
+}
+
+.remarkscell {
+  white-space: normal !important;
+  min-width: 160px;
+  max-width: 260px;
+}
+
+.actionscolumn {
+  text-align: right !important;
+  width: 1%;
 }
 
 
@@ -44,17 +112,6 @@
 
 .addassignmentbuttonclass:hover {
   background-color: rgb(024, 229, 242);
-}
-
-
-.assignmentcontainer {
-  margin: 20px 0px;
-  background-color: rgb(239, 244, 251);
-  padding: 20px;
-  border-radius: 13px;
-  display: flex;
-  justify-content: space-between;
-  color: black;
 }
 
 

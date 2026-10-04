@@ -81,47 +81,70 @@ export default function AssignmentsList() {
 
           {assignments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.assignmentstatustitle}>No assignments</h5></div>}
 
-          {assignments.length > 0 && assignments.map((assignment: Assignment, index) => (
-            <div key={index} className={styles.assignmentcontainer}>
-              <span>
+          {assignments.length > 0 &&
+            <div className={styles.tablewrapper}>
+              <table className={styles.assignmentstable}>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Model</th>
+                    <th>Serial No.</th>
+                    <th>Accessory</th>
+                    <th>OS</th>
+                    <th>Specs</th>
+                    <th>Purchased</th>
+                    <th>Retirement</th>
+                    <th>Price</th>
+                    <th>Department</th>
+                    <th>Old User</th>
+                    <th>Remarks</th>
+                    <th>Last Update</th>
+                    <th className={styles.actionscolumn}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+          {assignments.map((assignment: Assignment, index) => (
+            <tr key={index} className={styles.assignmentrow}>
+              <td className={styles.usercell}>
                 {assignment.assignedUser.name}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.model}
-              </span>
-               <span>
+              </td>
+              <td>
                 {assignment.device.serialNumber}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.accessories[0]?.name}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.os}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.specs}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.purchasedDate?.toLocaleDateString()}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.retirementDate?.toLocaleDateString()}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.device.price}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.assignedUser.department.name}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.oldUser?.name}
-              </span>
-              <span>
+              </td>
+              <td className={styles.remarkscell}>
                 {assignment.remarks}
-              </span>
-              <span>
+              </td>
+              <td>
                 {assignment.lastUpdateDate?.toLocaleDateString()}
-              </span>
+              </td>
+              <td className={styles.actionscolumn}>
               <div className={styles.assignmentbuttonspan}>
                 <Link to={`/assignment/${assignment.id}`}>
                   <button className={styles.assignmentlistbuttonclass}>
@@ -144,8 +167,12 @@ export default function AssignmentsList() {
                   )}
                 </button>
               </div>
-            </div>
+              </td>
+            </tr>
           ))}
+                </tbody>
+              </table>
+            </div>}
 
         </div>
       </div>
