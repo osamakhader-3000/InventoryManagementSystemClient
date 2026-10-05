@@ -5,7 +5,7 @@ import { DependencyContext } from '../../context/DependencyContext';
 import { ErrorMessageBox } from '../../shared/ui/GeneralComponents/ErrorMessageBox';
 import {TextBox} from '../../shared/ui/GeneralComponents/TextBox' 
 import { useNavigate } from "react-router";
-import { User } from "../../Domain/Entities/User";
+import { User } from "../../modules/Security/User";
 import { LoadingButton } from "../../shared/ui/GeneralComponents/LoadingButton";
 
 

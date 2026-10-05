@@ -1,4 +1,4 @@
-import { User } from '../../../Domain/Entities/User.ts'
+import { User } from '../../../modules/Security/User.ts'
 import { LoginRequest } from '../../DataTransferObjects/LoginRequest.ts'
 import { IUserApi } from '../Interfaces/IUserApi.ts'
 import urls from '../../../shared/infrastructure/http/urls.json';

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserAccountStatus } from "../../Domain/Entities/User";
+import { UserAccountStatus } from "../../modules/Security/User";
 import { AuthContext } from "../../context/AuthContext";
 import { Navigate, Outlet } from "react-router";
 

@@ -1,5 +1,5 @@
-import { User } from '../../Domain/Entities/User';
-import { AuthenticationResult } from '../../Domain/Entities/Authentication/AuthenticationResult';
+import { User } from '../../modules/Security/User';
+import { AuthenticationResult } from '../../modules/Security/AuthenticationResult';
 import Account from '../../Domain/Entities/Account';
 
 export interface IUserRepository {

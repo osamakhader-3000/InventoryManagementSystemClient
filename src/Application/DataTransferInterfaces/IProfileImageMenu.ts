@@ -1,4 +1,4 @@
-import { User } from "../../Domain/Entities/User";
+import { User } from "../../modules/Security/User";
 import ProfileImageMenuItem from "../DataTransferObjects/ProfileImageMenuItem";
 
 export interface IProfileImageMenu {

@@ -1,6 +1,6 @@
 import Realm from "../../../Domain/Entities/Realm";
 import { IRealmStorage } from "../Interfaces/IRealmStorage";
-import { User, UserAccountStatus, UserEmailVerificationStatus, UserRole } from "../../../Domain/Entities/User";
+import { User, UserAccountStatus, UserEmailVerificationStatus, UserRole } from "../../../modules/Security/User";
 
 export class RealmStorage implements IRealmStorage {
 

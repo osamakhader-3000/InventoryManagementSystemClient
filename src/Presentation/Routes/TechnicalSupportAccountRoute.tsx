@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { UserRole } from "../../Domain/Entities/User";
+import { UserRole } from "../../modules/Security/User";
 import { Navigate, Outlet } from "react-router";
 
 export function TechnicalSupportAccountRoute() {

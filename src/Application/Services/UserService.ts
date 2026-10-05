@@ -1,7 +1,7 @@
-import { User, UserRole } from "../../Domain/Entities/User";
+import { User, UserRole } from "../../modules/Security/User";
 import { IUserService } from "../Interfaces/IUserService";
 import { IUserRepository } from "../Repositories/IUserRepository";
-import UserLoginStatus from "../../Domain/Entities/Authentication/UserLogInStatus";
+import UserLoginStatus from "../../modules/Security/UserLogInStatus";
 import Account from "../../Domain/Entities/Account";
 
 export class UserService implements IUserService {

@@ -1,4 +1,4 @@
-import { AuthenticationResult } from "../../Domain/Entities/Authentication/AuthenticationResult";
+import { AuthenticationResult } from "../../modules/Security/AuthenticationResult";
 import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 
 export interface IAuthService {

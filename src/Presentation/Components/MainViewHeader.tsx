@@ -1,7 +1,7 @@
 import ProfileImageMenu from './ProfileImageMenu';
 import styles from './MainViewHeader.module.css'
 import { useContext, useEffect, useState } from "react";
-import { User } from "../../Domain/Entities/User";
+import { User } from "../../modules/Security/User";
 import { DependencyContext } from '../../context/DependencyContext';
 
 export default function MainViewHeader(){

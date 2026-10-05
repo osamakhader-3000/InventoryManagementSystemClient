@@ -1,4 +1,4 @@
-import { User } from "../../../Domain/Entities/User";
+import { User } from "../../../modules/Security/User";
 
 export interface IAuthStorage{
     SetLoginExpireTime(expireTime: Date): void;

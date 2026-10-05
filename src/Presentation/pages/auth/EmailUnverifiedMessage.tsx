@@ -2,7 +2,7 @@ import styles from '../../GeneralStyles.module.css';
 import { Navigate } from 'react-router';
 import { AuthContext } from '../../../context/AuthContext';
 import { useContext, useState } from 'react';
-import { UserEmailVerificationStatus } from '../../../Domain/Entities/User';
+import { UserEmailVerificationStatus } from '../../../modules/Security/User.ts';
 import { DependencyContext } from '../../../context/DependencyContext';
 import GeneralStyles from '../../GeneralStyles.module.css';
 import { LoadingButton } from "../../../shared/ui/GeneralComponents/LoadingButton.tsx"

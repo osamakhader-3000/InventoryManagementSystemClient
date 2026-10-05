@@ -1,6 +1,6 @@
 import ProfileImageMenuItem from "../../Application/DataTransferObjects/ProfileImageMenuItem";
 import { IProfileImageMenu } from "../../Application/DataTransferInterfaces/IProfileImageMenu";
-import { User } from "../../Domain/Entities/User";
+import { User } from "../../modules/Security/User";
 
 
 export class ProfileImageMenuRepository implements IProfileImageMenu {

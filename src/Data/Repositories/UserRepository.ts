@@ -1,9 +1,9 @@
-import { User } from "../../Domain/Entities/User.ts";
+import { User } from "../../modules/Security/User.ts";
 import { LoginRequest } from "../DataTransferObjects/LoginRequest.ts";
 import { IUserRepository } from "../../Application/Repositories/IUserRepository.ts";
 import { IUserApi } from "../api/Interfaces/IUserApi.ts";
 import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage.ts";
-import { AuthenticationResult } from "../../Domain/Entities/Authentication/AuthenticationResult.ts";
+import { AuthenticationResult } from "../../modules/Security/AuthenticationResult.ts";
 import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
 import { IAuthService } from "../Commons/IAuthService.ts";
 import Account from "../../Domain/Entities/Account.ts";

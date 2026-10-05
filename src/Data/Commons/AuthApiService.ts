@@ -1,6 +1,6 @@
 // Repository.ts
 
-import { AuthenticationResult } from "../../Domain/Entities/Authentication/AuthenticationResult.ts";
+import { AuthenticationResult } from "../../modules/Security/AuthenticationResult.ts";
 import { IAuthApi } from "../api/Interfaces/IAuthApi.ts";
 import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
 import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage";

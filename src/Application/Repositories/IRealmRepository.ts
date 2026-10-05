@@ -1,5 +1,5 @@
 import Realm from '../../Domain/Entities/Realm';
-import { User } from '../../Domain/Entities/User';
+import { User } from '../../modules/Security/User';
 
 export interface IRealmRepository {
 
