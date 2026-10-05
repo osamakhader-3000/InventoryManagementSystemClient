@@ -7,6 +7,73 @@
   box-sizing: border-box;
 }
 
+.filterspanel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  margin: 20px 20px 0px 20px;
+  padding: 20px;
+  border-radius: 13px;
+  width: 95%;
+  box-sizing: border-box;
+  background: white;
+  font-family: "DM Sans", sans-serif;
+}
+
+.filterfield {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.filterfield label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgb(43, 54, 116);
+}
+
+.filterinput {
+  height: 40px;
+  padding: 0px 12px;
+  border: 0px;
+  border-radius: 13px;
+  background-color: rgb(239, 244, 251);
+  color: black;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.filterinput:focus {
+  outline: 2px solid rgb(224, 229, 242);
+}
+
+.filterbuttons {
+  display: flex;
+  gap: 8px;
+}
+
+.filterbutton {
+  height: 40px;
+  padding: 0px 20px;
+  border: 0px;
+  border-radius: 13px;
+  background-color: rgb(224, 229, 242);
+  color: rgb(43, 54, 116);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filterbutton:hover:not(:disabled) {
+  background-color: rgb(024, 229, 242);
+}
+
+.filterbutton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .assignmentspanel {
   text-align: left;
   margin: 20px;

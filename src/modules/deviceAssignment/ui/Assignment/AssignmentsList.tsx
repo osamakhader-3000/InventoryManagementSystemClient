@@ -6,6 +6,8 @@ import { DependencyContext } from '../../../../context/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAssignments } from '../../application/assignment/useListAssignments';
 import { useDeleteAssignment } from '../../application/assignment/useDeleteAssignment';
+import { useListUsers } from '../../application/user/useListUsers';
+import { useListDepartments } from '../../application/department/useListDepartments';
 
 
 export default function AssignmentsList() {
@@ -16,6 +18,24 @@ export default function AssignmentsList() {
   const { deleteAssignment, deletingIds: deletingAssignmentIds } = useDeleteAssignment();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [assignmentid, setAssignmentId] = useState<bigint | null>(null);
+
+  const { data: users } = useListUsers();
+  const { data: departments } = useListDepartments();
+  const [userFilter, setUserFilter] = useState('');
+  const [departmentFilter, setDepartmentFilter] = useState('');
+  const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
+
+  const hasActiveFilter = userFilter !== '' || departmentFilter !== '' || purchasedDateFilter !== '';
+
+  const applyFilters = () => {
+    // TODO: pass the filters to the server once server-side filtering is available.
+  }
+
+  const clearFilters = () => {
+    setUserFilter('');
+    setDepartmentFilter('');
+    setPurchasedDateFilter('');
+  }
 
   const showDeleteConfirmation = (_assignmentid: bigint | null) => {
 
@@ -72,6 +92,35 @@ export default function AssignmentsList() {
           <Link to={'../addassignment/'} >
             <button type="button" className={styles.addassignmentbuttonclass}>+ Add</button>
           </Link>
+        </div>
+
+        <div className={styles.filterspanel}>
+          <div className={styles.filterfield}>
+            <label htmlFor="userFilter">User</label>
+            <select id="userFilter" className={styles.filterinput} value={userFilter} onChange={(e) => setUserFilter(e.target.value)}>
+              <option value="">All users</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id ?? ''}>{user.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="departmentFilter">Department</label>
+            <select id="departmentFilter" className={styles.filterinput} value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)}>
+              <option value="">All departments</option>
+              {departments.map((department) => (
+                <option key={department.id} value={department.id ?? ''}>{department.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="purchasedDateFilter">Purchased Date</label>
+            <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
+          </div>
+          <div className={styles.filterbuttons}>
+            <button type="button" className={styles.filterbutton} onClick={applyFilters}>Apply</button>
+            <button type="button" className={styles.filterbutton} onClick={clearFilters} disabled={!hasActiveFilter}>Clear</button>
+          </div>
         </div>
 
         <div className={styles.assignmentspanel}>

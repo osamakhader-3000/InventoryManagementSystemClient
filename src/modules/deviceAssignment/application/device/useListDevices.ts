@@ -10,7 +10,7 @@ export function useListDevices() {
     const [reloadKey, setReloadKey] = useState(0);
 
     useEffect(() => {
-        let cancelled = false;
+        let cancelled = false;        
         deviceRepository.ListDevices()
             .then((devices) => {
                 if (!cancelled) setData(devices);

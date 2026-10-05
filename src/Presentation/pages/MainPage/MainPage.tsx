@@ -31,6 +31,8 @@ import EditDepartmentForm from '../../../modules/deviceAssignment/ui/Department/
 import AddUserForm from '../../../modules/deviceAssignment/ui/User/AddUserForm.tsx';
 import EditUserForm from '../../../modules/deviceAssignment/ui/User/EditUserForm.tsx';
 import AssignmentsList from '../../../modules/deviceAssignment/ui/Assignment/AssignmentsList.tsx';
+import AccessoriesList from '../../../modules/deviceAssignment/ui/Accessory/AccessoriesList.tsx';
+import DevicesList from '../../../modules/deviceAssignment/ui/Device/DevicesList.tsx';
 
 
 function MainPage() {
@@ -77,6 +79,8 @@ function MainPage() {
                               <Route path="/editdevice/:id" element={<EditDeviceForm />} />
                               <Route path="/addaccessory" element={<AddAccessoryForm />} />
                               <Route path="/editaccessory/:id" element={<EditAccessoryForm />} />
+                              <Route path="/accessories" element={<AccessoriesList />} />
+                              <Route path="/devices" element={<DevicesList />} />
                               <Route path="/adddepartment" element={<AddDepartmentForm />} />
                               <Route path="/editdepartment/:id" element={<EditDepartmentForm />} />
                               <Route path="/adduser" element={<AddUserForm />} />
