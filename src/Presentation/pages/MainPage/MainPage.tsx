@@ -33,6 +33,8 @@ import EditUserForm from '../../../modules/deviceAssignment/ui/User/EditUserForm
 import AssignmentsList from '../../../modules/deviceAssignment/ui/Assignment/AssignmentsList.tsx';
 import AccessoriesList from '../../../modules/deviceAssignment/ui/Accessory/AccessoriesList.tsx';
 import DevicesList from '../../../modules/deviceAssignment/ui/Device/DevicesList.tsx';
+import UsersList from '../../../modules/deviceAssignment/ui/User/UsersList.tsx';
+import DepartmentsList from '../../../modules/deviceAssignment/ui/Department/DepartmentsList.tsx';
 
 
 function MainPage() {
@@ -81,8 +83,10 @@ function MainPage() {
                               <Route path="/editaccessory/:id" element={<EditAccessoryForm />} />
                               <Route path="/accessories" element={<AccessoriesList />} />
                               <Route path="/devices" element={<DevicesList />} />
+                              <Route path="/departments" element={<DepartmentsList />} />
                               <Route path="/adddepartment" element={<AddDepartmentForm />} />
                               <Route path="/editdepartment/:id" element={<EditDepartmentForm />} />
+                              <Route path="/users" element={<UsersList />} />
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />
                               <Route path="/viewcubesclient/:id" element={<ViewCubesClient />} />

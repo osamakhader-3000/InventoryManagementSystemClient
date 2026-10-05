@@ -11,7 +11,22 @@ export class HttpDepartmentRepository implements IDepartmentRepository {
     }
 
     async ListDepartments(): Promise<Department[]> {
+
+
+           let fakeData =  [
+            new Department("1", "Corporate Services"),
+            new Department("2", "Chairman's Office"),
+            new Department("3", "HR & Administration"),
+            new Department("4", "Technology and Consulting Services"),
+            new Department("5", "Finance")
+        ];
+
+        return fakeData;
+
+
         let result = await this.departmentApi.ListDepartments();
+     
+
         if (!Array.isArray(result.data)) 
             return [];
         return result.data ?? [];
