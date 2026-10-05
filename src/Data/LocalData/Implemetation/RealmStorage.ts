@@ -15,7 +15,7 @@ export class RealmStorage implements IRealmStorage {
             realms.push(new Realm("clients", "Clients", "Description of Clients"));
 
             if (user.userRole == UserRole.Administrator)
-                realms.push(new Realm("users", "Users", "Description of Users"));
+                realms.push(new Realm("admin/users","Users", "Description of Users"));
         }
 
         return Promise.resolve(realms.filter(r => r.name.toLowerCase().includes(name.toLowerCase())));

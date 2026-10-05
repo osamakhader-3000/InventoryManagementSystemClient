@@ -70,7 +70,7 @@ function MainPage() {
                               <Route path="/builds" element={<Builds />} />
                               <Route path="/clients" element={<Clients />} />
                               <Route element={<AdminAccountRoute />}>
-                                <Route path="/users" element={<Users />} />
+                                <Route path="/admin/users" element={<Users />} />
                               </Route>
                               <Route path="/assignments" element={<AssignmentsList />} />
                               <Route path="/addassignment" element={<AddAssignmentForm />} />
