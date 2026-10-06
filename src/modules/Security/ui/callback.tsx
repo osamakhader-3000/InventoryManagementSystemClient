@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../context/DependencyContext';
 import { useContext, useEffect } from 'react';
-import styles from '../../GeneralStyles.module.css';
+import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 
 export default function AuthCallback() {
     const navigate = useNavigate();

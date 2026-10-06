@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom"; // Added Navigate
 import LoginPage from './Presentation/pages/login/loginpage';
-import AuthCallback from './Presentation/pages/auth/callback';
+import AuthCallback from './modules/Security/ui/callback';
 import MainPage from './Presentation/pages/MainPage/MainPage';
 import ProtectedRoute from './Presentation/Components/ProtectedRoute';
 import {DependencyProvider} from './context/DependencyContext';
@@ -9,7 +9,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { ErrorMessageListener } from './shared/ui/listeners/ErrorMessageListener';
 import { NavigationListener } from './modules/Security/ui/NavigationListener';
-import { VerifyEmail } from './Presentation/pages/auth/verifyemail';
+import { VerifyEmail } from './modules/Security/ui/verifyemail';
 import { NotificationMessageListener } from './shared/ui/listeners/NotificationListener';
 
 function App() {

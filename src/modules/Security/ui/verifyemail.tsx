@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { DependencyContext } from "../../../context/DependencyContext";
 import { useNavigate } from "react-router";
-import styles from '../../GeneralStyles.module.css';
+import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 
 
 export function VerifyEmail() {

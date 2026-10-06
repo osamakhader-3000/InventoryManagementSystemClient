@@ -1,10 +1,9 @@
-import styles from '../../GeneralStyles.module.css';
+import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 import { Navigate } from 'react-router';
 import { AuthContext } from '../../../context/AuthContext';
 import { useContext, useState } from 'react';
 import { UserEmailVerificationStatus } from '../../../modules/Security/domain/User.ts';
 import { DependencyContext } from '../../../context/DependencyContext';
-import GeneralStyles from '../../GeneralStyles.module.css';
 import { LoadingButton } from "../../../shared/ui/GeneralComponents/LoadingButton.tsx"
 
 
@@ -47,7 +46,7 @@ export default function EmailUnverifiedMessage() {
             </div>
             <div>
                 <p>If you didn't receive the email, please check your spam folder or click the button below to resend the verification email.</p>
-                <LoadingButton label='Resend Verification Email' onClick={resendVerificationEmail} cssClass={sent? GeneralStyles.disablebutton: ''} isLoading={isLoading} />
+                <LoadingButton label='Resend Verification Email' onClick={resendVerificationEmail} cssClass={sent? styles.disablebutton: ''} isLoading={isLoading} />
             </div>
         </div>
     );

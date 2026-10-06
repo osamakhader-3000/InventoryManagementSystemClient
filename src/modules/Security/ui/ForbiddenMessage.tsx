@@ -1,4 +1,4 @@
-import styles from '../../GeneralStyles.module.css';
+import styles from '../../SharedStyles.module.css';
 
 export function ForbiddenMessage() {
     return (

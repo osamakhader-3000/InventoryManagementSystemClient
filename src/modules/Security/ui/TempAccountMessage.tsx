@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { Navigate } from "react-router";
-import { UserAccountStatus } from "../../../modules/Security/domain/User";
-import styles from '../../GeneralStyles.module.css';
+import { UserAccountStatus } from "../domain/User";
+import styles from '../../SharedStyles.module.css';
 
 export function TempAccountMessage() {
 
