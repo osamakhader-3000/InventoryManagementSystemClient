@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { ButtonPreloader } from "../../../shared/ui/GeneralComponents/ButtonPreloader";
 import { DeleteIconSvg } from "../../../shared/ui/GeneralComponents/DeleteIconSvg";
 import { EditIconSvg } from "../../../shared/ui/GeneralComponents/EditIconSvg";
-import { UserRole } from "../../../modules/Security/domain/User";
+import { canDelete, canEdit } from "../../../modules/Security/domain/User";
 import { ViewIconSvg } from "../../../shared/ui/GeneralComponents/ViewIconSvg";
 
 export default function Builds() {
@@ -29,8 +29,8 @@ export default function Builds() {
 
             let currentUser = await userService.GetCurrentUser();
             if (currentUser){
-                setReadonly(currentUser.userRole !== UserRole.Administrator && currentUser.userRole !== UserRole.TechnicalSupport);
-                setDeletePermission(currentUser.userRole === UserRole.Administrator);
+                setReadonly(!canEdit(currentUser));
+                setDeletePermission(canDelete(currentUser));
             }
         }
         fetchBuilds();

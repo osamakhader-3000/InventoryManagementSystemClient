@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import DepartmentForm from './DepartmentForm';
 import { useGetDepartment } from '../../application/department/useGetDepartment';
-import styles from '../../../../shared/ui/GeneralCss/EditForms.module.css';
+import styles from '../../../../shared/ui/SharedCss/EditForms.module.css';
 
 export default function EditDepartmentForm() {
 

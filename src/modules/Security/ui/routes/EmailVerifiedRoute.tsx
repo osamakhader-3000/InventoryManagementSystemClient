@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../../context/AuthContext.tsx';
 import { Navigate, Outlet } from 'react-router';
-import { UserEmailVerificationStatus } from '../../modules/Security/domain/User';
+import { UserEmailVerificationStatus } from '../../domain/User.ts';
 
 export function EmailVerifiedRoute() {
   const { currentUser } = useContext(AuthContext);

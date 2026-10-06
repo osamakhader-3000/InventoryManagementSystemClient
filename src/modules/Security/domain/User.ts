@@ -44,3 +44,20 @@ export enum UserRole
     TechnicalSupport = 2,
     Administrator = 3
 }
+
+// Standalone function rather than a method: users loaded from storage/API are plain objects, not User instances.
+export function isAdministrator(user: User): boolean {
+    return user.userRole === UserRole.Administrator;
+}
+
+export function hasTechnicalSupportAccess(user: User): boolean {
+    return user.userRole === UserRole.TechnicalSupport || isAdministrator(user);
+}
+
+export function canEdit(user: User): boolean {
+    return hasTechnicalSupportAccess(user);
+}
+
+export function canDelete(user: User): boolean {
+    return isAdministrator(user);
+}

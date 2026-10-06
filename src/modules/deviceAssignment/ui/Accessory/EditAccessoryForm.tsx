@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import AccessoryForm from './AccessoryForm';
 import { useGetAccessory } from '../../application/accessory/useGetAccessory';
-import styles from '../../../../shared/ui/GeneralCss/EditForms.module.css';
+import styles from '../../../../shared/ui/SharedCss/EditForms.module.css';
 
 export default function EditAccessoryForm() {
 

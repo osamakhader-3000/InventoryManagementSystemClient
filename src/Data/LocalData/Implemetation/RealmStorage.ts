@@ -1,6 +1,6 @@
 import Realm from "../../../Domain/Entities/Realm";
 import { IRealmStorage } from "../Interfaces/IRealmStorage";
-import { User, UserAccountStatus, UserEmailVerificationStatus, UserRole } from "../../../modules/Security/domain/User";
+import { User, UserAccountStatus, UserEmailVerificationStatus, isAdministrator } from "../../../modules/Security/domain/User";
 
 export class RealmStorage implements IRealmStorage {
 
@@ -14,7 +14,7 @@ export class RealmStorage implements IRealmStorage {
             realms.push(new Realm("builds", "Builds", "Description of Builds"));
             realms.push(new Realm("clients", "Clients", "Description of Clients"));
 
-            if (user.userRole == UserRole.Administrator)
+            if (isAdministrator(user))
                 realms.push(new Realm("admin/users","Users", "Description of Users"));
         }
 

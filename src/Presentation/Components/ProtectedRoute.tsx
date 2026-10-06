@@ -1,7 +1,7 @@
 import { useContext,useState,useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { DependencyContext } from '../../context/DependencyContext';
-import generalstyles from '../../Presentation/SharedStyles.module.css';
+import generalstyles from '../../shared/ui/SharedCss/SharedStyles.module.css';
 
 const ProtectedRoute = () => {
 

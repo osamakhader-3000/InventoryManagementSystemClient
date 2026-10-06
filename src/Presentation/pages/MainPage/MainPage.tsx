@@ -3,9 +3,9 @@ import MainSidebarMenu from '../../Components/MainSidebarMenu.tsx'
 import TasksPage from '../Tasks/TasksPage.tsx';
 import MainViewHeader from '../../Components/MainViewHeader.tsx';
 import styles from './MainPage.module.css'
-import { EmailVerifiedRoute } from '../../Routes/EmailVerifiedRoute.tsx';
-import { TempAccountRoute } from '../../Routes/TempAccountRoute.tsx';
-import EmailUnverifiedMessage from '../auth/EmailUnverifiedMessage.tsx';
+import { EmailVerifiedRoute } from '../../../modules/Security/ui/routes/EmailVerifiedRoute.tsx';
+import { TempAccountRoute } from '../../../modules/Security/ui/routes/TempAccountRoute.tsx';
+import EmailUnverifiedMessage from '../../../modules/Security/ui/EmailUnverifiedMessage.tsx';
 import Profile from '../User/Profile.tsx';
 import Users from '../AdminPages/Users.tsx';
 import { TempAccountMessage } from '../../../modules/Security/ui/TempAccountMessage.tsx';
@@ -13,7 +13,7 @@ import { AdminAccountRoute } from '../../../modules/Security/ui/routes/AdminAcco
 import AddCubesBuild from '../../Components/CubesBuild/AddCubesBuild.tsx';
 import EditCubesBuild from '../../Components/CubesBuild/EditCubesBuild.tsx';
 import Builds from '../Builds/Builds.tsx';
-import { TechnicalSupportAccountRoute } from '../../Routes/TechnicalSupportAccountRoute.tsx';
+import { TechnicalSupportAccountRoute } from '../../../modules/Security/ui/routes/TechnicalSupportAccountRoute.tsx';
 import { ForbiddenMessage } from '../../../modules/Security/ui/ForbiddenMessage.tsx';
 import Clients from '../Clients/Clients.tsx';
 import EditCubesClient from '../../Components/CubesClient/EditCubesClient.tsx';

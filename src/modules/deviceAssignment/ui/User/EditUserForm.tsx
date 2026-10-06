@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import UserForm from './UserForm';
 import { useGetUser } from '../../application/user/useGetUser';
-import styles from '../../../../shared/ui/GeneralCss/EditForms.module.css';
+import styles from '../../../../shared/ui/SharedCss/EditForms.module.css';
 
 export default function EditUserForm() {
 

@@ -1,5 +1,5 @@
 import { ButtonPreloader } from "./ButtonPreloader";
-import styles from '../../../Presentation/SharedStyles.module.css'
+import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css'
 
 export function LoadingButton({label, onClick, cssClass,isLoading}: {label?:string, onClick?:()=>void, cssClass?:string,isLoading?:boolean}) {
 

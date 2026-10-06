@@ -1,4 +1,4 @@
-import styles from '../../SharedStyles.module.css';
+import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 
 export function ForbiddenMessage() {
     return (

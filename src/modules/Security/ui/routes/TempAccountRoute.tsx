@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { UserAccountStatus } from "../../modules/Security/domain/User";
-import { AuthContext } from "../../context/AuthContext";
+import { UserAccountStatus } from "../../domain/User";
+import { AuthContext } from "../../../../context/AuthContext.tsx";
 import { Navigate, Outlet } from "react-router";
 
 export function TempAccountRoute() {

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../context/DependencyContext';
 import DepartmentValidationError from '../../domain/DepartmentValidationError';
-import styles from '../../../../shared/ui/GeneralCss/Forms.module.css';
+import styles from '../../../../shared/ui/SharedCss/Forms.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
 import { useCreateDepartment } from '../../application/department/useCreateDepartment';

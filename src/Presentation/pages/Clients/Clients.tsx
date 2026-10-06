@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { EditIconSvg } from "../../../shared/ui/GeneralComponents/EditIconSvg";
 import { DeleteIconSvg } from "../../../shared/ui/GeneralComponents/DeleteIconSvg";
 import { ButtonPreloader } from "../../../shared/ui/GeneralComponents/ButtonPreloader";
-import { UserRole } from "../../../modules/Security/domain/User";
+import { canDelete, canEdit } from "../../../modules/Security/domain/User";
 import { ViewIconSvg } from "../../../shared/ui/GeneralComponents/ViewIconSvg";
 import { DeleteConfirmation } from "../../../shared/ui/GeneralComponents/DeleteConfirmation";
 
@@ -31,8 +31,8 @@ export default function Clients() {
 
             let currentUser = await userService.GetCurrentUser();
             if (currentUser) {
-                setReadonly(currentUser.userRole !== UserRole.Administrator && currentUser.userRole !== UserRole.TechnicalSupport);
-                setDeletePermission(currentUser.userRole === UserRole.Administrator);
+                setReadonly(!canEdit(currentUser));
+                setDeletePermission(canDelete(currentUser));
             }
 
         };
