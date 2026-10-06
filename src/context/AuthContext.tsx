@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { User } from "../modules/Security/User";
+import { User } from "../modules/Security/domain/User";
 import { DependencyContext } from "./DependencyContext";
 import { useLocation } from 'react-router-dom';
 

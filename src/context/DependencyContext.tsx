@@ -15,10 +15,10 @@ import { IRelocationService } from '../Application/Interfaces/IRelocationService
 import { RelocationService } from '../Application/Services/RelocationService.ts';
 import { RelocationRepository } from '../Data/Repositories/RelocationRepository.ts';
 import { IAuthStorage } from '../Data/LocalData/Interfaces/IAuthStorage';
-import { AuthEventBus } from '../Channels/AuthEventBus';
-import { ErrorHandlingBus } from '../Channels/ErrorHandlingBus';
-import { NotificationHandlingBus } from '../Channels/NotificationHandlingBus';
-import { AuthListener } from '../Presentation/Listeners/AuthListener.ts';
+import { AuthEventBus } from '../modules/Security/infrastructure/AuthEventBus';
+import { ErrorHandlingBus } from '../shared/infrastructure/messaging/ErrorHandlingBus';
+import { NotificationHandlingBus } from '../shared/infrastructure/messaging/NotificationHandlingBus';
+import { AuthListener } from '../modules/Security/application/AuthListener.ts';
 import { AuthApiService } from '../Data/Commons/AuthApiService.ts';
 import { AuthApi } from '../Data/api/Implementation/AuthApi.ts';
 import { BuildApi } from '../Data/api/Implementation/BuildApi.ts';
@@ -82,7 +82,7 @@ const accessoryRepo = new HttpAccessoryRepository();
 const deviceRepo = new HttpDeviceRepository();
 const departmentRepo = new HttpDepartmentRepository();
 
-const authListener = new AuthListener(authEventBus, userServ);
+const authListener = new AuthListener(authEventBus, errorHandlingBus, userServ);
 authListener.StartListening();
 
 

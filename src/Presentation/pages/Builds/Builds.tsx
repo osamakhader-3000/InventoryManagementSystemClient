@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { ButtonPreloader } from "../../../shared/ui/GeneralComponents/ButtonPreloader";
 import { DeleteIconSvg } from "../../../shared/ui/GeneralComponents/DeleteIconSvg";
 import { EditIconSvg } from "../../../shared/ui/GeneralComponents/EditIconSvg";
-import { UserRole } from "../../../modules/Security/User";
+import { UserRole } from "../../../modules/Security/domain/User";
 import { ViewIconSvg } from "../../../shared/ui/GeneralComponents/ViewIconSvg";
 
 export default function Builds() {

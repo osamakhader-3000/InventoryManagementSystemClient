@@ -5,7 +5,7 @@ import Realm from '../../Domain/Entities/Realm';
 import styles from './MainSidebarMenu.module.css'
 import { useListRealmsByName } from '../Hooks/useListRealmsByName';
 import { DependencyContext } from '../../context/DependencyContext';
-import { User, UserAccountStatus, UserEmailVerificationStatus } from '../../modules/Security/User';
+import { User, UserAccountStatus, UserEmailVerificationStatus } from '../../modules/Security/domain/User';
 
 
 export default function MainSidebarMenu() {

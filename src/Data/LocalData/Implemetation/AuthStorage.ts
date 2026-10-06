@@ -1,4 +1,4 @@
-import { User } from "../../../modules/Security/User";
+import { User } from "../../../modules/Security/domain/User";
 import { IAuthStorage } from "../Interfaces/IAuthStorage";
 
 export class AuthStorage implements IAuthStorage {

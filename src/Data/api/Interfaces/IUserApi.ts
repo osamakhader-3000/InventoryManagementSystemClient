@@ -1,4 +1,4 @@
-import {User} from '../../../modules/Security/User'
+import {User} from '../../../modules/Security/domain/User'
 import {LoginRequest} from '../../DataTransferObjects/LoginRequest'
 import { GeneralApiResult } from '../../../shared/infrastructure/DataTransferObjects/GeneralApiResult';
 import Account from '../../../Domain/Entities/Account';

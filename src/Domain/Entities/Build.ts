@@ -1,5 +1,5 @@
 import Client from "./Client";
-import { User } from "../../modules/Security/User";
+import { User } from "../../modules/Security/domain/User";
 
 export default class Build {
     id: string|null;

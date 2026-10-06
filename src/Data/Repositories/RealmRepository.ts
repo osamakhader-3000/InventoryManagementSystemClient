@@ -1,5 +1,5 @@
 import Realm from "../../Domain/Entities/Realm";
-import { User } from "../../modules/Security/User";
+import { User } from "../../modules/Security/domain/User";
 import { IRealmRepository } from "../../Application/Repositories/IRealmRepository";
 import { IRealmStorage } from "../LocalData/Interfaces/IRealmStorage";
 

@@ -1,11 +1,11 @@
 // Repository.ts
 
-import { AuthenticationResult } from "../../modules/Security/AuthenticationResult.ts";
+import { AuthenticationResult } from "../../modules/Security/domain/AuthenticationResult.ts";
 import { IAuthApi } from "../api/Interfaces/IAuthApi.ts";
 import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
 import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage";
-import { AuthEventBus } from '../../Channels/AuthEventBus.ts';
-import { ErrorHandlingBus } from '../../Channels/ErrorHandlingBus.ts';
+import { AuthEventBus } from '../../modules/Security/infrastructure/AuthEventBus.ts';
+import { ErrorHandlingBus } from '../../shared/infrastructure/messaging/ErrorHandlingBus.ts';
 import { IAuthService } from "./IAuthService.ts";
 
 export class AuthApiService implements IAuthService {

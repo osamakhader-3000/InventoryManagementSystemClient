@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
-import { UserRole } from "../../modules/Security/User";
+import { UserRole } from "../../modules/Security/domain/User";
 
 export function AdminAccountRoute() {
     const { currentUser } = useContext(AuthContext);

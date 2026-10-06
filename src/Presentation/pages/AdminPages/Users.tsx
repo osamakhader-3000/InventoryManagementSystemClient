@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { DependencyContext } from '../../../context/DependencyContext'
-import { User, UserAccountStatus, UserEmailVerificationStatus } from "../../../modules/Security/User";
+import { User, UserAccountStatus, UserEmailVerificationStatus } from "../../../modules/Security/domain/User";
 import style from './CssStyles/Users.module.css'
 
 export default function Users() {

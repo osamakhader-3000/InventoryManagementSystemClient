@@ -1,6 +1,6 @@
 import { DependencyContext } from '../../../context/DependencyContext';
 import { useContext, useEffect, useRef, useState } from 'react';
-import {NotificationMessageBox} from '../../../shared/ui/GeneralComponents/NotificationMessageBox';
+import {NotificationMessageBox} from '../GeneralComponents/NotificationMessageBox';
 
 
 export function NotificationMessageListener() {

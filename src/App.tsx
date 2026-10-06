@@ -7,10 +7,10 @@ import ProtectedRoute from './Presentation/Components/ProtectedRoute';
 import {DependencyProvider} from './context/DependencyContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
-import { ErrorMessageListener } from './Presentation/Components/Listeners/ErrorMessageListener';
-import { NavigationListener } from './Presentation/Components/Listeners/NavigationListener';
+import { ErrorMessageListener } from './shared/ui/listeners/ErrorMessageListener';
+import { NavigationListener } from './modules/Security/ui/NavigationListener';
 import { VerifyEmail } from './Presentation/pages/auth/verifyemail';
-import { NotificationMessageListener } from './Presentation/Components/Listeners/NotificationListener';
+import { NotificationMessageListener } from './shared/ui/listeners/NotificationListener';
 
 function App() {
   
