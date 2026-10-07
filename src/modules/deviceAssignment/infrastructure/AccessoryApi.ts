@@ -15,31 +15,31 @@ export default class AccessoryApi extends GeneralApi {
 
     async ListAccessories(): Promise<GeneralApiResult<Accessory[]>> {
         let url = `${this.baseUrl}${urls['accessories-list']}`;
-        let result = await this.GeneralApiCaller<Accessory[]>('GET', url);   
+        let result = await this.SecureApiCaller<Accessory[]>('GET', url);   
         return result;
     }
 
     async CreateAccessory(data: Accessory): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['accessory-create']}`;
-        let result = await this.GeneralApiCaller<boolean>('POST', url, data);
+        let result = await this.SecureApiCaller<boolean>('POST', url, data);
         return result;
     }
 
     async UpdateAccessory(data: Accessory): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['accessory-update']}`;
-        let result = await this.GeneralApiCaller<boolean>('PUT', url, data);
+        let result = await this.SecureApiCaller<boolean>('PUT', url, data);
         return result;
     }
 
     async DeleteAccessory(id: number): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['accessory-delete']}/${id}`;
-        let result = await this.GeneralApiCaller<boolean>('DELETE', url);
+        let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
 
     async GetAccessory(id: number): Promise<GeneralApiResult<Accessory>> {
         let url = `${this.baseUrl}${urls['accessory-get']}`;
-        let result = await this.GeneralApiCaller<Accessory>('GET', url, { id });
+        let result = await this.SecureApiCaller<Accessory>('GET', url, { id });
         return result;
     }
 }

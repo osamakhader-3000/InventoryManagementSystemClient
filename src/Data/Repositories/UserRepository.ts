@@ -4,17 +4,16 @@ import { IUserRepository } from "../../Application/Repositories/IUserRepository.
 import { IUserApi } from "../api/Interfaces/IUserApi.ts";
 import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage.ts";
 import { AuthenticationResult } from "../../modules/Security/domain/AuthenticationResult.ts";
-import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
-import { IAuthService } from "../Commons/IAuthService.ts";
+import { IAuthSessionService } from "../../modules/Security/infrastructure/IAuthSessionService.ts";
 import Account from "../../Domain/Entities/Account.ts";
 
 export class UserRepository implements IUserRepository {
 
     protected userApi: IUserApi;
     protected authStorage: IAuthStorage;
-    protected authService: IAuthService;
+    protected authService: IAuthSessionService;
 
-    constructor(userApi: IUserApi, authStorage: IAuthStorage, authService: IAuthService) {
+    constructor(userApi: IUserApi, authStorage: IAuthStorage, authService: IAuthSessionService) {
         this.userApi = userApi;
         this.authStorage = authStorage;
         this.authService = authService;
@@ -23,9 +22,7 @@ export class UserRepository implements IUserRepository {
 
     async FetchUser(token: string): Promise<User> {
 
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<User>>>(async () => {
-            return this.userApi.FetchUser(token);
-        });
+        let result = await this.userApi.FetchUser(token);
         return result.data ?? new User('', '', '', '');
     }
 
@@ -79,9 +76,7 @@ export class UserRepository implements IUserRepository {
         if (cachedUser)
             return cachedUser;
 
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<User>>>(async () => {
-            return this.userApi.GetCurrentUser();
-        });
+        let result = await this.userApi.GetCurrentUser();
 
         if (result.data)
             this.authStorage.SetCurrentUser(result.data);
@@ -95,60 +90,43 @@ export class UserRepository implements IUserRepository {
     }
 
     async ResendVerificationEmail(): Promise<boolean> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<boolean>>>(async () => {
-            let result = await this.userApi.ResendVerificationEmail();
-            return result;
-        });
+        let result = await this.userApi.ResendVerificationEmail();
         return result?.success ?? false;
     }
 
     async GetUserInfo(): Promise<User> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<User>>>(async () => {
-            return this.userApi.GetUserInfo();
-        });
+        let result = await this.userApi.GetUserInfo();
         return result.data ?? new User('', '', '', '');
     }
 
 
     async ChangePassword(oldPassword: string, newPassword: string): Promise<boolean> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<boolean>>>(async () => {
-            return this.userApi.ChangePassword(oldPassword, newPassword);
-        });
+        let result = await this.userApi.ChangePassword(oldPassword, newPassword);
         return result?.success ?? false;
     }
 
     async ListUsers(): Promise<User[]> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<User[]>>>(async () => {
-            return this.userApi.ListUsers();
-        });
+        let result = await this.userApi.ListUsers();
         return result.data??[];
     }
 
     async SuspendUser(userId: string): Promise<boolean> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<boolean>>>(async () => {
-            return this.userApi.SuspendUser(userId);
-        });
+        let result = await this.userApi.SuspendUser(userId);
         return result?.success ?? false;
     }
 
     async ActivateUser(userId: string): Promise<boolean> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<boolean>>>(async () => {
-            return this.userApi.ActivateUser(userId);
-        });
+        let result = await this.userApi.ActivateUser(userId);
        return result?.success ?? false;
     }  
 
     async ChangeUserRole(user: User): Promise<boolean> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<boolean>>>(async () => {
-            return this.userApi.ChangeUserRole(user);
-        });
+        let result = await this.userApi.ChangeUserRole(user);
         return result?.success ?? false;
     }
 
     async ListUsersByIds(userIds: string[]): Promise<User[]> {
-        let result = await this.authService.ProtectedAccess<Promise<GeneralApiResult<User[]>>>(async () => {
-            return this.userApi.ListUsersByIds(userIds);
-        });
+        let result = await this.userApi.ListUsersByIds(userIds);
         return result.data??[];
     }
     

@@ -15,19 +15,19 @@ export class ClientApi extends GeneralApi implements IClientApi {
 
     async getClient(clientId: string): Promise<GeneralApiResult<Client>> {
         let url = `${this.baseUrl}/${urls['client-get']}/${clientId}`;
-        let result = await this.GeneralApiCaller<Client>('GET', url);
+        let result = await this.SecureApiCaller<Client>('GET', url);
         return result;
     }
 
     async updateClient(client: Client): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['client-update']}`;
-        let result = await this.GeneralApiCaller<boolean>('PUT', url, client);
+        let result = await this.SecureApiCaller<boolean>('PUT', url, client);
         return result;
     }
 
     async deleteClient(clientId: string): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['client-delete']}/${clientId}`;
-        let result = await this.GeneralApiCaller<boolean>('DELETE', url);
+        let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
 
@@ -36,13 +36,13 @@ export class ClientApi extends GeneralApi implements IClientApi {
         if (buildId) {
             url += `?buildId=${buildId}`;
         }
-        let result = await this.GeneralApiCaller<Client[]>('GET', url);
+        let result = await this.SecureApiCaller<Client[]>('GET', url);
         return result;
     }
 
     async createClient(client: Client): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}/${urls['client-create']}`;
-        let result = await this.GeneralApiCaller<boolean>('POST', url, client);
+        let result = await this.SecureApiCaller<boolean>('POST', url, client);
         return result;
     }
 }

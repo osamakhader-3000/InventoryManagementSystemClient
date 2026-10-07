@@ -1,26 +1,74 @@
 import axios from 'axios';
-import { GeneralApiResult,GeneralApiResultFactory } from '../DataTransferObjects/GeneralApiResult';
+import { ErrorTypes, GeneralApiResult,GeneralApiResultFactory } from '../DataTransferObjects/GeneralApiResult';
+import { IHttpSessionHandler } from './IHttpSessionHandler';
+import { IHttpErrorReporter } from './IHttpErrorReporter';
 
 
 
 
     export class GeneralApi{
 
+        private static sessionHandler: IHttpSessionHandler | null = null;
+        private static errorReporter: IHttpErrorReporter | null = null;
+        private static pendingRefresh: Promise<boolean> | null = null;
+
         private CachedPostRequests: PostRequest[] = [];
-      
+
         constructor(){
-           
+
         }
 
-    async GeneralApiCaller<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: any, headers?: any): Promise<GeneralApiResult<T>> {
-        try 
-        {           
-            return await this.ApiReferee<T>(method, url, data, headers);
-        } 
-        catch (error: any)         
+    static Configure(sessionHandler: IHttpSessionHandler, errorReporter: IHttpErrorReporter): void {
+        GeneralApi.sessionHandler = sessionHandler;
+        GeneralApi.errorReporter = errorReporter;
+    }
+
+    // Authenticated call: on 401 the session is refreshed once and the request retried.
+    async SecureApiCaller<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: any, headers?: any): Promise<GeneralApiResult<T>> {
+        let result = await this.ApiCaller<T>(method, url, data, headers);
+
+        if (result.ErrorType == ErrorTypes.Unauthorized && await GeneralApi.RefreshSession())
+            result = await this.ApiCaller<T>(method, url, data, headers);
+
+        GeneralApi.ReportFailure(result);
+        return result;
+    }
+
+    // For endpoints that must not trigger a session refresh (login, refresh, email verification...).
+    async ApiCaller<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: any, headers?: any): Promise<GeneralApiResult<T>> {
+        try
         {
-            return GeneralApiResultFactory.CreateFromErrorResponse<T>(error); 
+            return await this.ApiReferee<T>(method, url, data, headers);
         }
+        catch (error: any)
+        {
+            return GeneralApiResultFactory.CreateFromErrorResponse<T>(error);
+        }
+    }
+
+    // Concurrent 401s share a single refresh request.
+    private static RefreshSession(): Promise<boolean> {
+        if (!GeneralApi.sessionHandler)
+            return Promise.resolve(false);
+
+        if (!GeneralApi.pendingRefresh)
+            GeneralApi.pendingRefresh = GeneralApi.sessionHandler.RefreshSession()
+                .catch(() => false)
+                .finally(() => { GeneralApi.pendingRefresh = null; });
+
+        return GeneralApi.pendingRefresh;
+    }
+
+    private static ReportFailure<T>(result: GeneralApiResult<T>): void {
+        if (result.success)
+            return;
+
+        if (result.ErrorType == ErrorTypes.Unauthorized)
+            GeneralApi.sessionHandler?.SessionExpired();
+        else if (result.ErrorType == ErrorTypes.EmailVerificationRequired)
+            GeneralApi.sessionHandler?.EmailVerificationRequired();
+        else
+            GeneralApi.errorReporter?.ErrorOccured(result.resultMessage ?? "Unknown error");
     }
 
 
@@ -28,10 +76,10 @@ import { GeneralApiResult,GeneralApiResultFactory } from '../DataTransferObjects
     if(method === 'POST')
         return await this.IdemponentApiCaller<T>(url, data, headers);
     else
-        return await this.ApiCaller<T>(method, url, data, headers);
+        return await this.SendHttpRequest<T>(method, url, data, headers);
   }
 
-async ApiCaller<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: any, headers?: any): Promise<GeneralApiResult<T>> {
+async SendHttpRequest<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: any, headers?: any): Promise<GeneralApiResult<T>> {
        
             const response = await axios({
                 method: method,
@@ -67,7 +115,7 @@ async ApiCaller<T>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?
 
         try
         {
-            return await this.ApiCaller<T>('POST', url, data, {'Idempotency-Key': idempotencyKey,...headers});
+            return await this.SendHttpRequest<T>('POST', url, data, {'Idempotency-Key': idempotencyKey,...headers});
         }
         finally
         {

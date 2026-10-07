@@ -19,8 +19,9 @@ import { AuthEventBus } from '../modules/Security/infrastructure/AuthEventBus';
 import { ErrorHandlingBus } from '../shared/infrastructure/messaging/ErrorHandlingBus';
 import { NotificationHandlingBus } from '../shared/infrastructure/messaging/NotificationHandlingBus';
 import { AuthListener } from '../modules/Security/application/AuthListener.ts';
-import { AuthApiService } from '../Data/Commons/AuthApiService.ts';
-import { AuthApi } from '../Data/api/Implementation/AuthApi.ts';
+import { AuthSessionService } from '../modules/Security/infrastructure/AuthSessionService.ts';
+import { AuthApi } from '../modules/Security/infrastructure/AuthApi.ts';
+import { GeneralApi } from '../shared/infrastructure/http/GeneralApi';
 import { BuildApi } from '../Data/api/Implementation/BuildApi.ts';
 import { BuildRepository } from '../Data/Repositories/BuildRepository.ts';
 import { BuildService } from '../Application/Services/BuildService.ts';
@@ -51,7 +52,8 @@ const notificationHandlingBus = new NotificationHandlingBus();
 
 const authStorage = new AuthStorage();
 const authApi= new AuthApi();
-const authService = new AuthApiService(authApi, authStorage, authEventBus, errorHandlingBus);
+const authService = new AuthSessionService(authApi, authStorage, authEventBus, errorHandlingBus);
+GeneralApi.Configure(authService, errorHandlingBus);
 
 const userApi = new UserApi();
 const userRepository = new UserRepository(userApi,authStorage,authService);
@@ -69,11 +71,11 @@ const profileImgMenuServ = new ProfileImageMenuService(profImgMenuRepo, userRepo
 
 
 const buildApi = new BuildApi();
-const buildRepo = new BuildRepository(buildApi, authService);
+const buildRepo = new BuildRepository(buildApi);
 const buildServ = new BuildService(buildRepo,userRepository);
 
 const clientApi = new ClientApi();
-const clientRepo = new ClientRepository(clientApi, authService);
+const clientRepo = new ClientRepository(clientApi);
 const clientServ = new ClientService(clientRepo);
 
 const assignmentRepo = new HttpAssignmentRepository();

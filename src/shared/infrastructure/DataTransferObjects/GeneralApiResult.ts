@@ -1,5 +1,5 @@
 
-enum ErrorTypes {
+export enum ErrorTypes {
         Unauthorized = 'Unauthorized',
         NetworkError = 'NetworkError',
         ServerError = 'ServerError',

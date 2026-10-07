@@ -1,14 +1,13 @@
-// Repository.ts
+import { AuthenticationResult } from "../domain/AuthenticationResult.ts";
+import { IAuthApi } from "./IAuthApi.ts";
+import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
+import { IAuthStorage } from "../../../Data/LocalData/Interfaces/IAuthStorage";
+import { AuthEventBus } from './AuthEventBus.ts';
+import { ErrorHandlingBus } from '../../../shared/infrastructure/messaging/ErrorHandlingBus.ts';
+import { IHttpSessionHandler } from "../../../shared/infrastructure/http/IHttpSessionHandler.ts";
+import { IAuthSessionService } from "./IAuthSessionService.ts";
 
-import { AuthenticationResult } from "../../modules/Security/domain/AuthenticationResult.ts";
-import { IAuthApi } from "../api/Interfaces/IAuthApi.ts";
-import { GeneralApiResult } from "../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
-import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage";
-import { AuthEventBus } from '../../modules/Security/infrastructure/AuthEventBus.ts';
-import { ErrorHandlingBus } from '../../shared/infrastructure/messaging/ErrorHandlingBus.ts';
-import { IAuthService } from "./IAuthService.ts";
-
-export class AuthApiService implements IAuthService {
+export class AuthSessionService implements IAuthSessionService, IHttpSessionHandler {
   protected authApi: IAuthApi;
   protected authStorage: IAuthStorage;
   private authEventBus: AuthEventBus;
@@ -22,37 +21,17 @@ export class AuthApiService implements IAuthService {
     this.errorHandlingBus = errorHandlingBus;
   }
 
-  async ProtectedAccess<T>(fn: () => T): Promise<T> {
+  async RefreshSession(): Promise<boolean> {
+    let authResult = await this.Refresh();
+    return authResult.success;
+  }
 
-    let authResult: AuthenticationResult | null = null;
+  SessionExpired(): void {
+    this.authEventBus.UnauthorizedAccessAttempted();
+  }
 
-    try {
-      let result = await fn();
-
-      if (result && result instanceof GeneralApiResult && !result.success && result.ErrorType == 'Unauthorized')
-        authResult = await this.Refresh();
-
-      if (authResult && authResult.success)
-        result = await fn();
-
-      if (result && result instanceof GeneralApiResult && !result.success) {
-        if (result.ErrorType == 'Unauthorized')
-          this.authEventBus.UnauthorizedAccessAttempted();
-        else if (result.ErrorType == 'EmailVerificationRequired')
-          this.authEventBus.EmailVerificationRequired();
-        else
-          throw new Error(result.resultMessage ?? "Unknown error");
-      }
-
-      if (result == null)
-        throw new Error("Unknown error");
-
-      return result;
-    }
-    catch (error: any) {
-      this.errorHandlingBus.ErrorOccured(error?.message ?? "Unknown error");
-      return null as any;
-    }
+  EmailVerificationRequired(): void {
+    this.authEventBus.EmailVerificationRequired();
   }
 
 
