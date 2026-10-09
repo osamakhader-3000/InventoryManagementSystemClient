@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router';
 import MainSidebarMenu from '../../Components/MainSidebarMenu.tsx'
-import TasksPage from '../Tasks/TasksPage.tsx';
 import MainViewHeader from '../../Components/MainViewHeader.tsx';
 import styles from './MainPage.module.css'
 import { EmailVerifiedRoute } from '../../../modules/Security/ui/routes/EmailVerifiedRoute.tsx';
@@ -10,16 +9,8 @@ import Profile from '../User/Profile.tsx';
 import Users from '../AdminPages/Users.tsx';
 import { TempAccountMessage } from '../../../modules/Security/ui/TempAccountMessage.tsx';
 import { AdminAccountRoute } from '../../../modules/Security/ui/routes/AdminAccountRoute.tsx';
-import AddCubesBuild from '../../Components/CubesBuild/AddCubesBuild.tsx';
-import EditCubesBuild from '../../Components/CubesBuild/EditCubesBuild.tsx';
-import Builds from '../Builds/Builds.tsx';
 import { TechnicalSupportAccountRoute } from '../../../modules/Security/ui/routes/TechnicalSupportAccountRoute.tsx';
 import { ForbiddenMessage } from '../../../modules/Security/ui/ForbiddenMessage.tsx';
-import Clients from '../Clients/Clients.tsx';
-import EditCubesClient from '../../Components/CubesClient/EditCubesClient.tsx';
-import AddCubesClient from '../../Components/CubesClient/AddCubesClient.tsx';
-import ViewCubesClient from '../../Components/CubesClient/ViewCubesClient.tsx';
-import ViewCubesBuild from '../../Components/CubesBuild/ViewCubesBuild.tsx';
 import AddAssignmentForm from '../../../modules/deviceAssignment/ui/Assignment/AddAssignmentForm.tsx';
 import EditAssignmentForm from '../../../modules/deviceAssignment/ui/Assignment/EditAssignmentForm.tsx';
 import AddDeviceForm from '../../../modules/deviceAssignment/ui/Device/AddDeviceForm.tsx';
@@ -67,10 +58,7 @@ function MainPage() {
                           <Route path="/myprofile" element={<Profile />} />
                           <Route element={<EmailVerifiedRoute />}>
                             <Route element={<TempAccountRoute />}>
-                              <Route path="/" element={<Navigate to="/mytasks" replace />} />
-                              <Route path="/mytasks" element={<TasksPage />} />
-                              <Route path="/builds" element={<Builds />} />
-                              <Route path="/clients" element={<Clients />} />
+                              <Route path="/" element={<Navigate to="/assignments" replace />} />
                               <Route element={<AdminAccountRoute />}>
                                 <Route path="/admin/users" element={<Users />} />
                               </Route>
@@ -89,13 +77,7 @@ function MainPage() {
                               <Route path="/users" element={<UsersList />} />
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />
-                              <Route path="/viewcubesclient/:id" element={<ViewCubesClient />} />
-                              <Route path="/viewcubesbuild/:id" element={<ViewCubesBuild />} />
-                              <Route element={<TechnicalSupportAccountRoute />}>
-                                <Route path="/addcubesbuild" element={<AddCubesBuild />} />
-                                <Route path="/editcubesbuild/:id" element={<EditCubesBuild />} />
-                                <Route path="/addcubesclient" element={<AddCubesClient />} />
-                                <Route path="/editcubesclient/:id" element={<EditCubesClient />} />                                
+                              <Route element={<TechnicalSupportAccountRoute />}>                             
                               </Route>
                             </Route>
                           </Route>

@@ -27,7 +27,7 @@ function App() {
                 <Route path="/verifyemail" element={<VerifyEmail />} />
                 <Route path="/login" element={<LoginPage newAccount={false} />} />
                 <Route path="/signup" element={<LoginPage newAccount={true} />} />
-                <Route index element={<Navigate to="/mytasks" replace />} />                    
+                <Route index element={<Navigate to="/assignments" replace />} />                    
                 <Route element={<ProtectedRoute />}>
                   <Route path="*" element={<AuthProvider><MainPage /></AuthProvider>} />                   
                 </Route>
