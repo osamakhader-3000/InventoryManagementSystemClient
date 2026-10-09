@@ -9,36 +9,36 @@ export class UserApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}/${urls['assignments-domain']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}`;
     }
 
     async ListUsers(): Promise<GeneralApiResult<User[]>> {
-        let url = `${this.baseUrl}/${urls['users-list']}`;
+        let url = `${this.baseUrl}${urls['users-list']}`;
         let result = await this.SecureApiCaller<User[]>('GET', url);
         return result;
     }
 
     async GetUser(userID: bigint): Promise<GeneralApiResult<User>> {
-        let url = `${this.baseUrl}/${urls['user-get']}/${userID.toString()}`;
+        let url = `${this.baseUrl}${urls['user-get']}/${userID.toString()}`;
         let result = await this.SecureApiCaller<User>('GET', url);
         return result;
         
     }
 
     async CreateUser(user: User): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['user-create']}`;
+        let url = `${this.baseUrl}${urls['user-create']}`;
         let result = await this.SecureApiCaller<boolean>('POST', url, user);
         return result;
     }
 
     async UpdateUser(user: User): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['user-update']}`;
+        let url = `${this.baseUrl}${urls['user-update']}`;
         let result = await this.SecureApiCaller<boolean>('PUT', url, user);
         return result;
     }
 
     async DeleteUser(userID: bigint): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['user-delete']}/${userID.toString()}`;
+        let url = `${this.baseUrl}${urls['user-delete']}/${userID.toString()}`;
         let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
