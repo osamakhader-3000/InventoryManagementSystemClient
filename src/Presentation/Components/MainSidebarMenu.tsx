@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import RealmsMenuItem from './MainSidebarMenuItem';
+import MainSidebarMenuItem from './MainSidebarMenuItem';
 import SearchBox from '../../shared/ui/GeneralComponents/SearchBox';
 import Realm from '../../Domain/Entities/Realm';
 import styles from './MainSidebarMenu.module.css'
@@ -64,7 +64,7 @@ export default function MainSidebarMenu() {
                   realms.map((realm: Realm) => (
                     <tr key={realm.id} className={styles.realmsmenuelement}>
                       <td>
-                        <RealmsMenuItem ID={realm.id} Name={realm.name} />
+                        <MainSidebarMenuItem ID={realm.id} Name={realm.name} />
                       </td>
                     </tr>
                   ))}

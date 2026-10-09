@@ -10,9 +10,12 @@ export class RealmStorage implements IRealmStorage {
 
         if (user != null && user.emailVerificationStatus == UserEmailVerificationStatus.Verified && user.accountStatus == UserAccountStatus.Active) {
             
-            realms.push(new Realm("mytasks", "My Tasks", "Description of My Tasks"));
-            realms.push(new Realm("builds", "Builds", "Description of Builds"));
-            realms.push(new Realm("clients", "Clients", "Description of Clients"));
+            realms.push(new Realm("assignments", "Assignments", "List of Devices and users assinged to them"));
+            realms.push(new Realm("devices", "Devices", "List of all available Devices"));
+            realms.push(new Realm("accessories", "Accessories", "List of all available Accessories"));
+            realms.push(new Realm("departments", "Departments", "List of all Departments"));
+            realms.push(new Realm("users", "Users", "List of all available Users"));
+
 
             if (isAdministrator(user))
                 realms.push(new Realm("admin/users","Users", "Description of Users"));
