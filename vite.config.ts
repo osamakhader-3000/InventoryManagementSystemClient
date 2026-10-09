@@ -7,14 +7,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/security': {
-        target: 'https://localhost:5001',
-        changeOrigin: true,
-        secure: false,
-        ws: true,
-      },
-      '/steletusapp': {
-        target: 'https://localhost:5001',
+      '/api': {
+        target: 'https://localhost:7150',
         changeOrigin: true,
         secure: false,
         ws: true,
