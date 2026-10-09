@@ -33,7 +33,7 @@ const ProtectedRoute = () => {
         }
       };
       setIsLoggedIn(true);
-      //checkAuth();
+      checkAuth();
     }, [location.pathname]);
     
     // Show loading state while checking authentication  

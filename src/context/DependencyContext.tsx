@@ -5,7 +5,7 @@ import {RealmService} from '../Application/Services/RealmService';
 import { ProfileImageMenuService } from '../Application/Services/ProfileImageMenuService';
 import { ProfileImageMenuRepository } from '../Data/Repositories/ProfileImageMenuRepository';
 import { UserService } from '../Application/Services/UserService.ts';
-import { UserApi } from '../Data/api/Implementation/UserApi.ts';
+import { UserApi } from '../modules/Security/infrastructure/UserApi.ts';
 import { UserRepository } from '../Data/Repositories/UserRepository.ts';
 import { AuthStorage } from '../Data/LocalData/Implemetation/AuthStorage';
 import { IUserService } from '../Application/Interfaces/IUserService.ts';

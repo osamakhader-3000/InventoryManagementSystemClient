@@ -1,3 +1,4 @@
+/*
 import { User } from '../../../modules/Security/domain/User.ts'
 import { LoginRequest } from '../../DataTransferObjects/LoginRequest.ts'
 import { IUserApi } from '../Interfaces/IUserApi.ts'
@@ -7,7 +8,7 @@ import axios from 'axios';
 import { GeneralApiResult } from '../../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts';
 import { TokenHolder } from '../../DataTransferObjects/TokenHolder.ts';
 import { PasswordChangeRequest } from '../../DataTransferObjects/PasswordChangeRequest.ts';
-import Account from '../../../Domain/Entities/Account.ts';
+import Account from '../../../modules/Security/domain/Account.ts';
 
 export class UserApi extends GeneralApi implements IUserApi {
 
@@ -15,7 +16,7 @@ export class UserApi extends GeneralApi implements IUserApi {
 
     constructor() {
         super();
-        this.baseUrl = urls['security-app-domain'];
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['user']}`;
 
     }
 
@@ -126,4 +127,4 @@ export class UserApi extends GeneralApi implements IUserApi {
 
 }
 
-
+*/

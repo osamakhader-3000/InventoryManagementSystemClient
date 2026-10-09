@@ -1,7 +1,7 @@
 import {User} from '../../../modules/Security/domain/User'
-import {LoginRequest} from '../../DataTransferObjects/LoginRequest'
+import {LoginRequest} from '../../../modules/Security/domain/LoginRequest'
 import { GeneralApiResult } from '../../../shared/infrastructure/DataTransferObjects/GeneralApiResult';
-import Account from '../../../Domain/Entities/Account';
+import Account from '../../../modules/Security/domain/Account';
 
 export interface IUserApi{
     CreateAccount(account:Account):Promise<GeneralApiResult<Date>>;

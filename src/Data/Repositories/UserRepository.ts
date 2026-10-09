@@ -1,11 +1,11 @@
 import { User } from "../../modules/Security/domain/User.ts";
-import { LoginRequest } from "../DataTransferObjects/LoginRequest.ts";
+import { LoginRequest } from "../../modules/Security/domain/LoginRequest.ts";
 import { IUserRepository } from "../../Application/Repositories/IUserRepository.ts";
 import { IUserApi } from "../api/Interfaces/IUserApi.ts";
 import { IAuthStorage } from "../LocalData/Interfaces/IAuthStorage.ts";
 import { AuthenticationResult } from "../../modules/Security/domain/AuthenticationResult.ts";
 import { IAuthSessionService } from "../../modules/Security/infrastructure/IAuthSessionService.ts";
-import Account from "../../Domain/Entities/Account.ts";
+import Account from "../../modules/Security/domain/Account.ts";
 
 export class UserRepository implements IUserRepository {
 

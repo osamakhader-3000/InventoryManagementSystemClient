@@ -1,6 +1,6 @@
 import { User } from '../../modules/Security/domain/User';
 import { AuthenticationResult } from '../../modules/Security/domain/AuthenticationResult';
-import Account from '../../Domain/Entities/Account';
+import Account from '../../modules/Security/domain/Account';
 
 export interface IUserRepository {
   CreateAccount(account: Account): Promise<AuthenticationResult>;

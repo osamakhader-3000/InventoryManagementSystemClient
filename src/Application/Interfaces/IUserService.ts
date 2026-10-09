@@ -1,4 +1,4 @@
-import Account from '../../Domain/Entities/Account';
+import Account from '../../modules/Security/domain/Account';
 import UserLogginStatus from '../../modules/Security/domain/UserLogInStatus';
 import {User} from '../../modules/Security/domain/User'
 

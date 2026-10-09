@@ -6,7 +6,7 @@ import { DependencyContext } from '../../context/DependencyContext';
 import { ErrorMessageBox } from '../../shared/ui/GeneralComponents/ErrorMessageBox';
 import { useNavigate } from "react-router";
 import { LoadingButton } from "../../shared/ui/GeneralComponents/LoadingButton";
-import Account from "../../Domain/Entities/Account";
+import Account from "../../modules/Security/domain/Account";
 
 interface CreateAccountFormProps {
   redirectUrl: string;
