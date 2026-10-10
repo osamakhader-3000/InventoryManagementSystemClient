@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useDeleteDepartment() {
     const { departmentRepository } = useContext(DependencyContext);

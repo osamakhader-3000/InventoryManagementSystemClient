@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DependencyContext } from '../../../context/DependencyContext';
+import { DependencyContext } from '../../../app/DependencyContext';
 import { useLocation, useNavigate } from 'react-router';
 
 export function NavigationListener() {

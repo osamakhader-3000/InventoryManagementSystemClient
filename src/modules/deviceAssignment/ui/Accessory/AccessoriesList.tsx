@@ -2,7 +2,7 @@ import { useState, useContext, useMemo } from 'react';
 import { Link } from 'react-router';
 import Accessory from '../../domain/Accessory';
 import styles from './AccessoriesList.module.css'
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAccessories } from '../../application/accessory/useListAccessories';
 import { useDeleteAccessory } from '../../application/accessory/useDeleteAccessory';

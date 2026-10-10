@@ -2,87 +2,21 @@
 import { User, UserRole } from "../domain/User";
 import { IUserService } from "../domain/IUserService";
 import { IUserRepository } from "../domain/IUserRepository";
-import UserLoginStatus from "../domain/UserLogInStatus";
-import Account from "../domain/Account";
+import { ICurrentUserProvider } from "../domain/ICurrentUserProvider";
 
 export class UserService implements IUserService {
 
     userRepository: IUserRepository;
+    currentUserProvider: ICurrentUserProvider;
 
-    constructor(userRepository: IUserRepository) {
+    constructor(userRepository: IUserRepository, currentUserProvider: ICurrentUserProvider) {
         this.userRepository = userRepository;
-
+        this.currentUserProvider = currentUserProvider;
     }
 
-
-    async FetchUser(token: string): Promise<User> {
-        return this.userRepository.FetchUser(token);
-    }
-
-
-    async CreateAccount(account: Account): Promise<boolean> {
-        let result = await this.userRepository.CreateAccount(account);
-        return result.success;
-
-    }
-
-
-    async LoginAccount(user: User): Promise<boolean> {
-        let loginResult = await this.userRepository.LoginAccount(user);
-        return loginResult.success;
-    }
-
-
-    async CheckLoggedIn(): Promise<UserLoginStatus> {
-
-
-        let loginExpireDateTime = this.userRepository.GetLoginExpireTime();
-
-        let expired = loginExpireDateTime && new Date() > loginExpireDateTime;
-
-        if (expired || loginExpireDateTime == null) {
-            let result = await this.userRepository.Refresh();
-
-            if (!result.success) {
-
-                if (expired)
-                    return new UserLoginStatus(false, true);
-
-                if (loginExpireDateTime == null)
-                    return new UserLoginStatus(false, false);
-            }
-        }
-
-        return new UserLoginStatus(true, false);
-    }
-
-
-
-    async Logout(): Promise<void> {
-        this.userRepository.Logout();
-    }
-
-    async MicrosoftLoginCallBack(): Promise<boolean> {
-        return this.userRepository.MicrosoftLoginCallBack();
-    }
-
-    async GetCurrentUser(): Promise<User | null> {
-        let user = await this.userRepository.GetCurrentUser();
-        return user;
-    }
-
-    async VerifyEmail(token: string): Promise<boolean> {
-        let result = await this.userRepository.VerifyEmail(token);
-        return result;
-    }
-
-    async ResendVerificationEmail(): Promise<boolean> {
-        let result = await this.userRepository.ResendVerificationEmail();
-        return result;
-    }
 
     async GetCurrentUserProfile(): Promise<User> {
-        let currentUser = await this.GetCurrentUser();
+        let currentUser = await this.currentUserProvider.GetCurrentUser();
 
         if (!currentUser || !currentUser.id)
             throw new Error("User not logged in");
@@ -90,13 +24,6 @@ export class UserService implements IUserService {
         let user = await this.userRepository.GetUserInfo();
 
         return user;
-    }
-
-
-    async ChangePassword(oldPassword: string, newPassword: string): Promise<boolean> {
-
-        let result = await this.userRepository.ChangePassword(oldPassword, newPassword);
-        return result;
     }
 
 

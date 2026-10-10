@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
-import { DependencyContext } from "../../../context/DependencyContext";
+import { DependencyContext } from "../../../app/DependencyContext";
 import { useNavigate } from "react-router";
 import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 
 
 export function VerifyEmail() {
 
-const { userService: userService, notificationHandlingBus: notificationHandlingBus } = useContext(DependencyContext);
+const { authService, notificationHandlingBus } = useContext(DependencyContext);
 const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,10 +15,10 @@ const navigate = useNavigate();
       const token = urlParams.get('token');
         if (token) {
 
-            let result = await userService.VerifyEmail(token);
+            let result = await authService.VerifyEmail(token);
             if (result) {
                 notificationHandlingBus.NotificationOccured("Your email has been successfully verified. You can now log in.");
-                userService.Logout();
+                authService.Logout();
                 navigate("/login");
             }
                  

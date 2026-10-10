@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Accessory from "../../domain/Accessory";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useListAccessories() {
     const { accessoryRepository } = useContext(DependencyContext);

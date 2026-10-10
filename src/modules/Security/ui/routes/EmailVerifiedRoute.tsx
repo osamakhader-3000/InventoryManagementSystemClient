@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../../../context/AuthContext.tsx';
+import { AuthContext } from '../AuthContext.tsx';
 import { Navigate, Outlet } from 'react-router';
 import { UserEmailVerificationStatus } from '../../domain/User.ts';
 

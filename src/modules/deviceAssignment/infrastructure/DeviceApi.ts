@@ -9,35 +9,35 @@ export class DeviceApi extends GeneralApi{
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}/${urls['assignments-domain']}/${urls['devices']}/`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['devices']}`;
     }
 
     async ListDevices(): Promise<GeneralApiResult<Device[]>> {
-        let url = `${this.baseUrl}/${urls['devices-list']}`;
+        let url = `${this.baseUrl}${urls['devices-list']}`;
         let result = await this.SecureApiCaller<Device[]>('GET', url);
         return result;
     }
 
     async CreateDevice(device: Device): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['device-create']}`;
+        let url = `${this.baseUrl}${urls['device-create']}`;
         let result = await this.SecureApiCaller<boolean>('POST', url, device);
         return result;
     }
     
     async UpdateDevice(device: Device): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['device-update']}`;
+        let url = `${this.baseUrl}${urls['device-update']}`;
         let result = await this.SecureApiCaller<boolean>('PUT', url, device);
         return result;
     }
 
     async DeleteDevice(deviceId: string): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}/${urls['device-delete']}`;
+        let url = `${this.baseUrl}${urls['device-delete']}`;
         let result = await this.SecureApiCaller<boolean>('DELETE', url, { id: deviceId });
         return result;
     }
 
     async GetDevice(deviceId: string): Promise<GeneralApiResult<Device>> {
-        let url = `${this.baseUrl}/${urls['device-get']}`;
+        let url = `${this.baseUrl}${urls['device-get']}`;
         let result = await this.SecureApiCaller<Device>('GET', url, { id: deviceId });
         return result;
     }

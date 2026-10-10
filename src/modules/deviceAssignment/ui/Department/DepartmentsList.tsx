@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Department from '../../domain/Department';
 import styles from './DepartmentsList.module.css'
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDepartments } from '../../application/department/useListDepartments';
 import { useDeleteDepartment } from '../../application/department/useDeleteDepartment';

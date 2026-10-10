@@ -1,4 +1,4 @@
-import { DependencyContext } from '../../../context/DependencyContext';
+import { DependencyContext } from '../../../app/DependencyContext';
 import { useContext, useEffect, useRef, useState } from 'react';
 import {NotificationMessageBox} from '../GeneralComponents/NotificationMessageBox';
 

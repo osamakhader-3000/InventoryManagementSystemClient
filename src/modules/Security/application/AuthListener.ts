@@ -1,22 +1,22 @@
 import { AuthEventBus } from "../infrastructure/AuthEventBus.ts";
 import { ErrorHandlingBus } from "../../../shared/infrastructure/messaging/ErrorHandlingBus.ts";
-import { IUserService } from "../domain/IUserService.ts";
+import { IAuthService } from "../domain/IAuthService.ts";
 
 export class  AuthListener{
     private authEventBus:AuthEventBus;
     private errorHandlingBus:ErrorHandlingBus;
-    private userService:IUserService;
+    private authService:IAuthService;
 
-    constructor(authEventBus:AuthEventBus,errorHandlingBus:ErrorHandlingBus,authService:IUserService){
+    constructor(authEventBus:AuthEventBus,errorHandlingBus:ErrorHandlingBus,authService:IAuthService){
         this.authEventBus = authEventBus;
         this.errorHandlingBus = errorHandlingBus;
-        this.userService = authService;
+        this.authService = authService;
 
     }
 
      StartListening() {
         this.authEventBus.SubscribeToDenyAccess(() => {
-            this.userService.Logout();
+            this.authService.Logout();
             this.errorHandlingBus.ErrorOccured("Your session has expired. Please log in again.");
         });
     }

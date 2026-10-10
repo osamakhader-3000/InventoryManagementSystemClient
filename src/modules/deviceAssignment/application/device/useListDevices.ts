@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Device from "../../domain/Device";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useListDevices() {
     const { deviceRepository } = useContext(DependencyContext);

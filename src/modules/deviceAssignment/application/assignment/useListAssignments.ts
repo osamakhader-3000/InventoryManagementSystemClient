@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Assignment from "../../domain/Assignment";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useListAssignments() {
     const { assignmentRepository } = useContext(DependencyContext);

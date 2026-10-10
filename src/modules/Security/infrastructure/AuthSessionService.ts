@@ -1,7 +1,7 @@
 import { AuthenticationResult } from "../domain/AuthenticationResult.ts";
 import { IAuthApi } from "./IAuthApi.ts";
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult.ts";
-import { IAuthStorage } from "../../../Data/LocalData/Interfaces/IAuthStorage";
+import { IAuthStorage } from "./IAuthStorage";
 import { AuthEventBus } from './AuthEventBus.ts';
 import { ErrorHandlingBus } from '../../../shared/infrastructure/messaging/ErrorHandlingBus.ts';
 import { IHttpSessionHandler } from "../../../shared/infrastructure/http/IHttpSessionHandler.ts";

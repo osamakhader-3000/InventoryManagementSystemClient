@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 import Accessory, { type AccessoryProps } from "../../domain/Accessory";
 
 export type CreateAccessoryCommand = AccessoryProps;

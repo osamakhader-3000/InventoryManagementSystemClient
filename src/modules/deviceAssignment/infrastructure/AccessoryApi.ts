@@ -10,7 +10,7 @@ export default class AccessoryApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}/${urls['assignments-domain']}/${urls['accessories']}/`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['accessories']}`;
     }
 
     async ListAccessories(): Promise<GeneralApiResult<Accessory[]>> {

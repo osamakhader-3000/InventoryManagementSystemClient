@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Department from "../../domain/Department";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useListDepartments() {
     const { departmentRepository } = useContext(DependencyContext);

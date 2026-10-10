@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Assignment from '../../domain/Assignment';
 import styles from './AssignmentsList.module.css'
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAssignments } from '../../application/assignment/useListAssignments';
 import { useDeleteAssignment } from '../../application/assignment/useDeleteAssignment';

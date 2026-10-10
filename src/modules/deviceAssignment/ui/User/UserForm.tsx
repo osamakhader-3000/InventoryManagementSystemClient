@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import UserValidationError from '../../domain/UserValidationError';
 import styles from '../../../../shared/ui/SharedCss/Forms.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';

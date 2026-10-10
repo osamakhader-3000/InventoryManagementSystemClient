@@ -2,7 +2,7 @@ import { User } from "../domain/User.ts";
 import { LoginRequest } from "../domain/LoginRequest.ts";
 import { IAuthRepository } from "../domain/IAuthRepository.ts";
 import { IAuthApi } from "./IAuthApi.ts";
-import { IAuthStorage } from "../../../Data/LocalData/Interfaces/IAuthStorage.ts";
+import { IAuthStorage } from "./IAuthStorage.ts";
 import { AuthenticationResult } from "../domain/AuthenticationResult.ts";
 import { IAuthSessionService } from "./IAuthSessionService.ts";
 import Account from "../domain/Account.ts";
@@ -19,12 +19,6 @@ export class AuthRepository implements IAuthRepository {
         this.authService = authService;
     }
 
-
-    async FetchUser(token: string): Promise<User> {
-
-        let result = await this.authApi.FetchUser(token);
-        return result.data ?? new User('', '', '', '');
-    }
 
     async LoginAccount(user: User): Promise<AuthenticationResult> {
         if (!user.username || !user.password)

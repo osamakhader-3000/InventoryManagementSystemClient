@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../../../context/AuthContext";
+import { AuthContext } from "./AuthContext";
 import { Navigate } from "react-router";
 import { UserAccountStatus } from "../domain/User";
 import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';

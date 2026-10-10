@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import AssignmentValidationError from '../../domain/AssignmentValidationError';
 import styles from './AssignmentForm.module.css'
 import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiLineTextBox';
@@ -35,8 +35,6 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
   const { data: allDevices, isLoading: isLoadingDevices } = useListDevices();
   const { createAssignment, isSaving: isCreating } = useCreateAssignment();
   const { updateAssignment, isSaving: isUpdating } = useUpdateAssignment();  
-  const [selectedOperatingSystem, setSelectedOperatingSystem] = useState("");
-  const [specs, setSpecs] = useState("");
   const isSaving = isCreating || isUpdating;
   const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<number[]>(accessoryIds ?? []);
   const [selectedDeviceSerialNumber, setSelectedDeviceSerialNumber] = useState(serialNumber ?? "");
@@ -45,8 +43,6 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
   useEffect(() => {
     setRemarks(assignmentRemarks ?? "");
     setSelectedUserId(assignedUserId ?? "");
-    setSelectedOperatingSystem("");
-    setSpecs("");
     setSelectedAccessoryIds(accessoryIds ?? []);
     setSelectedDeviceSerialNumber(serialNumber ?? "");
   }, []);

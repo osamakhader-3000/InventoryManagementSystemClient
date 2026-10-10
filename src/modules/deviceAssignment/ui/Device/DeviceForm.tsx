@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import DeviceValidationError from '../../domain/DeviceValidationError';
 import { OperatingSystem } from '../../domain/OperatingSystem';
 import styles from './DeviceForm.module.css';

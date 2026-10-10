@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import User from '../../domain/User';
 import styles from './UsersList.module.css'
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useDeleteUser } from '../../application/user/useDeleteUser';

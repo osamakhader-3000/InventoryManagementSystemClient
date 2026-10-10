@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Device from '../../domain/Device';
 import styles from './DevicesList.module.css'
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';

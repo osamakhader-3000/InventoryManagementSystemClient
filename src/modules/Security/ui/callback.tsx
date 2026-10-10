@@ -1,19 +1,19 @@
 
 import { useNavigate } from 'react-router';
-import { DependencyContext } from '../../../context/DependencyContext';
+import { DependencyContext } from '../../../app/DependencyContext';
 import { useContext, useEffect } from 'react';
 import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 
 export default function AuthCallback() {
     const navigate = useNavigate();
 
-    const { userService: userService } = useContext(DependencyContext);
+    const { authService } = useContext(DependencyContext);
 
     useEffect(() => {
 
         async function handleMicrosoftLoginCallback() {
 
-            let result = await userService.MicrosoftLoginCallBack();
+            let result = await authService.MicrosoftLoginCallBack();
             if (result)
                 navigate("/");
 

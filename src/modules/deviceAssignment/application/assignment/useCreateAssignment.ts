@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 import Assignment from "../../domain/Assignment";
 import AssignmentValidationError from "../../domain/AssignmentValidationError";
 import Device from "../../domain/Device";

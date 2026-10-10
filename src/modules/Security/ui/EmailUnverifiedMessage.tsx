@@ -1,9 +1,9 @@
 import styles from '../../../shared/ui/SharedCss/SharedStyles.module.css';
 import { Navigate } from 'react-router';
-import { AuthContext } from '../../../context/AuthContext';
+import { AuthContext } from './AuthContext';
 import { useContext, useState } from 'react';
-import { UserEmailVerificationStatus } from '../../../modules/Security/domain/User.ts';
-import { DependencyContext } from '../../../context/DependencyContext';
+import { UserEmailVerificationStatus } from '../domain/User.ts';
+import { DependencyContext } from '../../../app/DependencyContext';
 import { LoadingButton } from "../../../shared/ui/GeneralComponents/LoadingButton.tsx"
 
 
@@ -11,7 +11,7 @@ import { LoadingButton } from "../../../shared/ui/GeneralComponents/LoadingButto
 export default function EmailUnverifiedMessage() {
 
     const { currentUser } = useContext(AuthContext);
-    const { userService: userService, notificationHandlingBus: notificationHandlingBus } = useContext(DependencyContext);
+    const { authService, notificationHandlingBus } = useContext(DependencyContext);
 
     const [sent, setSent] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function EmailUnverifiedMessage() {
 
         setIsLoading(true);
 
-        let result = await userService.ResendVerificationEmail();
+        let result = await authService.ResendVerificationEmail();
 
         setIsLoading(false);
 

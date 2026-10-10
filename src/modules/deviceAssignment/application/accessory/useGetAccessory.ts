@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { DependencyContext } from '../../../../context/DependencyContext';
+import { DependencyContext } from '../../../../app/DependencyContext';
 import Accessory from '../../domain/Accessory';
 
 export function useGetAccessory(accessoryId: number | null) {

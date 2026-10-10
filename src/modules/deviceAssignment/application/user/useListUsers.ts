@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import User from "../../domain/User";
-import { DependencyContext } from "../../../../context/DependencyContext";
+import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useListUsers() {
     const { assignmentUserRepository } = useContext(DependencyContext);
