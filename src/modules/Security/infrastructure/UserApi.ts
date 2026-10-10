@@ -1,4 +1,4 @@
-import { IUserApi } from '../Interfaces/IUserApi.ts';
+import { IUserApi } from '../infrastructure/IUserApi.ts';
 import { User } from '../../../modules/Security/domain/User.ts'
 import { LoginRequest } from '../domain/LoginRequest.ts'
 import urls from '../../../shared/infrastructure/http/urls.json';

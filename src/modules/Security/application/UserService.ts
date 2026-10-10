@@ -1,8 +1,9 @@
-import { User, UserRole } from "../../modules/Security/domain/User";
-import { IUserService } from "../Interfaces/IUserService";
-import { IUserRepository } from "../Repositories/IUserRepository";
-import UserLoginStatus from "../../modules/Security/domain/UserLogInStatus";
-import Account from "../../modules/Security/domain/Account";
+
+import { User, UserRole } from "../domain/User";
+import { IUserService } from "../domain/IUserService";
+import { IUserRepository } from "../domain/IUserRepository";
+import UserLoginStatus from "../domain/UserLogInStatus";
+import Account from "../domain/Account";
 
 export class UserService implements IUserService {
 

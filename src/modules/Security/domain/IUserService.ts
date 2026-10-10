@@ -1,6 +1,6 @@
-import Account from '../../modules/Security/domain/Account';
-import UserLogginStatus from '../../modules/Security/domain/UserLogInStatus';
-import {User} from '../../modules/Security/domain/User'
+import Account from './Account';
+import UserLogginStatus from './UserLogInStatus';
+import {User} from './User'
 
 export interface IUserService{
     CreateAccount(account: Account): Promise<boolean>;

@@ -1,6 +1,6 @@
 import { AuthEventBus } from "../infrastructure/AuthEventBus.ts";
 import { ErrorHandlingBus } from "../../../shared/infrastructure/messaging/ErrorHandlingBus.ts";
-import { IUserService } from "../../../Application/Interfaces/IUserService.ts";
+import { IUserService } from "../domain/IUserService.ts";
 
 export class  AuthListener{
     private authEventBus:AuthEventBus;
