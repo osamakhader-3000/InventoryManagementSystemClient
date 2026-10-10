@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { DependencyContext } from '../../../../app/DependencyContext'
-import { User, UserAccountStatus, UserEmailVerificationStatus } from "../../domain/User";
+import { User, UserAccountStatus, UserEmailVerificationStatus, UserRole, isAdministrator } from "../../domain/User";
 import style from './Users.module.css'
 
 export default function Users() {
@@ -67,7 +67,7 @@ export default function Users() {
 
         if (userId == null)
             return;
-        let newRole = event.target.value as unknown as string;
+        let newRole = event.target.value;
 
         let result = await userService.ChangeUserRole(userId, newRole);
         if (result) {
@@ -102,11 +102,11 @@ export default function Users() {
                                 <td>{getAccountStatusString(user.accountStatus)}</td>
                                 <td>{user.emailVerificationStatus === UserEmailVerificationStatus.Verified ? "Verified" : "Not Verified"}</td>
                                 <td>
-                                    {user.userRole == Administrator && "Admin"}
-                                    {user.userRole != Administrator &&
-                                        <select value={user.userRole} onChange={(event) => roleChanged(event, user.id)}>
-                                            <option value={Employee}>Employee</option>
-                                            <option value={TechnicalSupport}>Technical Support</option>
+                                    {isAdministrator(user)
+                                        ? "Admin"
+                                        : <select value={user.userRole} onChange={(event) => roleChanged(event, user.id)}>
+                                            <option value={UserRole.Employee}>Employee</option>
+                                            <option value={UserRole.TechnicalSupport}>Technical Support</option>
                                         </select>}
                                 </td>
                                 <td><button disabled={user.accountStatus === UserAccountStatus.Active} onClick={() => activateUser(user.id)}>Activate</button></td>
