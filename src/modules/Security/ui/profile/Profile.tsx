@@ -23,7 +23,7 @@ export default function Profile() {
         id: '',
         username: '',
         email: '',
-        userRole: 1,
+        userRole: '',
         localAccount: true
     });
 

@@ -40,10 +40,11 @@ export enum UserEmailVerificationStatus
 
 export enum UserRole
 {
-    Employee = 1,
-    TechnicalSupport = 2,
-    Administrator = 3
+    Employee = '019e6ffe-ddfb-7a84-8aca-697a4f2b2b6e',
+    TechnicalSupport = '019e6ffe-de4c-798f-a670-e553b3ca87ff',
+    Administrator = '019e6ffe-de50-70cf-a517-75bf904e51d2'
 }
+
 
 // Standalone function rather than a method: users loaded from storage/API are plain objects, not User instances.
 export function isAdministrator(user: User): boolean {

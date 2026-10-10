@@ -44,7 +44,7 @@ export class UserService implements IUserService {
         return result;
     }
 
-    async ChangeUserRole(userId: string, newRole: number): Promise<boolean> {
+    async ChangeUserRole(userId: string, newRole: string): Promise<boolean> {
         let role: UserRole = newRole as UserRole;
         let user = new User(userId, null, "", null, undefined, undefined, role);
         let result = await this.userRepository.ChangeUserRole(user);

@@ -10,7 +10,7 @@ export class UserApi extends GeneralApi implements IUserApi {
 
     constructor() {
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['auth']}${urls['user']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['security']}${urls['user']}`;
 
     }
 

@@ -17,7 +17,7 @@ export class AuthApi extends GeneralApi implements IAuthApi {
 
     constructor() {
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['auth']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['security']}${urls['auth']}`;
     }
 
 
