@@ -11,8 +11,10 @@ export default class LocationApi extends GeneralApi {
         this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['location']}`;
     }
 
-    async ListLocations(): Promise<GeneralApiResult<Location[]>> {
+    async ListLocations(name?: string): Promise<GeneralApiResult<Location[]>> {
         let url = `${this.baseUrl}${urls['location-list']}`;
+        if (name)
+            url += `?name=${encodeURIComponent(name)}`;
         let result = await this.SecureApiCaller<Location[]>('GET',url);
         return result;
     }

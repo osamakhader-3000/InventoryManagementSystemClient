@@ -11,21 +11,23 @@ export default function LocationsList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: locations, isLoading, reload } = useListLocations();
+  const [nameFilter, setNameFilter] = useState('');
+  const [appliedNameFilter, setAppliedNameFilter] = useState('');
+
+  const { data: locations, isLoading, reload } = useListLocations(appliedNameFilter);
   const { deleteLocation, deletingIds: deletingLocationIds } = useDeleteLocation();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [locationid, setLocationId] = useState<string | null>(null);
 
-  const [nameFilter, setNameFilter] = useState('');
-
-  const hasActiveFilter = nameFilter !== '';
+  const hasActiveFilter = nameFilter !== '' || appliedNameFilter !== '';
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedNameFilter(nameFilter.trim());
   }
 
   const clearFilters = () => {
     setNameFilter('');
+    setAppliedNameFilter('');
   }
 
   const showDeleteConfirmation = (_locationid: string | null) => {

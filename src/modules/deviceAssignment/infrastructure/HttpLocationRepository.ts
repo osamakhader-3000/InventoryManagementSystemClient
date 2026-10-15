@@ -9,8 +9,8 @@ export class HttpLocationRepository implements ILocationRepository {
         this.locationApi = new LocationApi();
     }
 
-    async ListLocations(): Promise<Location[]> {
-        let result = await this.locationApi.ListLocations();
+    async ListLocations(name?: string): Promise<Location[]> {
+        let result = await this.locationApi.ListLocations(name);
         if (!Array.isArray(result.data))
             return [];
         return result.data ?? [];

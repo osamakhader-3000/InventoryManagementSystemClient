@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Location from "../../domain/Location";
 import { DependencyContext } from "../../../../app/DependencyContext";
 
-export function useListLocations() {
+export function useListLocations(name?: string) {
     const { locationRepository } = useContext(DependencyContext);
     const [data, setData] = useState<Location[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ export function useListLocations() {
 
     useEffect(() => {
         let cancelled = false;
-        locationRepository.ListLocations()
+        locationRepository.ListLocations(name)
             .then((locations) => {
                 if (!cancelled) setData(locations);
             })
@@ -25,7 +25,7 @@ export function useListLocations() {
         return () => {
             cancelled = true;
         };
-    }, [locationRepository, reloadKey]);
+    }, [locationRepository, name, reloadKey]);
 
     const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 
