@@ -14,6 +14,7 @@ export class StaticRealmRepository implements IRealmRepository {
             realms.push(new Realm("devices", "Devices", "List of all available Devices"));
             realms.push(new Realm("accessories", "Accessories", "List of all available Accessories"));
             realms.push(new Realm("departments", "Departments", "List of all Departments"));
+            realms.push(new Realm("locations", "Locations", "List of all Locations"));
             realms.push(new Realm("users", "Users", "List of all available Users"));
 
 

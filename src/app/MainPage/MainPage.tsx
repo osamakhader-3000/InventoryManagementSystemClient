@@ -26,6 +26,9 @@ import AccessoriesList from '../../modules/deviceAssignment/ui/Accessory/Accesso
 import DevicesList from '../../modules/deviceAssignment/ui/Device/DevicesList.tsx';
 import UsersList from '../../modules/deviceAssignment/ui/User/UsersList.tsx';
 import DepartmentsList from '../../modules/deviceAssignment/ui/Department/DepartmentsList.tsx';
+import LocationsList from '../../modules/deviceAssignment/ui/Location/LocationsList.tsx';
+import AddLocationForm from '../../modules/deviceAssignment/ui/Location/AddLocationForm.tsx';
+import EditLocationForm from '../../modules/deviceAssignment/ui/Location/EditLocationForm.tsx';
 
 
 function MainPage() {
@@ -74,6 +77,9 @@ function MainPage() {
                               <Route path="/departments" element={<DepartmentsList />} />
                               <Route path="/adddepartment" element={<AddDepartmentForm />} />
                               <Route path="/editdepartment/:id" element={<EditDepartmentForm />} />
+                              <Route path="/locations" element={<LocationsList />} />
+                              <Route path="/addlocation" element={<AddLocationForm />} />
+                              <Route path="/editlocation/:id" element={<EditLocationForm />} />
                               <Route path="/users" element={<UsersList />} />
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />

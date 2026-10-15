@@ -2,7 +2,7 @@ import { TransactionType } from "./TransactionType";
 import Device from "./Device";
 import User from "./User";
 import { ItemCondition } from "./ItemCondition";
-import { Location } from "./Location";
+import Location from "./Location";
 
 export default class TrialLog {
     id: bigint;
