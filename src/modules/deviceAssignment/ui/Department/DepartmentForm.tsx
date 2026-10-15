@@ -7,6 +7,7 @@ import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
 import { useCreateDepartment } from '../../application/department/useCreateDepartment';
 import { useUpdateDepartment } from '../../application/department/useUpdateDepartment';
+import { getErrorMessage } from '../../../../shared/infrastructure/messaging/getErrorMessage';
 
 interface DepartmentFormProps {
     departmentId?: string | null;
@@ -46,7 +47,7 @@ export default function DepartmentForm({ departmentId = null, name = "", editMod
         navigate(-1);
       }
     } catch (error) {
-      errorHandlingBus.ErrorOccured(error instanceof DepartmentValidationError ? error.message : "Failed to save department");
+      errorHandlingBus.ErrorOccured(getErrorMessage(error,"Failed to save department"));
     }
   };
 

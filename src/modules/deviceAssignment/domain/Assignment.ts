@@ -47,7 +47,7 @@ export default class Assignment {
     }): Assignment {
         Assignment.ensureValid(props.assignedUser, props.device);
         return new Assignment(
-            null,
+            BigInt(0),
             props.device,
             props.assignedUser,
             null,

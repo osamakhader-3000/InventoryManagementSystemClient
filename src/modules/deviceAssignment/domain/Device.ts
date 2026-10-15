@@ -46,7 +46,7 @@ export default class Device {
     static create(props: DeviceProps): Device {
         Device.ensureValid(props);
         return new Device(
-            null,
+            "00000000-0000-0000-0000-000000000000",
             props.model.trim(),
             props.serialNumber.trim(),
             props.os,

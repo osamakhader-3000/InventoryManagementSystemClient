@@ -37,7 +37,7 @@
     "device-update":"/update",
     "device-delete":"/delete",
     "device-get":"/get",
-    "departments":"/departments",
+    "department":"/department",
     "departments-list":"/list",
     "department-create":"/create",
     "department-update":"/update",

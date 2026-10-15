@@ -17,7 +17,7 @@ export default class Department {
 
     static create(props: DepartmentProps): Department {
         Department.ensureValid(props);
-        return new Department(null, props.name.trim());
+        return new Department("00000000-0000-0000-0000-000000000000", props.name.trim());
     }
 
     static update(existing: Department, changes: DepartmentProps): Department {

@@ -25,7 +25,7 @@ export default class Accessory {
 
     static create(props: AccessoryProps): Accessory {
         Accessory.ensureValid(props);
-        return new Accessory(null, props.name.trim(), props.quantity, props.date);
+        return new Accessory(0, props.name.trim(), props.quantity, props.date);
     }
 
     static update(existing: Accessory, changes: AccessoryProps): Accessory {

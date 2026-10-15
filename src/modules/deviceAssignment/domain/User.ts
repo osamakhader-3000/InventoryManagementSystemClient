@@ -22,7 +22,7 @@ export default class User {
 
     static create(props: UserProps): User {
         User.ensureValid(props);
-        return new User(null, props.name.trim(), new Department(null, props.departmentName.trim()));
+        return new User("00000000-0000-0000-0000-000000000000", props.name.trim(), new Department("00000000-0000-0000-0000-000000000000", props.departmentName.trim()));
     }
 
     static update(existing: User, changes: UserProps): User {
@@ -31,7 +31,7 @@ export default class User {
         // Keep the existing department id when the department hasn't changed.
         const department = existing.department?.name === departmentName
             ? existing.department
-            : new Department(null, departmentName);
+            : new Department("00000000-0000-0000-0000-000000000000", departmentName);
         return new User(existing.id, changes.name.trim(), department);
     }
 
@@ -43,6 +43,6 @@ export default class User {
     }
 
     static fromId(id: string): User {
-        return new User(id, "", new Department(null, ""));
+        return new User(id, "", new Department("00000000-0000-0000-0000-000000000000", ""));
     }
 }

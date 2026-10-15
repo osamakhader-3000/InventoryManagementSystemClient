@@ -17,7 +17,7 @@ export default class Location {
 
     static create(props: LocationProps): Location {
         Location.ensureValid(props);
-        return new Location(null, props.name.trim());
+        return new Location("00000000-0000-0000-0000-000000000000", props.name.trim());
     }
 
     static update(existing: Location, changes: LocationProps): Location {
