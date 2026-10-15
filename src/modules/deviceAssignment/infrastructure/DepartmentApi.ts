@@ -30,13 +30,13 @@ export default class DepartmentApi extends GeneralApi {
     }
 
     async DeleteDepartment(departmentId: string): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}${urls['department-delete']}?id=${departmentId}`;
+        let url = `${this.baseUrl}${urls['department-delete']}/${departmentId}`;
         let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
 
     async GetDepartment(departmentId: string): Promise<GeneralApiResult<Department>> {
-        let url = `${this.baseUrl}${urls['department-get']}?id=${departmentId}`;
+        let url = `${this.baseUrl}${urls['department-get']}/${departmentId}`;
         let result = await this.SecureApiCaller<Department>('GET', url);
         return result;
     }

@@ -20,9 +20,9 @@ export default class Department {
         return new Department("00000000-0000-0000-0000-000000000000", props.name.trim());
     }
 
-    static update(existing: Department, changes: DepartmentProps): Department {
+    static update(id: string, changes: DepartmentProps): Department {
         Department.ensureValid(changes);
-        return new Department(existing.id, changes.name.trim());
+        return new Department(id, changes.name.trim());
     }
 
     private static ensureValid(props: DepartmentProps): void {
