@@ -19,31 +19,37 @@ export default function AccessoriesList() {
 
   const [nameFilter, setNameFilter] = useState('');
   const [stockFilter, setStockFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
 
-  const [appliedFilters, setAppliedFilters] = useState({ name: '', stock: '' });
+  const [appliedFilters, setAppliedFilters] = useState({ name: '', stock: '', date: '' });
 
-  const hasActiveFilter = nameFilter !== '' || stockFilter !== '' || appliedFilters.name !== '' || appliedFilters.stock !== '';
+  const hasActiveFilter = nameFilter !== '' || stockFilter !== '' || dateFilter !== ''
+    || appliedFilters.name !== '' || appliedFilters.stock !== '' || appliedFilters.date !== '';
 
   const filteredAccessories = useMemo(() => {
     const name = appliedFilters.name.trim().toLowerCase();
     const stock = appliedFilters.stock;
+    // The date input gives "yyyy-mm-dd"; formatDate gives "yyyy/MM/dd" in UTC, so compare those.
+    const date = appliedFilters.date.replace(/-/g, '/');
     return accessories.filter((accessory) => {
       if (name && !accessory.name.toLowerCase().includes(name)) return false;
       if (stock === 'instock' && accessory.quantity <= 0) return false;
       if (stock === 'outofstock' && accessory.quantity > 0) return false;
+      if (date && formatDate(accessory.date) !== date) return false;
       return true;
     });
   }, [accessories, appliedFilters]);
 
   const applyFilters = () => {
     // TODO: pass the filters to the server once server-side filtering is available.
-    setAppliedFilters({ name: nameFilter, stock: stockFilter });
+    setAppliedFilters({ name: nameFilter, stock: stockFilter, date: dateFilter });
   }
 
   const clearFilters = () => {
     setNameFilter('');
     setStockFilter('');
-    setAppliedFilters({ name: '', stock: '' });
+    setDateFilter('');
+    setAppliedFilters({ name: '', stock: '', date: '' });
   }
 
   const showDeleteConfirmation = (_accessoryid: string | null) => {
@@ -113,6 +119,10 @@ export default function AccessoriesList() {
               <option value="instock">In stock</option>
               <option value="outofstock">Out of stock</option>
             </select>
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="dateFilter">Date</label>
+            <input id="dateFilter" type="date" className={styles.filterinput} value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} />
           </div>
           <div className={styles.filterbuttons}>
             <button type="button" className={styles.filterbutton} onClick={applyFilters}>Apply</button>
