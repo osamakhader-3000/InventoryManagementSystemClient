@@ -11,21 +11,23 @@ export default function DepartmentsList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: departments, isLoading, reload } = useListDepartments();
+  const [nameFilter, setNameFilter] = useState('');
+  const [appliedNameFilter, setAppliedNameFilter] = useState('');
+
+  const { data: departments, isLoading, reload } = useListDepartments(appliedNameFilter);
   const { deleteDepartment, deletingIds: deletingDepartmentIds } = useDeleteDepartment();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [departmentid, setDepartmentId] = useState<string | null>(null);
 
-  const [nameFilter, setNameFilter] = useState('');
-
-  const hasActiveFilter = nameFilter !== '';
+  const hasActiveFilter = nameFilter !== '' || appliedNameFilter !== '';
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedNameFilter(nameFilter.trim());
   }
 
   const clearFilters = () => {
     setNameFilter('');
+    setAppliedNameFilter('');
   }
 
   const showDeleteConfirmation = (_departmentid: string | null) => {

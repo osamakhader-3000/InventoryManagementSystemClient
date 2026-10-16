@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Department from "../../domain/Department";
 import { DependencyContext } from "../../../../app/DependencyContext";
 
-export function useListDepartments() {
+export function useListDepartments(name?: string) {
     const { departmentRepository } = useContext(DependencyContext);
     const [data, setData] = useState<Department[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ export function useListDepartments() {
 
     useEffect(() => {
         let cancelled = false;
-        departmentRepository.ListDepartments()
+        departmentRepository.ListDepartments(name)
             .then((departments) => {
                 if (!cancelled) setData(departments);
             })
@@ -25,7 +25,7 @@ export function useListDepartments() {
         return () => {
             cancelled = true;
         };
-    }, [departmentRepository, reloadKey]);
+    }, [departmentRepository, name, reloadKey]);
 
     const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 

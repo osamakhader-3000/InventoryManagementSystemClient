@@ -1,7 +1,7 @@
 import Department from './Department';
 
 export interface IDepartmentRepository {
-    ListDepartments(): Promise<Department[]>;
+    ListDepartments(name?: string): Promise<Department[]>;
     CreateDepartment(department: Department): Promise<boolean>;
     UpdateDepartment(department: Department): Promise<boolean>;
     DeleteDepartment(departmentId: string): Promise<boolean>;

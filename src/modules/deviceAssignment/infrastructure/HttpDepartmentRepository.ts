@@ -10,9 +10,9 @@ export class HttpDepartmentRepository implements IDepartmentRepository {
         this.departmentApi = new DepartmentApi();
     }
 
-    async ListDepartments(): Promise<Department[]> {
+    async ListDepartments(name?: string): Promise<Department[]> {
 
-        let result = await this.departmentApi.ListDepartments();     
+        let result = await this.departmentApi.ListDepartments(name);     
 
         if (!Array.isArray(result.data)) 
             return [];

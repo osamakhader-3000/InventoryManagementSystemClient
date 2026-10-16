@@ -11,8 +11,10 @@ export default class DepartmentApi extends GeneralApi {
         this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['department']}`;
     }
 
-    async ListDepartments(): Promise<GeneralApiResult<Department[]>> {
+    async ListDepartments(name?: string): Promise<GeneralApiResult<Department[]>> {
         let url = `${this.baseUrl}${urls['departments-list']}`;
+        if (name)
+            url += `?name=${encodeURIComponent(name)}`;
         let result = await this.SecureApiCaller<Department[]>('GET',url);
         return result;
     }
