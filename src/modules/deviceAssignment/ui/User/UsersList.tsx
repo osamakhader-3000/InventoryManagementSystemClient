@@ -7,6 +7,7 @@ import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPre
 import { useListUsers } from '../../application/user/useListUsers';
 import { useDeleteUser } from '../../application/user/useDeleteUser';
 import { useListDepartments } from '../../application/department/useListDepartments';
+import { useListLocations } from '../../application/location/useListLocations';
 
 export default function UsersList() {
 
@@ -18,10 +19,12 @@ export default function UsersList() {
   const [userid, setUserId] = useState<string | null>(null);
 
   const { data: departments } = useListDepartments();
+  const { data: locations } = useListLocations();
   const [nameFilter, setNameFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
+  const [locationFilter, setLocationFilter] = useState('');
 
-  const hasActiveFilter = nameFilter !== '' || departmentFilter !== '';
+  const hasActiveFilter = nameFilter !== '' || departmentFilter !== '' || locationFilter !== '';
 
   const applyFilters = () => {
     // TODO: pass the filters to the server once server-side filtering is available.
@@ -30,6 +33,7 @@ export default function UsersList() {
   const clearFilters = () => {
     setNameFilter('');
     setDepartmentFilter('');
+    setLocationFilter('');
   }
 
   const showDeleteConfirmation = (_userid: string | null) => {
@@ -98,6 +102,15 @@ export default function UsersList() {
               <option value="">All departments</option>
               {departments.map((department) => (
                 <option key={department.id} value={department.id ?? ''}>{department.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="locationFilter">Location</label>
+            <select id="locationFilter" className={styles.filterinput} value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
+              <option value="">All locations</option>
+              {locations.map((location) => (
+                <option key={location.id} value={location.id ?? ''}>{location.name}</option>
               ))}
             </select>
           </div>
