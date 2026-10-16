@@ -20,25 +20,30 @@ export default function AccessoriesList() {
   const [nameFilter, setNameFilter] = useState('');
   const [stockFilter, setStockFilter] = useState('');
 
-  const hasActiveFilter = nameFilter !== '' || stockFilter !== '';
+  const [appliedFilters, setAppliedFilters] = useState({ name: '', stock: '' });
+
+  const hasActiveFilter = nameFilter !== '' || stockFilter !== '' || appliedFilters.name !== '' || appliedFilters.stock !== '';
 
   const filteredAccessories = useMemo(() => {
-    const name = nameFilter.trim().toLowerCase();
+    const name = appliedFilters.name.trim().toLowerCase();
+    const stock = appliedFilters.stock;
     return accessories.filter((accessory) => {
       if (name && !accessory.name.toLowerCase().includes(name)) return false;
-      if (stockFilter === 'instock' && accessory.quantity <= 0) return false;
-      if (stockFilter === 'outofstock' && accessory.quantity > 0) return false;
+      if (stock === 'instock' && accessory.quantity <= 0) return false;
+      if (stock === 'outofstock' && accessory.quantity > 0) return false;
       return true;
     });
-  }, [accessories, nameFilter, stockFilter]);
+  }, [accessories, appliedFilters]);
 
- const applyFilters = () => {
+  const applyFilters = () => {
     // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedFilters({ name: nameFilter, stock: stockFilter });
   }
 
   const clearFilters = () => {
     setNameFilter('');
     setStockFilter('');
+    setAppliedFilters({ name: '', stock: '' });
   }
 
   const showDeleteConfirmation = (_accessoryid: string | null) => {
