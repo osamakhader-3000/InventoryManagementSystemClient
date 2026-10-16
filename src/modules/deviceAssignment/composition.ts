@@ -2,12 +2,14 @@ import { IAssignmentRepository } from './domain/IAssignmentRepository';
 import IAccessoryRepository from './domain/IAccessoryRepository';
 import { IDepartmentRepository } from './domain/IDepartmentRepository';
 import { ILocationRepository } from './domain/ILocationRepository';
+import { IOperatingSystemRepository } from './domain/IOperatingSystemRepository';
 import { IDeviceRepository } from './domain/IDeviceRepository';
 import { IUserRepository } from './domain/IUserRepository';
 import { HttpAssignmentRepository } from './infrastructure/HttpAssignmentRepository';
 import { HttpAccessoryRepository } from './infrastructure/HttpAccessoryRepository';
 import { HttpDepartmentRepository } from './infrastructure/HttpDepartmentRepository';
 import { HttpLocationRepository } from './infrastructure/HttpLocationRepository';
+import { HttpOperatingSystemRepository } from './infrastructure/HttpOperatingSystemRepository';
 import { HttpDeviceRepository } from './infrastructure/HttpDeviceRepository';
 import { HttpUserRepository } from './infrastructure/HttpUserRepository';
 
@@ -18,6 +20,7 @@ export interface DeviceAssignmentDependencies {
     deviceRepository: IDeviceRepository;
     departmentRepository: IDepartmentRepository;
     locationRepository: ILocationRepository;
+    operatingSystemRepository: IOperatingSystemRepository;
 }
 
 export function createDeviceAssignmentDependencies(): DeviceAssignmentDependencies {
@@ -28,5 +31,6 @@ export function createDeviceAssignmentDependencies(): DeviceAssignmentDependenci
         deviceRepository: new HttpDeviceRepository(),
         departmentRepository: new HttpDepartmentRepository(),
         locationRepository: new HttpLocationRepository(),
+        operatingSystemRepository: new HttpOperatingSystemRepository(),
     };
 }

@@ -167,7 +167,7 @@ export default function AssignmentsList() {
                 {assignment.accessories[0]?.name}
               </td>
               <td>
-                {assignment.device.os}
+                {assignment.device.operatingSystem?.name}
               </td>
               <td>
                 {assignment.device.specs}

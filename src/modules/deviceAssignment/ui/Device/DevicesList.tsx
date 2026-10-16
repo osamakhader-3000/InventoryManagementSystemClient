@@ -6,7 +6,7 @@ import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';
-import { OperatingSystem } from '../../domain/OperatingSystem';
+import { useListOperatingSystems } from '../../application/operatingSystem/useListOperatingSystems';
 import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
@@ -15,6 +15,7 @@ export default function DevicesList() {
   const { notificationHandlingBus } = useContext(DependencyContext);
 
   const { data: devices, isLoading, reload } = useListDevices();
+  const { data: operatingSystems } = useListOperatingSystems();
   const { deleteDevice, deletingIds: deletingDeviceIds } = useDeleteDevice();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deviceid, setDeviceId] = useState<string | null>(null);
@@ -99,8 +100,8 @@ export default function DevicesList() {
             <label htmlFor="osFilter">OS</label>
             <select id="osFilter" className={styles.filterinput} value={osFilter} onChange={(e) => setOsFilter(e.target.value)}>
               <option value="">All</option>
-              {Object.values(OperatingSystem).map((os) => (
-                <option key={os} value={os}>{os}</option>
+              {operatingSystems.map((os) => (
+                <option key={os.id} value={os.id ?? ""}>{os.name}</option>
               ))}
             </select>
           </div>
@@ -147,7 +148,7 @@ export default function DevicesList() {
                 {device.serialNumber}
               </td>
               <td>
-                {device.os}
+                {device.operatingSystem?.name}
               </td>
               <td className={styles.specscell}>
                 {device.specs}
