@@ -19,7 +19,7 @@ export class HttpUserRepository implements IUserRepository {
         return result.data??new Array<User>();
     }
 
-    async GetUser(userID: bigint): Promise<User|null> {
+    async GetUser(userID: string): Promise<User|null> {
         let result = await this.userApi.GetUser(userID);
         return result.data;
     }
@@ -34,7 +34,7 @@ export class HttpUserRepository implements IUserRepository {
         return result.success;
     }
 
-    async DeleteUser(userID: bigint): Promise<boolean> {
+    async DeleteUser(userID: string): Promise<boolean> {
         let result = await this.userApi.DeleteUser(userID);
         return result.success;
     }

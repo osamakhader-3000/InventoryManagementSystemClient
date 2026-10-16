@@ -8,8 +8,7 @@ export function useDeleteUser() {
     const deleteUser = useCallback(async (userId: string): Promise<boolean> => {
         setDeletingIds((prev) => new Set(prev).add(userId));
         try {
-            // DeleteUser takes a bigint, while user ids arrive from the API as strings.
-            return await assignmentUserRepository.DeleteUser(BigInt(userId));
+            return await assignmentUserRepository.DeleteUser(userId);
         } finally {
             setDeletingIds((prev) => {
                 const next = new Set(prev);

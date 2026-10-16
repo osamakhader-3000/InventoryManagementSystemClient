@@ -30,13 +30,9 @@ export default class User {
         return new User("00000000-0000-0000-0000-000000000000", props.name.trim(), new Department(props.departmentId, ""), new Location(props.locationId, ""));
     }
 
-    static update(existing: User, changes: UserProps): User {
+    static update(id: string, changes: UserProps): User {
         User.ensureValid(changes);
-        // Keep the existing department when it hasn't changed.
-        const department = existing.department?.id === changes.departmentId
-            ? existing.department
-            : new Department(changes.departmentId, "");
-        return new User(existing.id, changes.name.trim(), department, new Location(changes.locationId, ""));
+        return new User(id, changes.name.trim(), new Department(changes.departmentId, ""), new Location(changes.locationId, ""));
     }
 
     private static ensureValid(props: UserProps): void {

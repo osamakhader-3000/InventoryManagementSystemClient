@@ -3,11 +3,16 @@ import UserForm from './UserForm';
 import { useGetUser } from '../../application/user/useGetUser';
 import styles from '../../../../shared/ui/SharedCss/EditForms.module.css';
 
+const EMPTY_GUID = "00000000-0000-0000-0000-000000000000";
+
+// The API returns an empty GUID when nothing is assigned; treat it as "not selected"
+// so the select shows its placeholder instead of silently displaying the first option.
+const selectedId = (id: string | null | undefined) => (id && id !== EMPTY_GUID ? id : "");
+
 export default function EditUserForm() {
 
   const { id } = useParams();
-  // GetUser takes a bigint, so only pass ids that BigInt() can parse.
-  const userId = id && /^\d+$/.test(id) ? id : null;
+  const userId = id ?? null;
   const { data: user, isLoading } = useGetUser(userId);
 
   if (isLoading)
@@ -23,7 +28,8 @@ export default function EditUserForm() {
       editMode={true}
       userId={user ? userId : null}
       name={user?.name}
-      departmentId={user?.department?.id ?? ""}
+      departmentId={selectedId(user?.department?.id)}
+      locationId={selectedId(user?.location?.id)}
     />
   );
 }

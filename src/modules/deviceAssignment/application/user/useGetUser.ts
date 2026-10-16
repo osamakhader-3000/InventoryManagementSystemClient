@@ -18,7 +18,7 @@ export function useGetUser(userId: string | null) {
             let cancelled = false;
             setIsLoading(true);
             setError(null);
-            assignmentUserRepository.GetUser(BigInt(userId))
+            assignmentUserRepository.GetUser(userId)
                 .then((user) => {
                     if (!cancelled) setData(user);
                 })

@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../app/DependencyContext';
-import DepartmentValidationError from '../../domain/DepartmentValidationError';
 import styles from '../../../../shared/ui/SharedCss/Forms.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
