@@ -134,6 +134,7 @@ export default function UsersList() {
                   <tr>
                     <th>Name</th>
                     <th>Department</th>
+                    <th>Location</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
                 </thead>
@@ -145,6 +146,9 @@ export default function UsersList() {
               </td>
               <td>
                 {user.department?.name}
+              </td>
+              <td>
+                {user.location?.name}
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.userbuttonspan}>
