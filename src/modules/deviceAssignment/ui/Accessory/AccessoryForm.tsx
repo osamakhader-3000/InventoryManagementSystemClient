@@ -12,6 +12,8 @@ interface AccessoryFormProps {
     accessoryId?: string | null;
     name?: string;
     quantity?: number;
+    assignedQuantity?: number;
+    availableQuantity?: number;
     date?: Date | null;
     editMode?: boolean;
 }
@@ -23,7 +25,7 @@ const toDateInputValue = (date: Date | null): string =>
 const fromDateInputValue = (value: string): Date | null =>
   value ? new Date(value) : null;
 
-export default function AccessoryForm({ accessoryId = null, name = "", quantity = 0, date = null, editMode = false }: AccessoryFormProps) {
+export default function AccessoryForm({ accessoryId = null, name = "", quantity = 0, assignedQuantity = 0, availableQuantity = 0, date = null, editMode = false }: AccessoryFormProps) {
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
@@ -44,8 +46,10 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
       errorHandlingBus.ErrorOccured("Quantity must be a number");
       return false;
     }
-    if (Number(accessoryQuantity) < 0) {
-      errorHandlingBus.ErrorOccured("Quantity cannot be negative");
+    if (Number(accessoryQuantity) < assignedQuantity) {
+      errorHandlingBus.ErrorOccured(assignedQuantity === 0
+        ? "Quantity cannot be negative"
+        : `Quantity cannot be less than the assigned quantity (${assignedQuantity})`);
       return false;
     }
     if (accessoryDate === "") {
@@ -86,7 +90,7 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
       return;
     }
     return save(
-      () => updateAccessory({ accessoryId, ...buildAccessoryProps() }),
+      () => updateAccessory({ accessoryId, assignedQuantity, ...buildAccessoryProps() }),
       "Accessory updated successfully"
     );
   };
@@ -109,7 +113,17 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
 
         <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
           <span className={styles.formlabel}>Quantity:</span>
-          <TextBox textInputType="number" onChange={(e) => setAccessoryQuantity(e.target.value)} value={accessoryQuantity} placeholder="0" min={0} />
+          <TextBox textInputType="number" onChange={(e) => setAccessoryQuantity(e.target.value)} value={accessoryQuantity} placeholder="0" min={assignedQuantity} />
+        </div>
+
+        <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
+          <span className={styles.formlabel}>Assigned Quantity:</span>
+          <TextBox textInputType="number" value={assignedQuantity.toString()} readOnly />
+        </div>
+
+        <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
+          <span className={styles.formlabel}>Available Quantity:</span>
+          <TextBox textInputType="number" value={availableQuantity.toString()} readOnly />
         </div>
 
         <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>

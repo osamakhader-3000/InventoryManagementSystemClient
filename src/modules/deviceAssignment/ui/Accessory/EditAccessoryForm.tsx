@@ -23,6 +23,8 @@ export default function EditAccessoryForm() {
       accessoryId={accessory ? accessoryId : null}
       name={accessory?.name}
       quantity={accessory?.quantity}
+      assignedQuantity={accessory?.assignedQuantity}
+      availableQuantity={accessory?.availableQuantity}
       date={accessory?.date ?? null}
     />
   );

@@ -144,6 +144,8 @@ export default function AccessoriesList() {
                   <tr>
                     <th>Name</th>
                     <th>Quantity</th>
+                    <th>Assigned Quantity</th>
+                    <th>Available Quantity</th>
                     <th>Date</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
@@ -157,6 +159,16 @@ export default function AccessoriesList() {
               <td>
                 <span className={`${styles.quantitybadge} ${accessory.quantity <= 0 ? styles.outofstock : ''}`}>
                   {accessory.quantity}
+                </span>
+              </td>
+              <td>
+                <span className={styles.quantitybadge}>
+                  {accessory.assignedQuantity}
+                </span>
+              </td>
+              <td>
+                <span className={`${styles.quantitybadge} ${accessory.availableQuantity <= 0 ? styles.outofstock : ''}`}>
+                  {accessory.availableQuantity}
                 </span>
               </td>
               <td>

@@ -4,16 +4,17 @@ import Accessory, { type AccessoryProps } from "../../domain/Accessory";
 
 export interface UpdateAccessoryCommand extends AccessoryProps {
     accessoryId: string;
+    assignedQuantity: number;
 }
 
 export function useUpdateAccessory() {
     const { accessoryRepository } = useContext(DependencyContext);
     const [isSaving, setIsSaving] = useState(false);
 
-    const updateAccessory = useCallback(async ({ accessoryId, ...changes }: UpdateAccessoryCommand): Promise<boolean> => {
+    const updateAccessory = useCallback(async ({ accessoryId, assignedQuantity, ...changes }: UpdateAccessoryCommand): Promise<boolean> => {
         setIsSaving(true);
         try {
-            const accessory = Accessory.update(accessoryId, changes);
+            const accessory = Accessory.update(accessoryId, changes, assignedQuantity);
             return await accessoryRepository.UpdateAccessory(accessory);
         } finally {
             setIsSaving(false);

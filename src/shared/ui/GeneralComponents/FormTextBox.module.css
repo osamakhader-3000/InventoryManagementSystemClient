@@ -139,6 +139,13 @@
     border-color: rgb(188, 108, 241); 
   }
 
+  .readonly,
+  .readonly:focus {
+    background-color: rgb(244, 247, 254);
+    border-color: rgb(204 208 217);
+    cursor: default;
+  }
+
   .invalid{
     border-color: salmon;
     border: 2px solid;

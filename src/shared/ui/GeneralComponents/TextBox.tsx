@@ -14,6 +14,7 @@ interface FormTextBoxProps {
   onBlur?: () => void;
   maxLength?: number;
   min?: number;
+  readOnly?: boolean;
 }
 
 export function TextBox({
@@ -29,6 +30,7 @@ export function TextBox({
   onBlur,
   maxLength,
   min,
+  readOnly = false,
 }: FormTextBoxProps) {
 
   const localRef = useRef<HTMLInputElement>(null);
@@ -65,12 +67,15 @@ export function TextBox({
       className={`
         ${formTextBoxStyles.textbox}
         ${isValid === false ? formTextBoxStyles.invalid : ''}
+        ${readOnly ? formTextBoxStyles.readonly : ''}
         ${textInputStyle || ''}
       `.trim()}
       ref={localRef}
       onBlur={onBlur}
       maxLength={maxLength}
       min={min}
+      readOnly={readOnly}
+      tabIndex={readOnly ? -1 : undefined}
     /></div>
   );
 }
