@@ -8,7 +8,7 @@ export default class DepartmentApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['department']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['department']}`;
     }
 
     async ListDepartments(name?: string): Promise<GeneralApiResult<Department[]>> {

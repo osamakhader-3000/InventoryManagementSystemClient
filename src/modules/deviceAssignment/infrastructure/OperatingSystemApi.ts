@@ -8,7 +8,7 @@ export default class OperatingSystemApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['operating-system']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['operating-system']}`;
     }
 
     async ListOperatingSystems(): Promise<GeneralApiResult<OperatingSystem[]>> {

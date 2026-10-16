@@ -8,7 +8,7 @@ export default class LocationApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['location']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['location']}`;
     }
 
     async ListLocations(name?: string): Promise<GeneralApiResult<Location[]>> {

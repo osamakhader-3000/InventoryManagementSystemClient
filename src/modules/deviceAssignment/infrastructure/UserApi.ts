@@ -10,7 +10,7 @@ export class UserApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['users-domain']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['users-domain']}`;
     }
 
     async ListUsers(filter?: UserFilter): Promise<GeneralApiResult<User[]>> {

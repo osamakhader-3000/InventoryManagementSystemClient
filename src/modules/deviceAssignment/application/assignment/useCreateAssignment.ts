@@ -10,7 +10,7 @@ export interface CreateAssignmentCommand {
     assignedUserId: string;
     deviceSerialNumber: string;
     remarks: string;
-    accessoryIds?: number[];
+    accessoryIds?: string[];
 }
 
 export function useCreateAssignment() {

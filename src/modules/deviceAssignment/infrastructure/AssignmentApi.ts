@@ -8,7 +8,7 @@ export class AssignmentApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = urls['inventory-management-system-app'];
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['assignment']}`;
     }
 
     async ListAssignments(): Promise<GeneralApiResult<Assignment[]>> {
