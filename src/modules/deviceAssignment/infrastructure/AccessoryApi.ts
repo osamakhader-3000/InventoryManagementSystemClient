@@ -38,8 +38,8 @@ export default class AccessoryApi extends GeneralApi {
     }
 
     async GetAccessory(id: string): Promise<GeneralApiResult<Accessory>> {
-        let url = `${this.baseUrl}${urls['accessory-get']}`;
-        let result = await this.SecureApiCaller<Accessory>('GET', url, { id });
+        let url = `${this.baseUrl}${urls['accessory-get']}/${id}`;
+        let result = await this.SecureApiCaller<Accessory>('GET', url);
         return result;
     }
 }
