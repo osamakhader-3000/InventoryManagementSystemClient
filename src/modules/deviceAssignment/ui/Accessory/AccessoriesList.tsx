@@ -1,6 +1,7 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Accessory from '../../domain/Accessory';
+import AccessoryFilter from '../../domain/AccessoryFilter';
 import styles from './AccessoriesList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -12,7 +13,8 @@ export default function AccessoriesList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: accessories, isLoading, reload } = useListAccessories();
+  const [appliedFilter, setAppliedFilter] = useState<AccessoryFilter>({});
+  const { data: accessories, isLoading, reload } = useListAccessories(appliedFilter);
   const { deleteAccessory, deletingIds: deletingAccessoryIds } = useDeleteAccessory();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [accessoryid, setAccessoryId] = useState<string | null>(null);
@@ -21,35 +23,22 @@ export default function AccessoriesList() {
   const [stockFilter, setStockFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
 
-  const [appliedFilters, setAppliedFilters] = useState({ name: '', stock: '', date: '' });
-
   const hasActiveFilter = nameFilter !== '' || stockFilter !== '' || dateFilter !== ''
-    || appliedFilters.name !== '' || appliedFilters.stock !== '' || appliedFilters.date !== '';
-
-  const filteredAccessories = useMemo(() => {
-    const name = appliedFilters.name.trim().toLowerCase();
-    const stock = appliedFilters.stock;
-    // The date input gives "yyyy-mm-dd"; formatDate gives "yyyy/MM/dd" in UTC, so compare those.
-    const date = appliedFilters.date.replace(/-/g, '/');
-    return accessories.filter((accessory) => {
-      if (name && !accessory.name.toLowerCase().includes(name)) return false;
-      if (stock === 'instock' && accessory.quantity <= 0) return false;
-      if (stock === 'outofstock' && accessory.quantity > 0) return false;
-      if (date && formatDate(accessory.date) !== date) return false;
-      return true;
-    });
-  }, [accessories, appliedFilters]);
+    || Object.keys(appliedFilter).length > 0;
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
-    setAppliedFilters({ name: nameFilter, stock: stockFilter, date: dateFilter });
+    setAppliedFilter({
+      name: nameFilter.trim(),
+      inStock: stockFilter === 'instock' ? true : stockFilter === 'outofstock' ? false : undefined,
+      date: dateFilter,
+    });
   }
 
   const clearFilters = () => {
     setNameFilter('');
     setStockFilter('');
     setDateFilter('');
-    setAppliedFilters({ name: '', stock: '', date: '' });
+    setAppliedFilter({});
   }
 
   const showDeleteConfirmation = (_accessoryid: string | null) => {
@@ -135,9 +124,9 @@ export default function AccessoriesList() {
             Accessories
           </h5>
 
-          {filteredAccessories.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.accessorystatustitle}>No accessories</h5></div>}
+          {accessories.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.accessorystatustitle}>No accessories</h5></div>}
 
-          {filteredAccessories.length > 0 &&
+          {accessories.length > 0 &&
             <div className={styles.tablewrapper}>
               <table className={styles.accessoriestable}>
                 <thead>
@@ -151,7 +140,7 @@ export default function AccessoriesList() {
                   </tr>
                 </thead>
                 <tbody>
-          {filteredAccessories.map((accessory: Accessory, index) => (
+          {accessories.map((accessory: Accessory, index) => (
             <tr key={accessory.id ?? index} className={styles.accessoryrow}>
               <td className={styles.namecell}>
                 {accessory.name}

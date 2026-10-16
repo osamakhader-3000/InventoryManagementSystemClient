@@ -1,4 +1,5 @@
 import Accessory from '../domain/Accessory';
+import AccessoryFilter from '../domain/AccessoryFilter';
 import IAccessoryRepository  from '../domain/IAccessoryRepository';
 import AccessoryApi from './AccessoryApi';
 
@@ -15,8 +16,8 @@ export class HttpAccessoryRepository implements IAccessoryRepository {
        return result.data ?? null;
     }
 
-    async ListAccessories(): Promise<Accessory[]> {
-        var result = await this.accessoryApi.ListAccessories();
+    async ListAccessories(filter?: AccessoryFilter): Promise<Accessory[]> {
+        var result = await this.accessoryApi.ListAccessories(filter);
 
         if (!Array.isArray(result.data))
             return [];
