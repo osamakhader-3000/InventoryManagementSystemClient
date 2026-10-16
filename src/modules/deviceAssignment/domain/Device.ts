@@ -85,6 +85,10 @@ export default class Device {
             throw new DeviceValidationError("A device must have a serial number");
         if (!props.model.trim())
             throw new DeviceValidationError("A device must have a model");
+        if (!props.os?.trim())
+            throw new DeviceValidationError("An OS must be selected");
+        if (!props.purchasedDate)
+            throw new DeviceValidationError("A purchase date must be selected");
         if (props.price < 0 || props.soldPrice < 0)
             throw new DeviceValidationError("Prices cannot be negative");
         if (props.purchasedDate && props.retirementDate && props.retirementDate < props.purchasedDate)

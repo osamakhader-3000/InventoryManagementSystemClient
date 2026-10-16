@@ -31,14 +31,14 @@ export class DeviceApi extends GeneralApi{
     }
 
     async DeleteDevice(deviceId: string): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}${urls['device-delete']}`;
-        let result = await this.SecureApiCaller<boolean>('DELETE', url, { id: deviceId });
+        let url = `${this.baseUrl}${urls['device-delete']}/${deviceId}`;
+        let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
 
     async GetDevice(deviceId: string): Promise<GeneralApiResult<Device>> {
-        let url = `${this.baseUrl}${urls['device-get']}`;
-        let result = await this.SecureApiCaller<Device>('GET', url, { id: deviceId });
+        let url = `${this.baseUrl}${urls['device-get']}/${deviceId}`;
+        let result = await this.SecureApiCaller<Device>('GET', url);
         return result;
     }
 }

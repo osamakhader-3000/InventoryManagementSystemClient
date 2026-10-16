@@ -45,8 +45,22 @@ export class GeneralApiResultFactory {
         else
             errorType = ErrorTypes.UnknownError;
 
-        const errorMessage = error?.response?.data && error.response.data !== ""? error.response.data : (error?.message ?? "Unknown error");
+        const errorMessage = GeneralApiResultFactory.ExtractErrorMessage(error?.response?.data) ?? error?.message ?? "Unknown error";
 
         return new GeneralApiResult<T>(false,errorType,errorMessage,null);
 
-    }}
+    }
+
+    private static ExtractErrorMessage(data: any): string | null {
+        if (data === null || data === undefined || data === "")
+            return null;
+        if (typeof data === "string")
+            return data;
+        if (typeof data === "object") {
+            const message = data.message ?? data.Message ?? data.detail ?? data.title ?? data.error;
+            if (typeof message === "string" && message !== "")
+                return message;
+        }
+        return JSON.stringify(data);
+    }
+}
