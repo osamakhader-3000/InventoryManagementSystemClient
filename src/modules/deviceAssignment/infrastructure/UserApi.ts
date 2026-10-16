@@ -3,6 +3,7 @@ import urls from '../../../shared/infrastructure/http/urls.json'
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
 import User from '../domain/User';
+import { UserFilter } from '../domain/IUserRepository';
 
 export class UserApi extends GeneralApi {
        private baseUrl:string;
@@ -12,8 +13,13 @@ export class UserApi extends GeneralApi {
         this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['users-domain']}`;
     }
 
-    async ListUsers(): Promise<GeneralApiResult<User[]>> {
-        let url = `${this.baseUrl}${urls['users-list']}`;
+    async ListUsers(filter?: UserFilter): Promise<GeneralApiResult<User[]>> {
+        let params = new URLSearchParams();
+        if (filter?.name) params.append('name', filter.name);
+        if (filter?.departmentId) params.append('dptId', filter.departmentId);
+        if (filter?.locationId) params.append('locId', filter.locationId);
+        let query = params.toString();
+        let url = `${this.baseUrl}${urls['users-list']}${query ? `?${query}` : ''}`;
         let result = await this.SecureApiCaller<User[]>('GET', url);
         return result;
     }

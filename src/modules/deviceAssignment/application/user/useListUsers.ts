@@ -1,17 +1,20 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import User from "../../domain/User";
+import { UserFilter } from "../../domain/IUserRepository";
 import { DependencyContext } from "../../../../app/DependencyContext";
 
-export function useListUsers() {
+export function useListUsers(filter?: UserFilter) {
     const { assignmentUserRepository } = useContext(DependencyContext);
     const [data, setData] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<unknown>(null);
     const [reloadKey, setReloadKey] = useState(0);
+    // Depend on the individual fields so a new filter object with the same values doesn't refetch.
+    const { name, departmentId, locationId } = filter ?? {};
 
     useEffect(() => {
         let cancelled = false;
-        assignmentUserRepository.ListUsers()
+        assignmentUserRepository.ListUsers({ name, departmentId, locationId })
             .then((users) => {
                 if (!cancelled) setData(users);
             })
@@ -25,7 +28,7 @@ export function useListUsers() {
         return () => {
             cancelled = true;
         };
-    }, [assignmentUserRepository, reloadKey]);
+    }, [assignmentUserRepository, reloadKey, name, departmentId, locationId]);
 
     const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 

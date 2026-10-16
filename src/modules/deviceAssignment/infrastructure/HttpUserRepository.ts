@@ -1,4 +1,4 @@
-import { IUserRepository } from '../domain/IUserRepository';
+import { IUserRepository, UserFilter } from '../domain/IUserRepository';
 import User from '../domain/User';
 import { UserApi } from './UserApi';
 
@@ -10,8 +10,8 @@ export class HttpUserRepository implements IUserRepository {
         this.userApi = new UserApi();
     }
 
-    async ListUsers(): Promise<User[]> {
-        let result = await this.userApi.ListUsers();
+    async ListUsers(filter?: UserFilter): Promise<User[]> {
+        let result = await this.userApi.ListUsers(filter);
 
         if (!Array.isArray(result.data)) 
             return [];

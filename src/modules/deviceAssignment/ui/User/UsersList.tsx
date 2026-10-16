@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import User from '../../domain/User';
+import { UserFilter } from '../../domain/IUserRepository';
 import styles from './UsersList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -13,7 +14,8 @@ export default function UsersList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: users, isLoading, reload } = useListUsers();
+  const [appliedFilter, setAppliedFilter] = useState<UserFilter>({});
+  const { data: users, isLoading, reload } = useListUsers(appliedFilter);
   const { deleteUser, deletingIds: deletingUserIds } = useDeleteUser();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [userid, setUserId] = useState<string | null>(null);
@@ -27,13 +29,18 @@ export default function UsersList() {
   const hasActiveFilter = nameFilter !== '' || departmentFilter !== '' || locationFilter !== '';
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedFilter({
+      name: nameFilter.trim() || undefined,
+      departmentId: departmentFilter || undefined,
+      locationId: locationFilter || undefined,
+    });
   }
 
   const clearFilters = () => {
     setNameFilter('');
     setDepartmentFilter('');
     setLocationFilter('');
+    setAppliedFilter({});
   }
 
   const showDeleteConfirmation = (_userid: string | null) => {
@@ -94,7 +101,7 @@ export default function UsersList() {
         <div className={styles.filterspanel}>
           <div className={styles.filterfield}>
             <label htmlFor="nameFilter">Name</label>
-            <input id="nameFilter" type="text" placeholder="Search users" className={styles.filterinput} value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
+            <input id="nameFilter" type="text" placeholder="Search users" className={styles.filterinput} value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') applyFilters(); }} />
           </div>
           <div className={styles.filterfield}>
             <label htmlFor="departmentFilter">Department</label>
