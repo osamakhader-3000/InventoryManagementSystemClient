@@ -25,7 +25,7 @@
     "user-create":"/create",
     "user-update":"/update",
     "user-delete":"/delete",
-    "accessories":"/accessories",
+    "accessory":"/accessory",
     "accessories-list":"/list",
     "accessory-create":"/create",
     "accessory-update":"/update",

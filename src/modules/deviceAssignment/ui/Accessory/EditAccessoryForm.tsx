@@ -6,8 +6,7 @@ import styles from '../../../../shared/ui/SharedCss/EditForms.module.css';
 export default function EditAccessoryForm() {
 
   const { id } = useParams();
-  const parsedId = Number(id);
-  const accessoryId = id && Number.isInteger(parsedId) ? parsedId : null;
+  const accessoryId = id ?? null;
   const { data: accessory, isLoading } = useGetAccessory(accessoryId);
 
   if (isLoading)

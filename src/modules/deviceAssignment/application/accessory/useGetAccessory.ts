@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import Accessory from '../../domain/Accessory';
 
-export function useGetAccessory(accessoryId: number | null) {
+export function useGetAccessory(accessoryId: string | null) {
         const { accessoryRepository } = useContext(DependencyContext);
         const [data, setData] = useState<Accessory | null>(null);
         const [isLoading, setIsLoading] = useState(accessoryId !== null);

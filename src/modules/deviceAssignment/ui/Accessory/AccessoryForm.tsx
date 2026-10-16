@@ -9,7 +9,7 @@ import { useCreateAccessory } from '../../application/accessory/useCreateAccesso
 import { useUpdateAccessory } from '../../application/accessory/useUpdateAccessory';
 
 interface AccessoryFormProps {
-    accessoryId?: number | null;
+    accessoryId?: string | null;
     name?: string;
     quantity?: number;
     date?: Date | null;

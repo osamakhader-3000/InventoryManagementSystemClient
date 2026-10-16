@@ -150,10 +150,10 @@ debugger;
                 {device.specs}
               </td>
               <td>
-                {toDate(device.purchasedDate)?.toLocaleDateString()}
+                {toDate(device.purchasedDate)?.toLocaleString()}
               </td>
               <td>
-                {toDate(device.retirementDate)?.toLocaleDateString()}
+                {toDate(device.retirementDate)?.toLocaleString()}
               </td>
               <td>
                 {device.price}

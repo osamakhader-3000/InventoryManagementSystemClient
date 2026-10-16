@@ -1,10 +1,9 @@
 import { useCallback, useContext, useState } from "react";
 import { DependencyContext } from "../../../../app/DependencyContext";
 import Accessory, { type AccessoryProps } from "../../domain/Accessory";
-import AccessoryValidationError from "../../domain/AccessoryValidationError";
 
 export interface UpdateAccessoryCommand extends AccessoryProps {
-    accessoryId: number;
+    accessoryId: string;
 }
 
 export function useUpdateAccessory() {
@@ -14,11 +13,7 @@ export function useUpdateAccessory() {
     const updateAccessory = useCallback(async ({ accessoryId, ...changes }: UpdateAccessoryCommand): Promise<boolean> => {
         setIsSaving(true);
         try {
-            const existing = await accessoryRepository.GetAccessoryById(accessoryId);
-            if (!existing)
-                throw new AccessoryValidationError("The accessory no longer exists");
-
-            const accessory = Accessory.update(existing, changes);
+            const accessory = Accessory.update(accessoryId, changes);
             return await accessoryRepository.UpdateAccessory(accessory);
         } finally {
             setIsSaving(false);

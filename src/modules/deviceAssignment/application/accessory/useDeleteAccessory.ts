@@ -3,9 +3,9 @@ import { DependencyContext } from "../../../../app/DependencyContext";
 
 export function useDeleteAccessory() {
     const { accessoryRepository } = useContext(DependencyContext);
-    const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
+    const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
 
-    const deleteAccessory = useCallback(async (accessoryId: number): Promise<boolean> => {
+    const deleteAccessory = useCallback(async (accessoryId: string): Promise<boolean> => {
         setDeletingIds((prev) => new Set(prev).add(accessoryId));
         try {
             return await accessoryRepository.DeleteAccessory(accessoryId);

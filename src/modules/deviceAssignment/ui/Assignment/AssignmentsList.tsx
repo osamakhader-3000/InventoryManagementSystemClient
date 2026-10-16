@@ -173,10 +173,10 @@ export default function AssignmentsList() {
                 {assignment.device.specs}
               </td>
               <td>
-                {assignment.device.purchasedDate?.toLocaleDateString()}
+                {assignment.device.purchasedDate?.toLocaleString()}
               </td>
               <td>
-                {assignment.device.retirementDate?.toLocaleDateString()}
+                {assignment.device.retirementDate?.toLocaleString()}
               </td>
               <td>
                 {assignment.device.price}
@@ -191,7 +191,7 @@ export default function AssignmentsList() {
                 {assignment.remarks}
               </td>
               <td>
-                {assignment.lastUpdateDate?.toLocaleDateString()}
+                {assignment.lastUpdateDate?.toLocaleString()}
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.assignmentbuttonspan}>

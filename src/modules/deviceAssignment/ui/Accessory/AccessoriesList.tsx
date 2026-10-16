@@ -6,6 +6,7 @@ import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAccessories } from '../../application/accessory/useListAccessories';
 import { useDeleteAccessory } from '../../application/accessory/useDeleteAccessory';
+import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function AccessoriesList() {
 
@@ -14,7 +15,7 @@ export default function AccessoriesList() {
   const { data: accessories, isLoading, reload } = useListAccessories();
   const { deleteAccessory, deletingIds: deletingAccessoryIds } = useDeleteAccessory();
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [accessoryid, setAccessoryId] = useState<number | null>(null);
+  const [accessoryid, setAccessoryId] = useState<string | null>(null);
 
   const [nameFilter, setNameFilter] = useState('');
   const [stockFilter, setStockFilter] = useState('');
@@ -40,7 +41,7 @@ export default function AccessoriesList() {
     setStockFilter('');
   }
 
-  const showDeleteConfirmation = (_accessoryid: number | null) => {
+  const showDeleteConfirmation = (_accessoryid: string | null) => {
 
     if (!_accessoryid) return;
 
@@ -54,7 +55,7 @@ export default function AccessoriesList() {
     handleDeleteAccessory(accessoryid);
   }
 
-  const handleDeleteAccessory = async (accessoryid: number | null) => {
+  const handleDeleteAccessory = async (accessoryid: string | null) => {
 
     if (!accessoryid) return;
 
@@ -144,7 +145,7 @@ export default function AccessoriesList() {
                 </span>
               </td>
               <td>
-                {accessory.date?.toLocaleDateString()}
+                {formatDate(accessory.date)}
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.accessorybuttonspan}>

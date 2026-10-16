@@ -10,7 +10,7 @@ export default class AccessoryApi extends GeneralApi {
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['accessories']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['accessory']}`;
     }
 
     async ListAccessories(): Promise<GeneralApiResult<Accessory[]>> {
@@ -31,13 +31,13 @@ export default class AccessoryApi extends GeneralApi {
         return result;
     }
 
-    async DeleteAccessory(id: number): Promise<GeneralApiResult<boolean>> {
+    async DeleteAccessory(id: string): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['accessory-delete']}/${id}`;
         let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
     }
 
-    async GetAccessory(id: number): Promise<GeneralApiResult<Accessory>> {
+    async GetAccessory(id: string): Promise<GeneralApiResult<Accessory>> {
         let url = `${this.baseUrl}${urls['accessory-get']}`;
         let result = await this.SecureApiCaller<Accessory>('GET', url, { id });
         return result;

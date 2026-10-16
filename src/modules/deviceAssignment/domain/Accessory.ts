@@ -7,12 +7,12 @@ export interface AccessoryProps {
 }
 
 export default class Accessory {
-    id: number|null;
+    id: string|null;
     name: string;
     quantity: number;
     date: Date|null;
     constructor(
-        id: number|null,
+        id: string|null,
         name: string,
         quantity: number,
         date: Date|null
@@ -25,12 +25,12 @@ export default class Accessory {
 
     static create(props: AccessoryProps): Accessory {
         Accessory.ensureValid(props);
-        return new Accessory(0, props.name.trim(), props.quantity, props.date);
+        return new Accessory("00000000-0000-0000-0000-000000000000", props.name.trim(), props.quantity, props.date);
     }
 
-    static update(existing: Accessory, changes: AccessoryProps): Accessory {
+    static update(id: string, changes: AccessoryProps): Accessory {
         Accessory.ensureValid(changes);
-        return new Accessory(existing.id, changes.name.trim(), changes.quantity, changes.date);
+        return new Accessory(id, changes.name.trim(), changes.quantity, changes.date);
     }
 
     private static ensureValid(props: AccessoryProps): void {
@@ -42,7 +42,7 @@ export default class Accessory {
             throw new AccessoryValidationError("Quantity cannot be negative");
     }
 
-    static fromId(id: number): Accessory {
+    static fromId(id: string): Accessory {
         return new Accessory(id, "", 0, null);
     }
 
