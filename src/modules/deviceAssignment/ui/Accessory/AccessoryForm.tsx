@@ -116,15 +116,19 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
           <TextBox textInputType="number" onChange={(e) => setAccessoryQuantity(e.target.value)} value={accessoryQuantity} placeholder="0" min={assignedQuantity} />
         </div>
 
-        <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
-          <span className={styles.formlabel}>Assigned Quantity:</span>
-          <TextBox textInputType="number" value={assignedQuantity.toString()} readOnly />
-        </div>
+        {editMode && (
+          <>
+            <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
+              <span className={styles.formlabel}>Assigned Quantity:</span>
+              <TextBox textInputType="number" value={assignedQuantity.toString()} readOnly />
+            </div>
 
-        <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
-          <span className={styles.formlabel}>Available Quantity:</span>
-          <TextBox textInputType="number" value={availableQuantity.toString()} readOnly />
-        </div>
+            <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
+              <span className={styles.formlabel}>Available Quantity:</span>
+              <TextBox textInputType="number" value={availableQuantity.toString()} readOnly />
+            </div>
+          </>
+        )}
 
         <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
           <span className={styles.formlabel}>Date:</span>
