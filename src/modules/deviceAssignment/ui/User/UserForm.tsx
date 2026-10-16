@@ -8,28 +8,35 @@ import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingBu
 import { useCreateUser } from '../../application/user/useCreateUser';
 import { useUpdateUser } from '../../application/user/useUpdateUser';
 import { useListDepartments } from '../../application/department/useListDepartments';
+import { useListLocations } from '../../application/location/useListLocations';
 import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 interface UserFormProps {
     userId?: string | null;
     name?: string;
-    departmentName?: string;
+    departmentId?: string;
+    locationId?: string;
     editMode?: boolean;
 }
 
-export default function UserForm({ userId = null, name = "", departmentName = "", editMode = false }: UserFormProps) {
+export default function UserForm({ userId = null, name = "", departmentId = "", locationId = "", editMode = false }: UserFormProps) {
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
   const [userName, setUserName] = useState(name);
-  const [userDepartment, setUserDepartment] = useState(departmentName);
+  const [userDepartment, setUserDepartment] = useState(departmentId);
+  const [userLocation, setUserLocation] = useState(locationId);
   const { data: allDepartments, isLoading: isLoadingDepartments } = useListDepartments();
+  const { data: allLocations, isLoading: isLoadingLocations } = useListLocations();
   const { createUser, isSaving: isCreating } = useCreateUser();
   const { updateUser, isSaving: isUpdating } = useUpdateUser();
   const isSaving = isCreating || isUpdating;
 
   // Quick UX checks only; business rules are enforced by the User entity.
   const validateForm = (): boolean => {
+
+    debugger;
+
     if (userName.trim() === "") {
       errorHandlingBus.ErrorOccured("Please enter a name");
       return false;
@@ -38,13 +45,18 @@ export default function UserForm({ userId = null, name = "", departmentName = ""
       errorHandlingBus.ErrorOccured("Please select a department");
       return false;
     }
+    if (userLocation.trim() === "") {
+      errorHandlingBus.ErrorOccured("Please select a location");
+      return false;
+    }
 
     return true;
   };
 
   const buildUserProps = () => ({
     name: userName,
-    departmentName: userDepartment,
+    departmentId: userDepartment,
+    locationId: userLocation,
   });
 
   const save = async (saveUser: () => Promise<boolean>, successMessage: string) => {
@@ -100,12 +112,27 @@ export default function UserForm({ userId = null, name = "", departmentName = ""
               {isLoadingDepartments ? "Loading departments..." : "Select a department"}
             </option>
             {allDepartments.map((department) => (
-              <option key={department.id ?? department.name} value={department.name}>
+              <option key={department.id ?? department.name} value={department.id ?? ""}>
                 {department.name}
               </option>
             ))}
           </SelectBox>        
       </div>
+
+        <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
+          <span className={styles.formlabel}>Location:</span>
+
+          <SelectBox name="location" className={styles.selectBox} onChange={(e) => setUserLocation(e.target.value)} value={userLocation} disabled={isLoadingLocations}>
+            <option value="" disabled>
+              {isLoadingLocations ? "Loading locations..." : "Select a location"}
+            </option>
+            {allLocations.map((location) => (
+              <option key={location.id ?? location.name} value={location.id ?? ""}>
+                {location.name}
+              </option>
+            ))}
+          </SelectBox>
+        </div>
 
         <div className={`${styles.formelementcontainer} ${styles.formbuttoncontainer}`}>
           {!editMode && <LoadingButton cssClass={`${styles.formbutton} ${styles.formokbutton}`} onClick={handleAdd} label='Add' isLoading={isSaving} />}

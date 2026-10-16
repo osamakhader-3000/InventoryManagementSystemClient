@@ -23,7 +23,7 @@ export default function EditUserForm() {
       editMode={true}
       userId={user ? userId : null}
       name={user?.name}
-      departmentName={user?.department?.name}
+      departmentId={user?.department?.id ?? ""}
     />
   );
 }

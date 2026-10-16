@@ -1,48 +1,54 @@
 import Department from './Department';
 import UserValidationError from './UserValidationError';
+import Location from './Location';
 
 export interface UserProps {
     name: string;
-    departmentName: string;
+    departmentId: string;
+    locationId: string;
 }
 
 export default class User {
     id: string|null;
-    name: string;   
+    name: string;
     department: Department;
+    location: Location;
     constructor(
-    id: string|null,    
-    name: string,   
+    id: string|null,
+    name: string,
     department: Department,
+    location: Location,
     ) {
         this.id = id;
         this.name = name;
         this.department = department;
+        this.location = location;
     }
 
     static create(props: UserProps): User {
         User.ensureValid(props);
-        return new User("00000000-0000-0000-0000-000000000000", props.name.trim(), new Department("00000000-0000-0000-0000-000000000000", props.departmentName.trim()));
+        return new User("00000000-0000-0000-0000-000000000000", props.name.trim(), new Department(props.departmentId, ""), new Location(props.locationId, ""));
     }
 
     static update(existing: User, changes: UserProps): User {
         User.ensureValid(changes);
-        const departmentName = changes.departmentName.trim();
-        // Keep the existing department id when the department hasn't changed.
-        const department = existing.department?.name === departmentName
+        // Keep the existing department when it hasn't changed.
+        const department = existing.department?.id === changes.departmentId
             ? existing.department
-            : new Department("00000000-0000-0000-0000-000000000000", departmentName);
-        return new User(existing.id, changes.name.trim(), department);
+            : new Department(changes.departmentId, "");
+        return new User(existing.id, changes.name.trim(), department, new Location(changes.locationId, ""));
     }
 
     private static ensureValid(props: UserProps): void {
         if (!props.name.trim())
             throw new UserValidationError("A user must have a name");
-        if (!props.departmentName.trim())
+        if (!props.departmentId.trim())
             throw new UserValidationError("A user must belong to a department");
+        if (!props.locationId.trim())
+            throw new UserValidationError("A user must have a location");
     }
 
     static fromId(id: string): User {
-        return new User(id, "", new Department("00000000-0000-0000-0000-000000000000", ""));
+        return new User(id, "", new Department("00000000-0000-0000-0000-000000000000", ""), new Location("00000000-0000-0000-0000-000000000000", ""  ));
     }
 }
