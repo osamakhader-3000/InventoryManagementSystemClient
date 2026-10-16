@@ -44,6 +44,14 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
       errorHandlingBus.ErrorOccured("Quantity must be a number");
       return false;
     }
+    if (Number(accessoryQuantity) < 0) {
+      errorHandlingBus.ErrorOccured("Quantity cannot be negative");
+      return false;
+    }
+    if (accessoryDate === "") {
+      errorHandlingBus.ErrorOccured("Please select a date");
+      return false;
+    }
 
     return true;
   };
@@ -101,7 +109,7 @@ export default function AccessoryForm({ accessoryId = null, name = "", quantity 
 
         <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>
           <span className={styles.formlabel}>Quantity:</span>
-          <TextBox textInputType="number" onChange={(e) => setAccessoryQuantity(e.target.value)} value={accessoryQuantity} placeholder="0" />
+          <TextBox textInputType="number" onChange={(e) => setAccessoryQuantity(e.target.value)} value={accessoryQuantity} placeholder="0" min={0} />
         </div>
 
         <div className={`${styles.formelementcontainer} ${styles.formlabeledrow}`}>

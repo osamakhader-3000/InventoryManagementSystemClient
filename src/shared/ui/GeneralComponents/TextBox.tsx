@@ -13,6 +13,7 @@ interface FormTextBoxProps {
   isValid?: boolean;
   onBlur?: () => void;
   maxLength?: number;
+  min?: number;
 }
 
 export function TextBox({
@@ -27,6 +28,7 @@ export function TextBox({
   isValid,
   onBlur,
   maxLength,
+  min,
 }: FormTextBoxProps) {
 
   const localRef = useRef<HTMLInputElement>(null);
@@ -68,6 +70,7 @@ export function TextBox({
       ref={localRef}
       onBlur={onBlur}
       maxLength={maxLength}
+      min={min}
     /></div>
   );
 }

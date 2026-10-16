@@ -40,6 +40,8 @@ export default class Accessory {
             throw new AccessoryValidationError("Quantity must be a whole number");
         if (props.quantity < 0)
             throw new AccessoryValidationError("Quantity cannot be negative");
+        if (!props.date)
+            throw new AccessoryValidationError("An accessory must have a date");
     }
 
     static fromId(id: string): Accessory {
