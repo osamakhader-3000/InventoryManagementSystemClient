@@ -7,9 +7,11 @@ import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPre
 import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';
 import { OperatingSystem } from '../../domain/OperatingSystem';
+import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
+import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function DevicesList() {
-debugger;
+
   const { notificationHandlingBus } = useContext(DependencyContext);
 
   const { data: devices, isLoading, reload } = useListDevices();
@@ -128,9 +130,10 @@ debugger;
                     <th>Serial No.</th>
                     <th>OS</th>
                     <th>Specs</th>
-                    <th>Purchased</th>
-                    <th>Retirement</th>
-                    <th>Price</th>
+                    <th>Purchased Date</th>
+                    <th>Retirement Date</th>
+                    <th>Price (AED)</th>
+                    <th>Status</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
                 </thead>
@@ -150,14 +153,17 @@ debugger;
                 {device.specs}
               </td>
               <td>
-                {toDate(device.purchasedDate)?.toLocaleString()}
+                {formatDate(device.purchasedDate)}
               </td>
               <td>
-                {toDate(device.retirementDate)?.toLocaleString()}
+                {formatDate(device.retirementDate)}
               </td>
               <td>
                 {device.price}
-              </td>            
+              </td>  
+              <td>
+                {getDeviceStatusLabel(device.status)}
+              </td>
               <td className={styles.actionscolumn}>
               <div className={styles.devicebuttonspan}>
                 <Link to={`/editdevice/${device.id}`}>
@@ -191,9 +197,3 @@ debugger;
   );
 }
 
-// Devices come straight from the API as JSON, so dates may arrive as ISO strings rather than Date objects.
-function toDate(value: Date | string | null): Date | null {
-  if (!value) return null;
-  const date = value instanceof Date ? value : new Date(value);
-  return isNaN(date.getTime()) ? null : date;
-}

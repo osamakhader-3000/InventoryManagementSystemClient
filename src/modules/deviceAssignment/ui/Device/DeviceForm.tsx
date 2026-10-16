@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import DeviceValidationError from '../../domain/DeviceValidationError';
 import { OperatingSystem } from '../../domain/OperatingSystem';
+import { DeviceStatus, deviceStatusOptions, getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import styles from './DeviceForm.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiLineTextBox';
@@ -21,6 +22,7 @@ interface DeviceFormProps {
     retirementDate?: Date | null;
     price?: number;
     soldPrice?: number;
+    status?: DeviceStatus;
     editMode?: boolean;
 }
 
@@ -31,7 +33,7 @@ const toDateInputValue = (date: Date | null): string =>
 const fromDateInputValue = (value: string): Date | null =>
   value ? new Date(value) : null;
 
-export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", os = "", specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, editMode = false }: DeviceFormProps) {
+export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", os = "", specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, status = DeviceStatus.New, editMode = false }: DeviceFormProps) {
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
@@ -43,6 +45,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
   const [deviceRetirementDate, setDeviceRetirementDate] = useState(toDateInputValue(retirementDate));
   const [devicePrice, setDevicePrice] = useState(price.toString());
   const [deviceSoldPrice, setDeviceSoldPrice] = useState(soldPrice.toString());
+  const [deviceStatus, setDeviceStatus] = useState<DeviceStatus>(status);
   const { createDevice, isSaving: isCreating } = useCreateDevice();
   const { updateDevice, isSaving: isUpdating } = useUpdateDevice();
   const isSaving = isCreating || isUpdating;
@@ -74,6 +77,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
     retirementDate: fromDateInputValue(deviceRetirementDate),
     price: Number(devicePrice),
     soldPrice: Number(deviceSoldPrice),
+    status: deviceStatus,
   });
 
   const save = async (saveDevice: () => Promise<boolean>, successMessage: string) => {
@@ -138,6 +142,17 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
               <option value="" disabled>Select an operating system</option>
               {Object.values(OperatingSystem).map((operatingSystem) => (
                 <option key={operatingSystem} value={operatingSystem}>{operatingSystem}</option>
+              ))}
+            </SelectBox>
+          </div>
+        </div>
+
+        <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
+          <span className={styles.deviceformlabel}>Status:</span>
+          <div className="selectBoxContainer">
+            <SelectBox name="status" className="selectBox" onChange={(e) => setDeviceStatus(Number(e.target.value) as DeviceStatus)} value={deviceStatus}>
+              {deviceStatusOptions.map((deviceStatusOption) => (
+                <option key={deviceStatusOption} value={deviceStatusOption}>{getDeviceStatusLabel(deviceStatusOption)}</option>
               ))}
             </SelectBox>
           </div>

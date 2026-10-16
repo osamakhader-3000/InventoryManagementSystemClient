@@ -9,7 +9,7 @@ export class DeviceApi extends GeneralApi{
 
     constructor(){
         super();
-        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['devices']}`;
+        this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['device']}`;
     }
 
     async ListDevices(): Promise<GeneralApiResult<Device[]>> {

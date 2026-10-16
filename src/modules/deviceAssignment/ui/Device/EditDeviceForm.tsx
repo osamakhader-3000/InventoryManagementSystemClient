@@ -29,6 +29,7 @@ export default function EditDeviceForm() {
       retirementDate={device?.retirementDate ?? null}
       price={device?.price}
       soldPrice={device?.soldPrice}
+      status={device?.status}
     />
   );
 }

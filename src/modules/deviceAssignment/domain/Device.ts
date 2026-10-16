@@ -1,4 +1,5 @@
 import DeviceValidationError from "./DeviceValidationError";
+import { DeviceStatus } from "./DeviceStatus";
 
 export interface DeviceProps {
     model: string;
@@ -9,6 +10,7 @@ export interface DeviceProps {
     retirementDate: Date|null;
     price: number;
     soldPrice: number;
+    status: DeviceStatus;
 }
 
 export default class Device {
@@ -21,6 +23,7 @@ export default class Device {
     retirementDate: Date|null;
     price: number;
     soldPrice: number;
+    status: DeviceStatus;
     constructor(
         id: string|null,
         model: string,
@@ -31,6 +34,7 @@ export default class Device {
         retirementDate: Date|null,
         price: number,
         soldPrice: number,
+        status: DeviceStatus = DeviceStatus.New,
     ) {
         this.id = id;
         this.model = model;
@@ -41,6 +45,7 @@ export default class Device {
         this.retirementDate = retirementDate;
         this.price = price;
         this.soldPrice = soldPrice;
+        this.status = status;
     }
 
     static create(props: DeviceProps): Device {
@@ -54,7 +59,8 @@ export default class Device {
             props.purchasedDate,
             props.retirementDate,
             props.price,
-            props.soldPrice
+            props.soldPrice,
+            props.status
         );
     }
 
@@ -69,7 +75,8 @@ export default class Device {
             changes.purchasedDate,
             changes.retirementDate,
             changes.price,
-            changes.soldPrice
+            changes.soldPrice,
+            changes.status
         );
     }
 

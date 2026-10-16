@@ -31,7 +31,7 @@
     "accessory-update":"/update",
     "accessory-delete":"/delete",
     "accessory-get":"/get",
-    "devices":"/devices",
+    "device":"/device",
     "devices-list":"/list",
     "device-create":"/create",
     "device-update":"/update",
