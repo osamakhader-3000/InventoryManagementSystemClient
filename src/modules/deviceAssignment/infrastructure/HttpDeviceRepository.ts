@@ -1,5 +1,6 @@
 import { IDeviceRepository } from "../domain/IDeviceRepository";
 import Device from "../domain/Device";
+import DeviceFilter from "../domain/DeviceFilter";
 import { DeviceApi } from "./DeviceApi";
 
 export class HttpDeviceRepository implements IDeviceRepository {
@@ -10,8 +11,8 @@ export class HttpDeviceRepository implements IDeviceRepository {
         this.deviceApi = new DeviceApi();
     }
 
-    async ListDevices(): Promise<Device[]> {
-        let result = await this.deviceApi.ListDevices();
+    async ListDevices(filter?: DeviceFilter): Promise<Device[]> {
+        let result = await this.deviceApi.ListDevices(filter);
 
         if (!Array.isArray(result.data)) 
             return [];

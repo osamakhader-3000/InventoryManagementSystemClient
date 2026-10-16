@@ -1,4 +1,5 @@
 import Device from "../domain/Device";
+import DeviceFilter from "../domain/DeviceFilter";
 import urls from '../../../shared/infrastructure/http/urls.json'
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
@@ -12,8 +13,15 @@ export class DeviceApi extends GeneralApi{
         this.baseUrl = `${urls['inventory-management-system-app']}${urls['assignments-domain']}${urls['device']}`;
     }
 
-    async ListDevices(): Promise<GeneralApiResult<Device[]>> {
-        let url = `${this.baseUrl}${urls['devices-list']}`;
+    async ListDevices(filter?: DeviceFilter): Promise<GeneralApiResult<Device[]>> {
+        const params = new URLSearchParams();
+        if (filter?.model) params.append('model', filter.model);
+        if (filter?.serialNumber) params.append('sn', filter.serialNumber);
+        if (filter?.operatingSystem) params.append('os', filter.operatingSystem);
+        if (filter?.purchasedDate) params.append('purDate', filter.purchasedDate);
+
+        const query = params.toString();
+        let url = `${this.baseUrl}${urls['devices-list']}${query ? `?${query}` : ''}`;
         let result = await this.SecureApiCaller<Device[]>('GET', url);
         return result;
     }

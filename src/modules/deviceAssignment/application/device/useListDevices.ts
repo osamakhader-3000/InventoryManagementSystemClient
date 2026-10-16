@@ -1,8 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Device from "../../domain/Device";
 import { DependencyContext } from "../../../../app/DependencyContext";
+import DeviceFilter from "../../domain/DeviceFilter";
 
-export function useListDevices() {
+export function useListDevices(filter?: DeviceFilter) {
     const { deviceRepository } = useContext(DependencyContext);
     const [data, setData] = useState<Device[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +12,7 @@ export function useListDevices() {
 
     useEffect(() => {
         let cancelled = false;        
-        deviceRepository.ListDevices()
+        deviceRepository.ListDevices(filter)
             .then((devices) => {
                 if (!cancelled) setData(devices);
             })
@@ -25,7 +26,7 @@ export function useListDevices() {
         return () => {
             cancelled = true;
         };
-    }, [deviceRepository, reloadKey]);
+    }, [deviceRepository, filter, reloadKey]);
 
     const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 

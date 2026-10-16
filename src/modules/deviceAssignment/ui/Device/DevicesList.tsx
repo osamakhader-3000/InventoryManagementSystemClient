@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Device from '../../domain/Device';
+import DeviceFilter from '../../domain/DeviceFilter';
 import styles from './DevicesList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -14,26 +15,35 @@ export default function DevicesList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: devices, isLoading, reload } = useListDevices();
+  const [appliedFilter, setAppliedFilter] = useState<DeviceFilter>({});
+  const { data: devices, isLoading, reload } = useListDevices(appliedFilter);
   const { data: operatingSystems } = useListOperatingSystems();
   const { deleteDevice, deletingIds: deletingDeviceIds } = useDeleteDevice();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deviceid, setDeviceId] = useState<string | null>(null);
 
-  const [searchFilter, setSearchFilter] = useState('');
+  const [modelFilter, setModelFilter] = useState('');
+  const [serialNumberFilter, setSerialNumberFilter] = useState('');
   const [osFilter, setOsFilter] = useState('');
   const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
 
-  const hasActiveFilter = searchFilter !== '' || osFilter !== '' || purchasedDateFilter !== '';
+  const hasActiveFilter = modelFilter !== '' || serialNumberFilter !== '' || osFilter !== '' || purchasedDateFilter !== '';
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedFilter({
+      model: modelFilter.trim(),
+      serialNumber: serialNumberFilter.trim(),
+      operatingSystem: osFilter,
+      purchasedDate: purchasedDateFilter,
+    });
   }
 
   const clearFilters = () => {
-    setSearchFilter('');
+    setModelFilter('');
+    setSerialNumberFilter('');
     setOsFilter('');
     setPurchasedDateFilter('');
+    setAppliedFilter({});
   }
 
   const showDeleteConfirmation = (_deviceid: string | null) => {
@@ -93,15 +103,19 @@ export default function DevicesList() {
 
         <div className={styles.filterspanel}>
           <div className={styles.filterfield}>
-            <label htmlFor="searchFilter">Model / Serial No.</label>
-            <input id="searchFilter" type="text" placeholder="Search devices" className={styles.filterinput} value={searchFilter} onChange={(e) => setSearchFilter(e.target.value)} />
+            <label htmlFor="modelFilter">Model</label>
+            <input id="modelFilter" type="text" placeholder="Search model" className={styles.filterinput} value={modelFilter} onChange={(e) => setModelFilter(e.target.value)} />
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="serialNumberFilter">Serial No.</label>
+            <input id="serialNumberFilter" type="text" placeholder="Search serial no." className={styles.filterinput} value={serialNumberFilter} onChange={(e) => setSerialNumberFilter(e.target.value)} />
           </div>
           <div className={styles.filterfield}>
             <label htmlFor="osFilter">OS</label>
             <select id="osFilter" className={styles.filterinput} value={osFilter} onChange={(e) => setOsFilter(e.target.value)}>
               <option value="">All</option>
               {operatingSystems.map((os) => (
-                <option key={os.id} value={os.id ?? ""}>{os.name}</option>
+                <option key={os.id} value={os.name ?? ""}>{os.name}</option>
               ))}
             </select>
           </div>
@@ -129,7 +143,7 @@ export default function DevicesList() {
                   <tr>
                     <th>Model</th>
                     <th>Serial No.</th>
-                    <th>OS</th>
+                    <th>Operating System</th>
                     <th>Specs</th>
                     <th>Purchased Date</th>
                     <th>Retirement Date</th>
