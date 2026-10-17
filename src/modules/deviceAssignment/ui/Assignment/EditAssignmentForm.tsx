@@ -2,11 +2,11 @@ import AssignmentForm from "./AssignmentForm";
 import { useGetAssignment } from "../../application/assignment/useGetAssignment";
 import styles from "./EditAssignmentForm.module.css";
 
-function getAssignmentIdFromPath(): bigint | null {
+function getAssignmentIdFromPath(): number | null {
     const assignmentIdStr = window.location.pathname.split("/").pop();
     if (!assignmentIdStr) return null;
     if (isNaN(Number(assignmentIdStr))) return null;
-    return BigInt(assignmentIdStr);
+    return Number(assignmentIdStr);
 }
 
 export default function EditAssignmentForm() {
@@ -27,12 +27,12 @@ export default function EditAssignmentForm() {
         <AssignmentForm
             editMode={true}
             assignmentId={assignment ? assignmentId : null}
-            serialNumber={assignment?.device.serialNumber ?? null}
+            deviceId={assignment?.device.id ?? null}
             assignmentRemarks={assignment?.remarks ?? null}
             assignedUserId={assignment?.assignedUser.id ?? null}
             accessoryIds={assignment?.accessories
                 .map(accessory => accessory.id)
-                .filter((id): id is number => id !== null)}
+                .filter((id): id is string => id !== null)}
         />
     );
 }

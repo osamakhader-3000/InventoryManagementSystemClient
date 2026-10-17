@@ -4,7 +4,7 @@ import Accessory from './Accessory';
 import AssignmentValidationError from './AssignmentValidationError';
 
 export default class Assignment {
-    id: bigint|null;
+    id: number|null;
     device: Device;
     assignedUser: User;
     assignmentDate: Date|null;
@@ -15,7 +15,7 @@ export default class Assignment {
     headset: string|null;
     lastUpdateDate: Date|null;
     constructor(
-        id: bigint|null,
+        id: number|null,
         device: Device,
         assignedUser: User,
         assignmentDate: Date|null,
@@ -47,7 +47,7 @@ export default class Assignment {
     }): Assignment {
         Assignment.ensureValid(props.assignedUser, props.device);
         return new Assignment(
-            BigInt(0),
+            0,
             props.device,
             props.assignedUser,
             null,
@@ -85,7 +85,7 @@ export default class Assignment {
     private static ensureValid(assignedUser: User, device: Device) {
         if (!assignedUser.id)
             throw new AssignmentValidationError("An assignment must have a user");
-        if (device.serialNumber.trim() === "")
-            throw new AssignmentValidationError("Serial Number cannot be empty");
+        if (!device.id)
+            throw new AssignmentValidationError("An assignment must have a device");
     }
 }

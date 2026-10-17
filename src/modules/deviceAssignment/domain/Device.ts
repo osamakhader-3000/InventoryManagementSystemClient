@@ -96,8 +96,8 @@ export default class Device {
             throw new DeviceValidationError("Retirement date cannot be before purchase date");
     }
 
-    // Reference to a device known only by its serial number (until the form has a device picker).
-    static fromSerialNumber(serialNumber: string): Device {
-        return new Device(null, "", serialNumber.trim(), null, "", null, null, 0, 0);
+    // Reference to an existing device known only by its id.
+    static fromId(id: string): Device {
+        return new Device(id, "", "", null, "", null, null, 0, 0);
     }
 }

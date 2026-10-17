@@ -5,7 +5,7 @@ import { ItemCondition } from "./ItemCondition";
 import Location from "./Location";
 
 export default class TrialLog {
-    id: bigint;
+    id: number;
     transactionType: TransactionType;
     device: Device;    
     tsmeSerialNumber: string;
@@ -15,7 +15,7 @@ export default class TrialLog {
     date: Date;
     agent: User;
     constructor(
-        id: bigint,
+        id: number,
         transactionType: TransactionType,
         device: Device,
         tsmeSerialNumber: string,

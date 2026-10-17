@@ -14,16 +14,16 @@ import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 
 interface AssignmentFormProps {
-  assignmentId?: bigint | null;
-  serialNumber?: string | null;
+  assignmentId?: number | null;
+  deviceId?: string | null;
   assignmentRemarks?: string | null;
   assignedUserId?: string | null;
-  accessoryIds?: number[];
+  accessoryIds?: string[];
   editMode?: boolean;
 }
 
 
-export default function AssignmentForm({ assignmentId = null, serialNumber = null, assignmentRemarks = null, assignedUserId = null,accessoryIds = [], editMode: editMode = false }: AssignmentFormProps) {
+export default function AssignmentForm({ assignmentId = null, deviceId = null, assignmentRemarks = null, assignedUserId = null,accessoryIds = [], editMode: editMode = false }: AssignmentFormProps) {
 
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
@@ -36,15 +36,15 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
   const { createAssignment, isSaving: isCreating } = useCreateAssignment();
   const { updateAssignment, isSaving: isUpdating } = useUpdateAssignment();  
   const isSaving = isCreating || isUpdating;
-  const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<number[]>(accessoryIds ?? []);
-  const [selectedDeviceSerialNumber, setSelectedDeviceSerialNumber] = useState(serialNumber ?? "");
+  const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<string[]>(accessoryIds ?? []);
+  const [selectedDeviceId, setSelectedDeviceId] = useState(deviceId ?? "");
 
 
   useEffect(() => {
     setRemarks(assignmentRemarks ?? "");
     setSelectedUserId(assignedUserId ?? "");
     setSelectedAccessoryIds(accessoryIds ?? []);
-    setSelectedDeviceSerialNumber(serialNumber ?? "");
+    setSelectedDeviceId(deviceId ?? "");
   }, []);
 
 
@@ -52,7 +52,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
     setSelectedUserId(e.target.value);
   };
 
-  const handleAccessorySelectChange = (id: number) => {
+  const handleAccessorySelectChange = (id: string) => {
     setSelectedAccessoryIds(prev =>
       prev.includes(id) ? prev.filter(a => a !== id) : [...prev, id]
     );
@@ -64,8 +64,8 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
 
  
 
-  const handleSerialNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedDeviceSerialNumber(e.target.value);
+  const handleDeviceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDeviceId(e.target.value);
   }; 
 
   // Quick UX checks only; business rules are enforced by the Assignment entity.
@@ -92,7 +92,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
   };
 
   const handleAdd = () => save(
-    () => createAssignment({ assignedUserId: selectedUserId, deviceSerialNumber: selectedDeviceSerialNumber ?? "", remarks: remarks, accessoryIds : selectedAccessoryIds??[] }),
+    () => createAssignment({ assignedUserId: selectedUserId, deviceId: selectedDeviceId, remarks: remarks, accessoryIds : selectedAccessoryIds??[] }),
     "Assignment added successfully"
   );
 
@@ -102,7 +102,7 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
       return;
     }
     return save(
-      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceSerialNumber: selectedDeviceSerialNumber ?? "", remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
+      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceId: selectedDeviceId, remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
       "Assignment updated successfully"
     );
   };
@@ -136,13 +136,13 @@ export default function AssignmentForm({ assignmentId = null, serialNumber = nul
 
          <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
           <span style={{ width: "20%" }}>Device:</span>
-         <SelectBox name="serialNumber" className="selectBox" onChange={handleSerialNumberChange} value={serialNumber ?? ""} disabled={isLoadingDevices}>
+         <SelectBox name="deviceId" className="selectBox" onChange={handleDeviceChange} value={selectedDeviceId} disabled={isLoadingDevices}>
             <option value="" disabled>
               {isLoadingDevices ? "Loading devices..." : "Select a device"}
             </option>
-            {allDevices.filter((device) => device.serialNumber !== null).map((device) => (
-              <option key={device.serialNumber!} value={device.serialNumber!}>
-                {device.serialNumber}
+            {allDevices.filter((device) => device.id !== null).map((device) => (
+              <option key={device.id!} value={device.id!}>
+                {device.model} - {device.serialNumber}
               </option>
             ))}
           </SelectBox>

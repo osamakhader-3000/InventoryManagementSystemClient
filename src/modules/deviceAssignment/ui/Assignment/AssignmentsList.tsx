@@ -17,7 +17,7 @@ export default function AssignmentsList() {
   const { data: assignments, isLoading, reload } = useListAssignments();
   const { deleteAssignment, deletingIds: deletingAssignmentIds } = useDeleteAssignment();
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [assignmentid, setAssignmentId] = useState<bigint | null>(null);
+  const [assignmentid, setAssignmentId] = useState<number | null>(null);
 
   const { data: users } = useListUsers();
   const { data: departments } = useListDepartments();
@@ -37,7 +37,7 @@ export default function AssignmentsList() {
     setPurchasedDateFilter('');
   }
 
-  const showDeleteConfirmation = (_assignmentid: bigint | null) => {
+  const showDeleteConfirmation = (_assignmentid: number | null) => {
 
     if (!_assignmentid) return;
 
@@ -53,7 +53,7 @@ export default function AssignmentsList() {
 
 
 
-  const handleDeleteAssignment = async (assignmentid: bigint | null) => {
+  const handleDeleteAssignment = async (assignmentid: number | null) => {
 
     if (!assignmentid) return;
 

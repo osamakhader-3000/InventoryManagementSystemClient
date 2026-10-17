@@ -7,11 +7,11 @@ import User from "../../domain/User";
 import Accessory from "../../domain/Accessory";
 
 export interface UpdateAssignmentCommand {
-    assignmentId: bigint;
+    assignmentId: number;
     assignedUserId: string;
-    deviceSerialNumber: string;
+    deviceId: string;
     remarks: string;
-    accessoryIds?: number[];
+    accessoryIds?: string[];
 }
 
 export function useUpdateAssignment() {
@@ -32,9 +32,9 @@ export function useUpdateAssignment() {
                 ? existing.assignedUser
                 : User.fromId(command.assignedUserId);
 
-            const device = existing.device.serialNumber === command.deviceSerialNumber.trim()
+            const device = existing.device.id === command.deviceId
                 ? existing.device
-                : Device.fromSerialNumber(command.deviceSerialNumber);
+                : Device.fromId(command.deviceId);
 
             const assignment = Assignment.update(existing, {
                 assignedUser,

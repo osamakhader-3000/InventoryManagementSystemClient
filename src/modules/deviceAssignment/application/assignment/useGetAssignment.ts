@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import Assignment from '../../domain/Assignment';
 
-export function useGetAssignment(assignmentId: bigint | null) {
+export function useGetAssignment(assignmentId: number | null) {
         const { assignmentRepository } = useContext(DependencyContext);
         const [data, setData] = useState<Assignment | null>(null);
         const [isLoading, setIsLoading] = useState(assignmentId !== null);

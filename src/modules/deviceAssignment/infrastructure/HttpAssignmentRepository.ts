@@ -16,7 +16,7 @@ export class HttpAssignmentRepository implements IAssignmentRepository {
         this.assignmentApi = new AssignmentApi();
     }
 
-    async GetAssignment(assignmentId: bigint): Promise<Assignment | null> {
+    async GetAssignment(assignmentId: number): Promise<Assignment | null> {
         var result = await this.assignmentApi.GetAssignment(assignmentId);
         return result.data ?? null;
     }
@@ -31,7 +31,7 @@ export class HttpAssignmentRepository implements IAssignmentRepository {
         return result.success;
     }
 
-    async DeleteAssignment(assignmentId: bigint): Promise<boolean> {
+    async DeleteAssignment(assignmentId: number): Promise<boolean> {
         var result = await this.assignmentApi.DeleteAssignment(assignmentId);
         return result.success;
     }

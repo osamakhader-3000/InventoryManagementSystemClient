@@ -8,7 +8,7 @@ import Accessory from "../../domain/Accessory";
 
 export interface CreateAssignmentCommand {
     assignedUserId: string;
-    deviceSerialNumber: string;
+    deviceId: string;
     remarks: string;
     accessoryIds?: string[];
 }
@@ -25,7 +25,7 @@ export function useCreateAssignment() {
         try {
             const assignment = Assignment.create({
                 assignedUser: User.fromId(command.assignedUserId),
-                device: Device.fromSerialNumber(command.deviceSerialNumber),
+                device: Device.fromId(command.deviceId),
                 remarks: command.remarks,
                 accessories: command.accessoryIds?.map(id => Accessory.fromId(id)) ?? []
             });

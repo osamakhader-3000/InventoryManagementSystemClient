@@ -17,7 +17,7 @@ export class AssignmentApi extends GeneralApi {
         return result;
     }
 
-    async GetAssignment(assignmentID: bigint): Promise<GeneralApiResult<Assignment>> {
+    async GetAssignment(assignmentID: number): Promise<GeneralApiResult<Assignment>> {
         let url = `${this.baseUrl}${urls['assignment-get']}/${assignmentID.toString()}`;
         let result = await this.SecureApiCaller<Assignment>('GET', url);
         return result;
@@ -26,17 +26,31 @@ export class AssignmentApi extends GeneralApi {
 
     async CreateAssignment(assignment: Assignment): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['assignment-create']}`;
-        let result = await this.SecureApiCaller<boolean>('POST', url, assignment);
+        let result = await this.SecureApiCaller<boolean>('POST', url, this.toRequestBody(assignment));
         return result;
     }
 
     async UpdateAssignment(assignment: Assignment): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['assignment-update']}`;
-        let result = await this.SecureApiCaller<boolean>('PUT', url, assignment);
+        let result = await this.SecureApiCaller<boolean>('PUT', url, this.toRequestBody(assignment));
         return result;
     }
 
-    async DeleteAssignment(assignmentID: bigint): Promise<GeneralApiResult<boolean>> {
+    // Only the fields the server reads. Nulls for non-nullable server types (Guid, DateTime, bool)
+    // fail JSON binding, so unknown values are left out instead of sent as null.
+    private toRequestBody(assignment: Assignment) {
+        return {
+            id: assignment.id ?? 0,
+            device: assignment.device.id
+                ? { id: assignment.device.id, serialNumber: assignment.device.serialNumber }
+                : { serialNumber: assignment.device.serialNumber },
+            assignedUser: { id: assignment.assignedUser.id },
+            accessories: assignment.accessories.map(accessory => ({ id: accessory.id })),
+            remarks: assignment.remarks
+        };
+    }
+
+    async DeleteAssignment(assignmentID: number): Promise<GeneralApiResult<boolean>> {
         let url = `${this.baseUrl}${urls['assignment-delete']}/${assignmentID.toString()}`;
         let result = await this.SecureApiCaller<boolean>('DELETE', url);
         return result;
