@@ -7,3 +7,10 @@ export enum TransactionType {
 }
 
 export const transactionTypeLabel = (value: TransactionType): string => TransactionType[value] ?? '';
+
+export const transactionTypeOptions: TransactionType[] = [
+    TransactionType.Assign,
+    TransactionType.Update,
+    TransactionType.Relocate,
+    TransactionType.Return
+];
