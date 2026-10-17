@@ -33,6 +33,7 @@ import EditLocationForm from '../../modules/deviceAssignment/ui/Location/EditLoc
 import OperatingSystemsList from '../../modules/deviceAssignment/ui/OperatingSystem/OperatingSystemsList.tsx';
 import AddOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/AddOperatingSystemForm.tsx';
 import EditOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/EditOperatingSystemForm.tsx';
+import TrialLogList from '../../modules/deviceAssignment/ui/TrialLog/TrialLogList.tsx';
 
 
 function MainPage() {
@@ -91,6 +92,7 @@ function MainPage() {
                               <Route path="/users" element={<UsersList />} />
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />
+                              <Route path="/triallog" element={<TrialLogList />} />
                               <Route element={<TechnicalSupportAccountRoute />}>                             
                               </Route>
                             </Route>

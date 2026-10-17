@@ -1,38 +1,37 @@
 import { TransactionType } from "./TransactionType";
-import Device from "./Device";
-import User from "./User";
-import { ItemCondition } from "./ItemCondition";
-import Location from "./Location";
 
 export default class TrialLog {
     id: number;
+    deviceId: string;
+    deviceModel: string;
+    deviceSerialNumber: string;
+    userId: string;
+    userName: string;
+    eventDate: Date;
     transactionType: TransactionType;
-    device: Device;    
-    tsmeSerialNumber: string;
-    user: User;
-    location: Location;
-    itemCondition: ItemCondition;
-    date: Date;
-    agent: User;
+    agentId: string;
+    agentName: string;
     constructor(
         id: number,
+        deviceId: string,
+        deviceModel: string,
+        deviceSerialNumber: string,
+        userId: string,
+        userName: string,
+        eventDate: Date,
         transactionType: TransactionType,
-        device: Device,
-        tsmeSerialNumber: string,
-        user: User,
-        location: Location,
-        itemCondition: ItemCondition,
-        date: Date,
-        agent: User
+        agentId: string,
+        agentName: string
     ) {
         this.id = id;
+        this.deviceId = deviceId;
+        this.deviceModel = deviceModel;
+        this.deviceSerialNumber = deviceSerialNumber;
+        this.userId = userId;
+        this.userName = userName;
+        this.eventDate = eventDate;
         this.transactionType = transactionType;
-        this.device = device;
-        this.tsmeSerialNumber = tsmeSerialNumber;
-        this.user = user;
-        this.location = location;
-        this.itemCondition = itemCondition;
-        this.date = date;
-        this.agent = agent;
+        this.agentId = agentId;
+        this.agentName = agentName;
     }
 }

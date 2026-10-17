@@ -17,6 +17,7 @@ export class StaticRealmRepository implements IRealmRepository {
             realms.push(new Realm("locations", "Locations", "List of all Locations"));
             realms.push(new Realm("operatingsystems", "Operating Systems", "List of all Operating Systems"));
             realms.push(new Realm("users", "Users", "List of all available Users"));
+            realms.push(new Realm("triallog", "Trial Log", "History of all device transactions"));
 
 
             if (isAdministrator(user))
