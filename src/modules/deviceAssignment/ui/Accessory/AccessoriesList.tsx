@@ -174,6 +174,7 @@ export default function AccessoriesList() {
                     </svg>
                   </button>
                 </Link>
+                {!accessory.assignedQuantity && (
                 <button className={styles.accessorylistbuttonclass} onClick={() => showDeleteConfirmation(accessory.id)}>
                   {deletingAccessoryIds.has(accessory.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
@@ -182,6 +183,7 @@ export default function AccessoriesList() {
                     </svg>
                   )}
                 </button>
+                )}
               </div>
               </td>
             </tr>

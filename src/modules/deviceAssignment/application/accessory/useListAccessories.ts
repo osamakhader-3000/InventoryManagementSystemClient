@@ -14,7 +14,6 @@ export function useListAccessories(filter?: AccessoryFilter) {
         let cancelled = false;
         accessoryRepository.ListAccessories(filter)
             .then((accessories) => {
-                debugger;
                 if (!cancelled) setData(accessories);
             })
             .catch((err) => {

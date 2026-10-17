@@ -190,6 +190,7 @@ export default function DevicesList() {
                     </svg>
                   </button>
                 </Link>
+                {!device.isTaken &&
                 <button className={styles.devicelistbuttonclass} onClick={() => showDeleteConfirmation(device.id)}>
                   {deletingDeviceIds.has(device.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
@@ -197,7 +198,7 @@ export default function DevicesList() {
                       <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                     </svg>
                   )}
-                </button>
+                </button>}
               </div>
               </td>
             </tr>

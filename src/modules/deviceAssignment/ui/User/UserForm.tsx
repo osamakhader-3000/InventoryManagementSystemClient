@@ -35,8 +35,6 @@ export default function UserForm({ userId = null, name = "", departmentId = "", 
   // Quick UX checks only; business rules are enforced by the User entity.
   const validateForm = (): boolean => {
 
-    debugger;
-
     if (userName.trim() === "") {
       errorHandlingBus.ErrorOccured("Please enter a name");
       return false;
