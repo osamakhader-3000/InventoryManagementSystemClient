@@ -124,6 +124,10 @@
   cursor: default;
 }
 
+.accessoryListItemDisabled {
+  opacity: 0.5;
+}
+
 .assignmentformcontainer {
   margin: 20px;
   width: 50%;

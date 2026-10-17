@@ -153,12 +153,18 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
           <span style={{ width: "20%" }}>Accessories</span>
           <div className={styles.accessoryList}>
               {isLoadingAccessories && <p>Loading accessories...</p>}
-              {!isLoadingAccessories && allAccessories.filter(accessory => accessory.id !== null).map(accessory => (
-                  <div key={accessory.id!} className={styles.accessoryListItem}>
-                      <input type="checkbox" checked={selectedAccessoryIds.includes(accessory.id!)} onChange={() => handleAccessorySelectChange(accessory.id!)} />
-                      <span className={styles.spanBuildVersion} onClick={() => handleAccessorySelectChange(accessory.id!)}>{accessory.name}</span>
-                  </div>
-              ))}
+              {!isLoadingAccessories && allAccessories.filter(accessory => accessory.id !== null).map(accessory => {
+                  // Accessories already held by this assignment stay toggleable so they can be released.
+                  const isUnavailable = accessory.availableQuantity <= 0 && !accessoryIds.includes(accessory.id!);
+                  return (
+                    <div key={accessory.id!} className={`${styles.accessoryListItem} ${isUnavailable ? styles.accessoryListItemDisabled : ''}`} title={isUnavailable ? "Out of stock" : undefined}>
+                        <input type="checkbox" checked={selectedAccessoryIds.includes(accessory.id!)} disabled={isUnavailable} onChange={() => handleAccessorySelectChange(accessory.id!)} />
+                        <span className={styles.spanBuildVersion} onClick={() => !isUnavailable && handleAccessorySelectChange(accessory.id!)}>
+                          {accessory.name}
+                        </span>
+                    </div>
+                  );
+              })}
           </div>
         </div>
 
