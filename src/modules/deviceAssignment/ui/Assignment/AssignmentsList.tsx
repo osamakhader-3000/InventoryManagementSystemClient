@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Assignment from '../../domain/Assignment';
+import AssignmentFilter from '../../domain/AssignmentFilter';
 import styles from './AssignmentsList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -14,7 +15,8 @@ export default function AssignmentsList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
 
-  const { data: assignments, isLoading, reload } = useListAssignments();
+  const [appliedFilter, setAppliedFilter] = useState<AssignmentFilter>({});
+  const { data: assignments, isLoading, reload } = useListAssignments(appliedFilter);
   const { returnAssignment, returningIds: returningAssignmentIds } = useReturnAssignment();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [assignmentid, setAssignmentId] = useState<number | null>(null);
@@ -24,17 +26,31 @@ export default function AssignmentsList() {
   const [userFilter, setUserFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
   const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
-
-  const hasActiveFilter = userFilter !== '' || departmentFilter !== '' || purchasedDateFilter !== '';
+  const [modelFilter, setModelFilter] = useState('');
+  const [isReturnedFilter, setIsReturnedFilter] = useState('');
+  const [serialNumberFilter, setSerialNumberFilter] = useState('');
+  const hasActiveFilter = userFilter !== '' || departmentFilter !== '' || purchasedDateFilter !== ''
+    || modelFilter !== '' || isReturnedFilter !== '' || serialNumberFilter !== '';
 
   const applyFilters = () => {
-    // TODO: pass the filters to the server once server-side filtering is available.
+    setAppliedFilter({
+      userId: userFilter,
+      departmentId: departmentFilter,
+      purchasedDate: purchasedDateFilter,
+      model: modelFilter.trim(),
+      serialNumber: serialNumberFilter.trim(),
+      isReturned: isReturnedFilter === '' ? undefined : isReturnedFilter === 'true',
+    });
   }
 
   const clearFilters = () => {
     setUserFilter('');
     setDepartmentFilter('');
     setPurchasedDateFilter('');
+    setModelFilter('');
+    setIsReturnedFilter('');
+    setSerialNumberFilter('');
+    setAppliedFilter({});
   }
 
   const showReturnConfirmation = (_assignmentid: number | null) => {
@@ -104,7 +120,30 @@ export default function AssignmentsList() {
               ))}
             </select>
           </div>
+           <div className={styles.filterfield}>
+            <label htmlFor="modelFilter">Model</label>
+            <input id="modelFilter" type="text" placeholder="Search model" className={styles.filterinput} value={modelFilter} onChange={(e) => setModelFilter(e.target.value)} />
+          </div>
+
+         <div className={styles.filterfield}>
+            <label htmlFor="serialNumberFilter">Serial No.</label>
+            <input id="serialNumberFilter" type="text" placeholder="Search serial no." className={styles.filterinput} value={serialNumberFilter} onChange={(e) => setSerialNumberFilter(e.target.value)} />
+          </div>
           <div className={styles.filterfield}>
+            <label htmlFor="purchasedDateFilter">Purchased Date</label>
+            <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
+          </div>
+
+          <div className={styles.filterfield}>
+            <label htmlFor="isReturnedFilter">Is Returned</label>
+            <select id="isReturnedFilter" className={styles.filterinput} value={isReturnedFilter} onChange={(e) => setIsReturnedFilter(e.target.value)}>
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+ 
+           <div className={styles.filterfield}>
             <label htmlFor="departmentFilter">Department</label>
             <select id="departmentFilter" className={styles.filterinput} value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)}>
               <option value="">All departments</option>
@@ -113,10 +152,7 @@ export default function AssignmentsList() {
               ))}
             </select>
           </div>
-          <div className={styles.filterfield}>
-            <label htmlFor="purchasedDateFilter">Purchased Date</label>
-            <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
-          </div>
+
           <div className={styles.filterbuttons}>
             <button type="button" className={styles.filterbutton} onClick={applyFilters}>Apply</button>
             <button type="button" className={styles.filterbutton} onClick={clearFilters} disabled={!hasActiveFilter}>Clear</button>
@@ -140,7 +176,7 @@ export default function AssignmentsList() {
                     <th>Serial No.</th>
                     <th>Operating System</th>
                     <th>Specs</th>
-                    <th>Purchased</th>
+                    <th>Purchase Date</th>
                     <th>Is Returned</th>
                     <th>Department</th>
                     <th>Last Update</th>

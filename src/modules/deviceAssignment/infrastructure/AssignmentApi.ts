@@ -1,4 +1,5 @@
 import Assignment from "../domain/Assignment";
+import AssignmentFilter from "../domain/AssignmentFilter";
 import urls from '../../../shared/infrastructure/http/urls.json'
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
 import { GeneralApiResult } from "../../../shared/infrastructure/DataTransferObjects/GeneralApiResult";
@@ -11,8 +12,17 @@ export class AssignmentApi extends GeneralApi {
         this.baseUrl = `${urls['inventory-management-system-app']}${urls['inventory-domain']}${urls['assignment']}`;
     }
 
-    async ListAssignments(): Promise<GeneralApiResult<Assignment[]>> {
-        let url = `${this.baseUrl}${urls['assignments-list']}`;
+    async ListAssignments(filter?: AssignmentFilter): Promise<GeneralApiResult<Assignment[]>> {
+        const params = new URLSearchParams();
+        if (filter?.userId) params.append('userid', filter.userId);
+        if (filter?.departmentId) params.append('depid', filter.departmentId);
+        if (filter?.purchasedDate) params.append('purDate', filter.purchasedDate);
+        if (filter?.model) params.append('model', filter.model);
+        if (filter?.serialNumber) params.append('sn', filter.serialNumber);
+        if (filter?.isReturned !== undefined) params.append('rtrnd', filter.isReturned ? '1' : '0');
+
+        const query = params.toString();
+        let url = `${this.baseUrl}${urls['assignments-list']}${query ? `?${query}` : ''}`;
         let result = await this.SecureApiCaller<Assignment[]>('GET', url);
         return result;
     }

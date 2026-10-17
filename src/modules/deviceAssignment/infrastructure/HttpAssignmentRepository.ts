@@ -1,5 +1,6 @@
 import Accessory from "../domain/Accessory";
 import Assignment from "../domain/Assignment";
+import AssignmentFilter from "../domain/AssignmentFilter";
 import Department from "../domain/Department";
 import Location from "../domain/Location";
 import OperatingSystem from "../domain/OperatingSystem";
@@ -36,8 +37,8 @@ export class HttpAssignmentRepository implements IAssignmentRepository {
         return result.success;
     }
 
-    async ListAssignments(): Promise<Assignment[]> {
-        var result = await this.assignmentApi.ListAssignments();
+    async ListAssignments(filter?: AssignmentFilter): Promise<Assignment[]> {
+        var result = await this.assignmentApi.ListAssignments(filter);
 
         if (!Array.isArray(result.data)) 
             return [];
