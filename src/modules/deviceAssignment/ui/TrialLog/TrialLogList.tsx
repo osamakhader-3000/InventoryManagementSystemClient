@@ -1,5 +1,6 @@
 import TrialLog from '../../domain/TrialLog';
 import { transactionTypeLabel } from '../../domain/TransactionType';
+import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
@@ -36,6 +37,8 @@ export default function TrialLogList() {
                   <th>Serial No.</th>
                   <th>User</th>
                   <th>Agent</th>
+                  <th>Location</th>
+                  <th>Device Condition</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,6 +61,12 @@ export default function TrialLogList() {
                     </td>
                     <td>
                       {trialLog.agentName}
+                    </td>
+                    <td>
+                      {trialLog.locationName}
+                    </td>
+                    <td>
+                      {getDeviceStatusLabel(trialLog.status)}
                     </td>
                   </tr>
                 ))}

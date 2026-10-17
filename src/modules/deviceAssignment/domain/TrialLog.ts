@@ -1,4 +1,5 @@
 import { TransactionType } from "./TransactionType";
+import { DeviceStatus } from "./DeviceStatus";
 
 export default class TrialLog {
     id: number;
@@ -11,6 +12,8 @@ export default class TrialLog {
     transactionType: TransactionType;
     agentId: string;
     agentName: string;
+    locationName: string;
+    status: DeviceStatus;
     constructor(
         id: number,
         deviceId: string,
@@ -21,7 +24,9 @@ export default class TrialLog {
         eventDate: Date,
         transactionType: TransactionType,
         agentId: string,
-        agentName: string
+        agentName: string,
+        locationName: string,
+        status: DeviceStatus
     ) {
         this.id = id;
         this.deviceId = deviceId;
@@ -33,5 +38,7 @@ export default class TrialLog {
         this.transactionType = transactionType;
         this.agentId = agentId;
         this.agentName = agentName;
+        this.locationName = locationName;
+        this.status = status;
     }
 }
