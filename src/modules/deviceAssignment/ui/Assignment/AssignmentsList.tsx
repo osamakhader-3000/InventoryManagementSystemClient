@@ -141,7 +141,7 @@ export default function AssignmentsList() {
                     <th>Operating System</th>
                     <th>Specs</th>
                     <th>Purchased</th>
-                    <th>Price</th>
+                    <th>Is Returned</th>
                     <th>Department</th>
                     <th>Last Update</th>
                     <th className={styles.actionscolumn}>Actions</th>
@@ -169,7 +169,7 @@ export default function AssignmentsList() {
                 {formatDate(assignment.device.purchasedDate)}
               </td>           
               <td>
-                {assignment.device.price}
+                {assignment.isReturned ? 'Yes' : 'No'}
               </td>
               <td>
                 {assignment.assignedUser.department.name}
@@ -178,7 +178,7 @@ export default function AssignmentsList() {
                 {formatDate(assignment.lastUpdateDate)}
               </td>
               <td className={styles.actionscolumn}>
-              <div className={styles.assignmentbuttonspan}>
+              {!assignment.isReturned && <div className={styles.assignmentbuttonspan}>
                 <Link to={`/viewassignment/${assignment.id}`}>
                   <button className={styles.assignmentlistbuttonclass} title="View Details">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -198,7 +198,7 @@ export default function AssignmentsList() {
                     </svg>
                   )}
                 </button>
-              </div>
+              </div>}
               </td>
             </tr>
           ))}

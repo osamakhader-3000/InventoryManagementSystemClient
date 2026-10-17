@@ -13,6 +13,7 @@ export default class Assignment {
     accessories: Accessory[];
     remarks: string;
     headset: string|null;
+    isReturned: number;
     lastUpdateDate: Date|null;
     constructor(
         id: number|null,
@@ -24,6 +25,7 @@ export default class Assignment {
         accessories: Accessory[],
         remarks: string,
         headset: string|null,
+        isReturned: number,
         lastUpdateDate: Date|null
     ) {
         this.id = id;
@@ -35,6 +37,7 @@ export default class Assignment {
         this.accessories = accessories;
         this.remarks = remarks;
         this.headset = headset;
+        this.isReturned = isReturned;
         this.lastUpdateDate = lastUpdateDate;
     }
 
@@ -57,6 +60,7 @@ export default class Assignment {
             props.accessories ?? [],
             props.remarks,
             null,
+            0,
             null
         );
     }
@@ -82,6 +86,7 @@ export default class Assignment {
             changes.accessories ?? [],
             changes.remarks,
             existing.headset,
+            existing.isReturned,
             new Date()
         );
     }
