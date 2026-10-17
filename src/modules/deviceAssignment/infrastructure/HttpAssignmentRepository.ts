@@ -1,12 +1,6 @@
-import Accessory from "../domain/Accessory";
 import Assignment from "../domain/Assignment";
 import AssignmentFilter from "../domain/AssignmentFilter";
-import Department from "../domain/Department";
-import Location from "../domain/Location";
-import OperatingSystem from "../domain/OperatingSystem";
-import Device from "../domain/Device";
 import { IAssignmentRepository } from "../domain/IAssignmentRepository";
-import User from "../domain/User";
 import { AssignmentApi } from "./AssignmentApi";
 
 export class HttpAssignmentRepository implements IAssignmentRepository {

@@ -14,3 +14,4 @@ dist/index.html
 dist/Googlelogo.svg.webp
 dist/32px-Microsoft_logo.svg.png
 dist/
+public/web.config
