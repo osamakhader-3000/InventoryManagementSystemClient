@@ -9,6 +9,8 @@ import Accessory from "../../domain/Accessory";
 export interface CreateAssignmentCommand {
     assignedUserId: string;
     deviceId: string;
+    // Used only for validation; not sent to the API.
+    isDeviceTaken?: boolean;
     remarks: string;
     accessoryIds?: string[];
 }
@@ -25,7 +27,7 @@ export function useCreateAssignment() {
         try {
             const assignment = Assignment.create({
                 assignedUser: User.fromId(command.assignedUserId),
-                device: Device.fromId(command.deviceId),
+                device: Device.fromId(command.deviceId, command.isDeviceTaken),
                 remarks: command.remarks,
                 accessories: command.accessoryIds?.map(id => Accessory.fromId(id)) ?? []
             });

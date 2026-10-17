@@ -25,6 +25,7 @@ export default class Device {
     price: number;
     soldPrice: number;
     status: DeviceStatus;
+    isTaken: boolean;
     constructor(
         id: string|null,
         model: string,
@@ -36,6 +37,7 @@ export default class Device {
         price: number,
         soldPrice: number,
         status: DeviceStatus = DeviceStatus.New,
+        isTaken: boolean = false,
     ) {
         this.id = id;
         this.model = model;
@@ -47,6 +49,7 @@ export default class Device {
         this.price = price;
         this.soldPrice = soldPrice;
         this.status = status;
+        this.isTaken = isTaken;
     }
 
     static create(props: DeviceProps): Device {
@@ -77,7 +80,8 @@ export default class Device {
             changes.retirementDate,
             changes.price,
             changes.soldPrice,
-            changes.status
+            changes.status,
+            existing.isTaken
         );
     }
 
@@ -97,7 +101,7 @@ export default class Device {
     }
 
     // Reference to an existing device known only by its id.
-    static fromId(id: string): Device {
-        return new Device(id, "", "", null, "", null, null, 0, 0);
+    static fromId(id: string, isTaken: boolean = false): Device {
+        return new Device(id, "", "", null, "", null, null, 0, 0, DeviceStatus.New, isTaken);
     }
 }

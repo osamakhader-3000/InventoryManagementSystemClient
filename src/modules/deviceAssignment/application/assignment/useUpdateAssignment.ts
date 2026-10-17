@@ -10,6 +10,8 @@ export interface UpdateAssignmentCommand {
     assignmentId: number;
     assignedUserId: string;
     deviceId: string;
+    // Used only for validation; not sent to the API.
+    isDeviceTaken?: boolean;
     remarks: string;
     accessoryIds?: string[];
 }
@@ -34,7 +36,7 @@ export function useUpdateAssignment() {
 
             const device = existing.device.id === command.deviceId
                 ? existing.device
-                : Device.fromId(command.deviceId);
+                : Device.fromId(command.deviceId, command.isDeviceTaken);
 
             const assignment = Assignment.update(existing, {
                 assignedUser,

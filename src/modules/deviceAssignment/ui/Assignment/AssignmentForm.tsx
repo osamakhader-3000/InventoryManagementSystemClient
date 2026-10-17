@@ -11,6 +11,7 @@ import { useListDevices } from '../../application/device/useListDevices';
 import { useCreateAssignment } from '../../application/assignment/useCreateAssignment';
 import { useUpdateAssignment } from '../../application/assignment/useUpdateAssignment';
 import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
+import Device from '../../domain/Device';
 
 
 interface AssignmentFormProps {
@@ -66,7 +67,10 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
 
   const handleDeviceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedDeviceId(e.target.value);
-  }; 
+  };
+
+  // The device already held by this assignment stays selectable.
+  const isDeviceUnavailable = (device: Device) => !!device.isTaken && device.id !== deviceId;
 
   // Quick UX checks only; business rules are enforced by the Assignment entity.
   const validateForm = (): boolean => {
@@ -77,6 +81,9 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
 
     return true;
   };
+
+  const isSelectedDeviceTaken = () =>
+    !!allDevices.find(device => device.id === selectedDeviceId)?.isTaken;
 
   const save = async (saveAssignment: () => Promise<boolean>, successMessage: string) => {
     if (!validateForm()) return;
@@ -92,7 +99,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
   };
 
   const handleAdd = () => save(
-    () => createAssignment({ assignedUserId: selectedUserId, deviceId: selectedDeviceId, remarks: remarks, accessoryIds : selectedAccessoryIds??[] }),
+    () => createAssignment({ assignedUserId: selectedUserId, deviceId: selectedDeviceId, isDeviceTaken: isSelectedDeviceTaken(), remarks: remarks, accessoryIds : selectedAccessoryIds??[] }),
     "Assignment added successfully"
   );
 
@@ -102,7 +109,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
       return;
     }
     return save(
-      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceId: selectedDeviceId, remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
+      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceId: selectedDeviceId, isDeviceTaken: isSelectedDeviceTaken(), remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
       "Assignment updated successfully"
     );
   };
@@ -141,8 +148,8 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
               {isLoadingDevices ? "Loading devices..." : "Select a device"}
             </option>
             {allDevices.filter((device) => device.id !== null).map((device) => (
-              <option key={device.id!} value={device.id!}>
-                {device.model} - {device.serialNumber}
+              <option key={device.id!} value={device.id!} disabled={isDeviceUnavailable(device)}>
+                {device.model} - {device.serialNumber}{isDeviceUnavailable(device) ? " (assigned)" : ""}
               </option>
             ))}
           </SelectBox>

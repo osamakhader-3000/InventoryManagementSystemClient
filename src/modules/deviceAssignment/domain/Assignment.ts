@@ -46,6 +46,7 @@ export default class Assignment {
         accessories?: Accessory[];
     }): Assignment {
         Assignment.ensureValid(props.assignedUser, props.device);
+        Assignment.ensureDeviceAvailable(props.device);
         return new Assignment(
             0,
             props.device,
@@ -67,6 +68,9 @@ export default class Assignment {
         accessories?: Accessory[];
     }): Assignment {
         Assignment.ensureValid(changes.assignedUser, changes.device);
+        // The device this assignment already holds is taken by itself, so only check a newly chosen one.
+        if (existing.device.id !== changes.device.id)
+            Assignment.ensureDeviceAvailable(changes.device);
         const isReassigned = existing.assignedUser.id !== changes.assignedUser.id;
         return new Assignment(
             existing.id,
@@ -87,5 +91,10 @@ export default class Assignment {
             throw new AssignmentValidationError("An assignment must have a user");
         if (!device.id)
             throw new AssignmentValidationError("An assignment must have a device");
+    }
+
+    private static ensureDeviceAvailable(device: Device) {
+        if (device.isTaken)
+            throw new AssignmentValidationError("The selected device is already assigned");
     }
 }
