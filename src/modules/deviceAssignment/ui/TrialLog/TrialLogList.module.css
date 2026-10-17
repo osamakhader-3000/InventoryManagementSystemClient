@@ -85,8 +85,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 25%;
-  margin-right: 25%;
 }
 
 .emptycontainer {
@@ -95,9 +93,9 @@
 }
 
 .filterspanel {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: end;
   gap: 16px;
   margin: 20px 20px 0px 20px;
   padding: 20px;
@@ -112,7 +110,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-width: 200px;
+  min-width: 0;
 }
 
 .filterfield label {
@@ -130,6 +128,8 @@
   color: black;
   font-family: inherit;
   font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .filterinput:focus {
@@ -139,6 +139,8 @@
 .filterbuttons {
   display: flex;
   gap: 8px;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
 }
 
 .filterbutton {
