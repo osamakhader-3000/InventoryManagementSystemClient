@@ -1,5 +1,6 @@
 import TrialLog from './TrialLog';
+import TrialLogFilter from './TrialLogFilter';
 
 export interface ITrialLogRepository {
-    ListTrialLogs(): Promise<TrialLog[]>;
+    ListTrialLogs(filter?: TrialLogFilter): Promise<TrialLog[]>;
 }

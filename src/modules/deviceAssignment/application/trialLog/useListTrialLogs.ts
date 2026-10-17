@@ -12,8 +12,7 @@ export function useListTrialLogs(filter?: TrialLogFilter) {
 
     useEffect(() => {
         let cancelled = false;
-        // TODO: pass filter to the repository once the backend supports trial log filtering.
-        trialLogRepository.ListTrialLogs()
+        trialLogRepository.ListTrialLogs(filter)
             .then((trialLogs) => {
                 if (!cancelled) setData(trialLogs);
             })

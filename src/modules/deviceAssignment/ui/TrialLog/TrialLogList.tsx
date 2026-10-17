@@ -6,7 +6,7 @@ import { deviceStatusOptions, getDeviceStatusLabel } from '../../domain/DeviceSt
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
-import { useListLocations } from '../../application/location/useListLocations';
+import { useListDepartments } from '../../application/department/useListDepartments';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function TrialLogList() {
@@ -15,16 +15,16 @@ export default function TrialLogList() {
   const { data: trialLogs, isLoading } = useListTrialLogs(appliedFilter);
 
   const { data: users } = useListUsers();
-  const { data: locations } = useListLocations();
+  const { data: departments } = useListDepartments();
   const [eventDateFilter, setEventDateFilter] = useState('');
   const [transactionTypeFilter, setTransactionTypeFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
   const [userFilter, setUserFilter] = useState('');
-  const [locationFilter, setLocationFilter] = useState('');
+  const [departmentFilter, setDepartmentFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const hasActiveFilter = eventDateFilter !== '' || transactionTypeFilter !== '' || modelFilter !== ''
-    || serialNumberFilter !== '' || userFilter !== '' || locationFilter !== '' || statusFilter !== '';
+    || serialNumberFilter !== '' || userFilter !== '' || departmentFilter !== '' || statusFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
@@ -33,7 +33,7 @@ export default function TrialLogList() {
       model: modelFilter.trim(),
       serialNumber: serialNumberFilter.trim(),
       userId: userFilter,
-      locationId: locationFilter,
+      departmentId: departmentFilter,
       status: statusFilter === '' ? undefined : Number(statusFilter),
     });
   }
@@ -44,7 +44,7 @@ export default function TrialLogList() {
     setModelFilter('');
     setSerialNumberFilter('');
     setUserFilter('');
-    setLocationFilter('');
+    setDepartmentFilter('');
     setStatusFilter('');
     setAppliedFilter({});
   }
@@ -96,11 +96,11 @@ export default function TrialLogList() {
         </div>
 
         <div className={styles.filterfield}>
-          <label htmlFor="locationFilter">Location</label>
-          <select id="locationFilter" className={styles.filterinput} value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
-            <option value="">All locations</option>
-            {locations.map((location) => (
-              <option key={location.id} value={location.id ?? ''}>{location.name}</option>
+          <label htmlFor="departmentFilter">Department</label>
+          <select id="departmentFilter" className={styles.filterinput} value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)}>
+            <option value="">All departments</option>
+            {departments.map((department) => (
+              <option key={department.id} value={department.id ?? ''}>{department.name}</option>
             ))}
           </select>
         </div>
