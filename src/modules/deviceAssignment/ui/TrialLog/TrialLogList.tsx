@@ -7,6 +7,7 @@ import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useListDepartments } from '../../application/department/useListDepartments';
+import { useListLocations } from '../../application/location/useListLocations';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function TrialLogList() {
@@ -16,6 +17,7 @@ export default function TrialLogList() {
 
   const { data: users } = useListUsers();
   const { data: departments } = useListDepartments();
+  const { data: locations } = useListLocations();
   const [eventDateFilter, setEventDateFilter] = useState('');
   const [transactionTypeFilter, setTransactionTypeFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
@@ -23,8 +25,9 @@ export default function TrialLogList() {
   const [userFilter, setUserFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [locationFilter, setLocationFilter] = useState('');
   const hasActiveFilter = eventDateFilter !== '' || transactionTypeFilter !== '' || modelFilter !== ''
-    || serialNumberFilter !== '' || userFilter !== '' || departmentFilter !== '' || statusFilter !== '';
+    || serialNumberFilter !== '' || userFilter !== '' || departmentFilter !== '' || statusFilter !== '' || locationFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
@@ -35,6 +38,7 @@ export default function TrialLogList() {
       userId: userFilter,
       departmentId: departmentFilter,
       status: statusFilter === '' ? undefined : Number(statusFilter),
+      locationId: locationFilter,
     });
   }
 
@@ -46,6 +50,7 @@ export default function TrialLogList() {
     setUserFilter('');
     setDepartmentFilter('');
     setStatusFilter('');
+    setLocationFilter('');
     setAppliedFilter({});
   }
 
@@ -101,6 +106,16 @@ export default function TrialLogList() {
             <option value="">All departments</option>
             {departments.map((department) => (
               <option key={department.id} value={department.id ?? ''}>{department.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.filterfield}>
+          <label htmlFor="locationFilter">Location</label>
+          <select id="locationFilter" className={styles.filterinput} value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
+            <option value="">All locations</option>
+            {locations.map((location) => (
+              <option key={location.id} value={location.id ?? ''}>{location.name}</option>
             ))}
           </select>
         </div>
