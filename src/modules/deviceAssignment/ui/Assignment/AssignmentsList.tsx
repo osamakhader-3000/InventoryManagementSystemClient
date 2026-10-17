@@ -8,7 +8,7 @@ import { useListAssignments } from '../../application/assignment/useListAssignme
 import { useReturnAssignment } from '../../application/assignment/useReturnAssignment';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useListDepartments } from '../../application/department/useListDepartments';
-
+import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function AssignmentsList() {
 
@@ -138,15 +138,11 @@ export default function AssignmentsList() {
                     <th>User</th>
                     <th>Model</th>
                     <th>Serial No.</th>
-                    <th>Accessory</th>
-                    <th>OS</th>
+                    <th>Operating System</th>
                     <th>Specs</th>
                     <th>Purchased</th>
-                    <th>Retirement</th>
                     <th>Price</th>
                     <th>Department</th>
-                    <th>Old User</th>
-                    <th>Remarks</th>
                     <th>Last Update</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
@@ -162,10 +158,7 @@ export default function AssignmentsList() {
               </td>
               <td>
                 {assignment.device.serialNumber}
-              </td>
-              <td>
-                {assignment.accessories[0]?.name}
-              </td>
+              </td>             
               <td>
                 {assignment.device.operatingSystem?.name}
               </td>
@@ -173,31 +166,22 @@ export default function AssignmentsList() {
                 {assignment.device.specs}
               </td>
               <td>
-                {assignment.device.purchasedDate?.toLocaleString()}
-              </td>
-              <td>
-                {assignment.device.retirementDate?.toLocaleString()}
-              </td>
+                {formatDate(assignment.device.purchasedDate)}
+              </td>           
               <td>
                 {assignment.device.price}
               </td>
               <td>
                 {assignment.assignedUser.department.name}
-              </td>
+              </td> 
               <td>
-                {assignment.oldUser?.name}
-              </td>
-              <td className={styles.remarkscell}>
-                {assignment.remarks}
-              </td>
-              <td>
-                {assignment.lastUpdateDate?.toLocaleString()}
+                {formatDate(assignment.lastUpdateDate)}
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.assignmentbuttonspan}>
                 <Link to={`/viewassignment/${assignment.id}`}>
                   <button className={styles.assignmentlistbuttonclass} title="View Details">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14 2 14 8 20 8" />
                     <line x1="16" y1="13" x2="8" y2="13" />
