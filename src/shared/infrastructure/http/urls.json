@@ -12,7 +12,7 @@
     "assignments-list":"/list",
     "assignment-create":"/create",
     "assignment-update":"/update",
-    "assignment-delete":"/delete",
+    "assignment-return":"/return",
     "assignment-get":"/get",
     "realms-domain":"http://localhost:85",
     "realms-list":"/Ticket/Realms/List",

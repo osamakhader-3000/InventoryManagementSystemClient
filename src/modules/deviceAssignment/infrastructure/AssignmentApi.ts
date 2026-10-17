@@ -50,9 +50,9 @@ export class AssignmentApi extends GeneralApi {
         };
     }
 
-    async DeleteAssignment(assignmentID: number): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}${urls['assignment-delete']}/${assignmentID.toString()}`;
-        let result = await this.SecureApiCaller<boolean>('DELETE', url);
+    async ReturnAssignment(assignmentID: number): Promise<GeneralApiResult<boolean>> {
+        let url = `${this.baseUrl}${urls['assignment-return']}/${assignmentID.toString()}`;
+        let result = await this.SecureApiCaller<boolean>('PUT', url);
         return result;
     }
 

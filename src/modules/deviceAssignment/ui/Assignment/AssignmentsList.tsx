@@ -5,7 +5,7 @@ import styles from './AssignmentsList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAssignments } from '../../application/assignment/useListAssignments';
-import { useDeleteAssignment } from '../../application/assignment/useDeleteAssignment';
+import { useReturnAssignment } from '../../application/assignment/useReturnAssignment';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useListDepartments } from '../../application/department/useListDepartments';
 
@@ -15,7 +15,7 @@ export default function AssignmentsList() {
   const { notificationHandlingBus } = useContext(DependencyContext);
 
   const { data: assignments, isLoading, reload } = useListAssignments();
-  const { deleteAssignment, deletingIds: deletingAssignmentIds } = useDeleteAssignment();
+  const { returnAssignment, returningIds: returningAssignmentIds } = useReturnAssignment();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [assignmentid, setAssignmentId] = useState<number | null>(null);
 
@@ -37,7 +37,7 @@ export default function AssignmentsList() {
     setPurchasedDateFilter('');
   }
 
-  const showDeleteConfirmation = (_assignmentid: number | null) => {
+  const showReturnConfirmation = (_assignmentid: number | null) => {
 
     if (!_assignmentid) return;
 
@@ -46,21 +46,21 @@ export default function AssignmentsList() {
 
   }
 
-  const deleteAssignmentConfirmed = () => {
+  const returnAssignmentConfirmed = () => {
     setShowConfirmation(false);
-    handleDeleteAssignment(assignmentid);
+    handleReturnAssignment(assignmentid);
   }
 
 
 
-  const handleDeleteAssignment = async (assignmentid: number | null) => {
+  const handleReturnAssignment = async (assignmentid: number | null) => {
 
     if (!assignmentid) return;
 
-    let result = await deleteAssignment(assignmentid);
+    let result = await returnAssignment(assignmentid);
 
     if (result) {
-      notificationHandlingBus.NotificationOccured("Assignment deleted successfully");
+      notificationHandlingBus.NotificationOccured("Assignment returned successfully");
       reload();
     }
 
@@ -79,9 +79,9 @@ export default function AssignmentsList() {
       {showConfirmation &&
         <div className={styles.confirmationcontainer} onClick={() => setShowConfirmation(false)}>
           <div className={styles.confirmationbox} onClick={(e) => e.stopPropagation()}>
-            <h3>Are you sure you want to delete this assignment?</h3>
+            <h3>Are you sure you want to return this assignment?</h3>
             <div className={styles.confirmationbuttons}>
-              <button className={styles.confirmationbutton} onClick={() => deleteAssignmentConfirmed()}>Yes</button>
+              <button className={styles.confirmationbutton} onClick={() => returnAssignmentConfirmed()}>Yes</button>
               <button className={styles.confirmationbutton} onClick={() => setShowConfirmation(false)}>No</button>
             </div>
           </div>
@@ -207,11 +207,11 @@ export default function AssignmentsList() {
                     </svg>
                   </button>
                 </Link>
-                <button className={styles.assignmentlistbuttonclass} onClick={() => showDeleteConfirmation(assignment.id)}>
-                  {deletingAssignmentIds.has(assignment.id!) ? <ButtonPreloader /> : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
-                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                <button className={styles.assignmentlistbuttonclass} title="Return Assignment" onClick={() => showReturnConfirmation(assignment.id)}>
+                  {returningAssignmentIds.has(assignment.id!) ? <ButtonPreloader /> : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 14L4 9l5-5" />
+                      <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11" />
                     </svg>
                   )}
                 </button>

@@ -5,5 +5,5 @@ export interface IAssignmentRepository {
     ListAssignments(): Promise<Assignment[]>;
     CreateAssignment(assignment: Assignment): Promise<boolean>;
     UpdateAssignment(assignment: Assignment): Promise<boolean>;
-    DeleteAssignment(assignmentId: number): Promise<boolean>;
+    ReturnAssignment(assignmentId: number): Promise<boolean>;
 }
