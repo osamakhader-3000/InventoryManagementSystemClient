@@ -15,6 +15,8 @@ interface FormTextBoxProps {
   maxLength?: number;
   min?: number;
   readOnly?: boolean;
+  name?: string;
+  autoComplete?: string;
 }
 
 export function TextBox({
@@ -31,6 +33,8 @@ export function TextBox({
   maxLength,
   min,
   readOnly = false,
+  name,
+  autoComplete = "off",
 }: FormTextBoxProps) {
 
   const localRef = useRef<HTMLInputElement>(null);
@@ -56,7 +60,8 @@ export function TextBox({
   return (
     <div className={formTextBoxStyles.outerDivStyle}>
     <input
-      name="testtextbox"
+      name={name}
+      autoComplete={autoComplete}
       onClick={handleInsideClick}
       value={value ?? ""}
       aria-invalid={isValid === false}

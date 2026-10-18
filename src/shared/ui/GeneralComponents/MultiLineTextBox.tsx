@@ -50,7 +50,6 @@ export function MultiLineTextBox({
   return (
     <div className={style.outerDivStyle}>
     <textarea
-      name="testtextbox"
       onClick={handleInsideClick}
       value={value ?? ""}
       aria-invalid={isValid === false}

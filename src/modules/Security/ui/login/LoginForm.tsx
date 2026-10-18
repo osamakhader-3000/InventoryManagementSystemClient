@@ -100,8 +100,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectUrl }) => {
         <div className={styles.thirdOfWidth}></div>
         <div className={`${styles.loginformdiv}`} style={{width: '25%'}}>
 
-         <TextBox placeholder="Username" value={username} onChange={usernameChanged} isValid={!invalidUsername} onUnClick={()=>{setInvalidUsername(false);}} />
-         <TextBox placeholder="Password" value={password} onChange={passwordChanged} isValid={!invalidPassword} onUnClick={()=>{setInvalidPassword(false);}} textInputType="password"/>
+         <TextBox name="username" autoComplete="username" placeholder="Username" value={username} onChange={usernameChanged} isValid={!invalidUsername} onUnClick={()=>{setInvalidUsername(false);}} />
+         <TextBox placeholder="Password" value={password} onChange={passwordChanged} isValid={!invalidPassword} onUnClick={()=>{setInvalidPassword(false);}} textInputType="password" name="password" autoComplete="current-password"/>
           <span ref={loginButtonWrapperRef} className={styles.loginButtonWrap}>
             <LoadingButton label="Login" onClick={login} isLoading={isLoading}/>         
           </span>

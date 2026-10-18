@@ -140,9 +140,9 @@ export default function Profile() {
                     <h2>Change Password</h2>
                     <div className={style.passwordChangeContainer}>
                         <div className={style.column}>
-                            <TextBox placeholder="Old Password" value={oldPassword} onChange={oldPasswordChanged} isValid={true} />
-                            <TextBox placeholder="New Password" value={newPassword} onChange={newPasswordChanged} isValid={!invalidNewPasswordError && !duplicatePasswordError} onUnClick={() => { setInvalidNewPasswordError(false); setDuplicatePasswordError(false) }} />
-                            <TextBox placeholder="Confirm New Password" value={confirmNewPassword} onChange={confirmNewPasswordChanged} isValid={!invalidConfirmNewPassword} onUnClick={() => { setInvalidConfirmNewPassword(false); }} />
+                            <TextBox placeholder="Old Password" value={oldPassword} onChange={oldPasswordChanged} isValid={true} textInputType="password" autoComplete="current-password" />
+                            <TextBox placeholder="New Password" value={newPassword} onChange={newPasswordChanged} isValid={!invalidNewPasswordError && !duplicatePasswordError} onUnClick={() => { setInvalidNewPasswordError(false); setDuplicatePasswordError(false) }} textInputType="password" autoComplete="new-password" />
+                            <TextBox placeholder="Confirm New Password" value={confirmNewPassword} onChange={confirmNewPasswordChanged} isValid={!invalidConfirmNewPassword} onUnClick={() => { setInvalidConfirmNewPassword(false); }} textInputType="password" autoComplete="new-password" />
 
                         </div>
                         <br />

@@ -120,9 +120,9 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = () => {
       <div className={styles.container}>
         <div className={styles.thirdOfWidth}></div>
         <div className={`${styles.loginformdiv} ${styles.thirdOfWidth}`}>
-          <TextBox onChange={usernameChanged} onBlur={usernameUnclick} value={username} isValid={!invalidUsername} placeholder="Username" />
-          <TextBox onChange={emailChanged} onBlur={emailUnclick} value={email} isValid={!invalidEmail} placeholder="Email" />
-          <TextBox onChange={passwordChanged} onBlur={passwordUnclick} value={password} isValid={!invalidPassword} placeholder="Password" textInputType="password" />
+          <TextBox onChange={usernameChanged} onBlur={usernameUnclick} value={username} isValid={!invalidUsername} placeholder="Username" name="username" autoComplete="username" />
+          <TextBox onChange={emailChanged} onBlur={emailUnclick} value={email} isValid={!invalidEmail} placeholder="Email" name="email" autoComplete="email" />
+          <TextBox onChange={passwordChanged} onBlur={passwordUnclick} value={password} isValid={!invalidPassword} placeholder="Password" textInputType="password" name="password" autoComplete="new-password" />
           <span ref={errorBoxWrapperRef} className={styles.buttonWrap}>
             <LoadingButton label="Create Account" onClick={createAccount} cssClass={styles.buttonStyle} isLoading={isLoading} />
             <ErrorMessageBox showError={showError}>
