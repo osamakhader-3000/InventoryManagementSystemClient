@@ -8,6 +8,8 @@ import { useContext, useRef } from 'react';
 import { useLocation } from 'react-router';
 import backgroundImage from '../../../../assets/Icons/Logo.jpg';
 
+const authPages = ["/login", "/signup"];
+
 interface LoginPageProps {
   newAccount: boolean;
 }
@@ -21,8 +23,10 @@ export default function LoginPage({newAccount}:LoginPageProps) {
 
   const { relocationService: relocationService } = useContext(DependencyContext);
 
+  // Never redirect back to an auth page (e.g. a stale "from: /login" left in history state).
+  const fromPath: string | undefined = (location.state as any)?.from?.pathname;
   const redirectUrlRef = useRef(
-    (location.state as any)?.from?.pathname || "/"
+    fromPath && !authPages.includes(fromPath) ? fromPath : "/"
   );
   function microsoftlogin() {
     relocationService.RelocateToMicrosoftLogin();
