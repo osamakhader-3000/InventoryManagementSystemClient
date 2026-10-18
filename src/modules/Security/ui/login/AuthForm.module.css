@@ -10,7 +10,7 @@
       justify-content: center;
       width: 100%;
       justify-content: space-around;
-      padding-top: 5%;
+      gap: 1em;
   }
 
   .loginformdiv{
