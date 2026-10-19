@@ -77,7 +77,7 @@
 }
 
 .taskformbutton:hover {
-  background-color: rgb(177, 184, 202);
+  background-color: rgb(224, 229, 242);
 }
 
 .taskformokbutton {
@@ -85,7 +85,7 @@
 }
 
 .taskformokbutton:hover {
-  background-color: rgb(224, 79, 79);
+  background-color: rgb(224, 229, 242);
 }
 
 
@@ -174,7 +174,7 @@
 }
 
 .assignmentformbuttonformbutton:hover {
-  background-color: rgb(177, 184, 202);
+  background-color: rgb(224, 229, 242);
 }
 
 .assignmentformokbutton {
@@ -182,5 +182,5 @@
 }
 
 .assignmentformokbutton:hover {
-  background-color: rgb(224, 79, 79);
+  background-color: rgb(224, 229, 242);
 }

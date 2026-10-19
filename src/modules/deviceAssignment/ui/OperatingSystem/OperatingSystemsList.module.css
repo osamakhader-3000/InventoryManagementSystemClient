@@ -105,7 +105,7 @@
 }
 
 .addoperatingsystembuttonclass:hover {
-  background-color: rgb(024, 229, 242);
+  background-color: rgb(224, 229, 242);
 }
 
 
@@ -122,7 +122,7 @@
 }
 
 .operatingsystemlistbuttonclass:hover {
-  background-color: rgb(024, 229, 242);
+  background-color: rgb(224, 229, 242);
   cursor: pointer;
 
 }
@@ -140,8 +140,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;  
-  margin-left: 25%;
-  margin-right: 25%;
 }
 
 .emptycontainer {
@@ -191,7 +189,7 @@
 }
 
 .confirmationbutton:hover {
-  background-color: rgb(024, 229, 242);
+  background-color: rgb(224, 229, 242);
   cursor: pointer;
 }
 

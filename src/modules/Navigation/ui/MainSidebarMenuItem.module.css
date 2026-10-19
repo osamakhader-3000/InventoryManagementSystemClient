@@ -1,6 +1,6 @@
 :root {
   /* Default theme (e.g., light theme) */
-  --background-color: #cff;
+  --background-color: #f6f7f9;
 }
 
 [data-theme="dark"] {
@@ -43,6 +43,7 @@
       font-family: "DM Sans", sans-serif;
       line-height: 1.5;
       display: block;
+      color: #002e4d;
   }
 
   .realmsmenurealmimg

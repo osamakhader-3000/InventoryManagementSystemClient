@@ -155,7 +155,7 @@
 }
 
 .filterbutton:hover:not(:disabled) {
-  background-color: rgb(024, 229, 242);
+  background-color: rgb(224, 229, 242);
 }
 
 .filterbutton:disabled {
