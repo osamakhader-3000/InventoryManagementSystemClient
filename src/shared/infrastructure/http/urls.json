@@ -38,6 +38,7 @@
     "device-update":"/update",
     "device-delete":"/delete",
     "device-get":"/get",
+    "device-sell":"/sell",
     "department":"/department",
     "departments-list":"/list",
     "department-create":"/create",

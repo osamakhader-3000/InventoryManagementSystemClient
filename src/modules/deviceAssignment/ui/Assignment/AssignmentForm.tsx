@@ -70,7 +70,9 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
   };
 
   // The device already held by this assignment stays selectable.
-  const isDeviceUnavailable = (device: Device) => !!device.isTaken && device.id !== deviceId;
+  const isDeviceUnavailable = (device: Device) => (!!device.isTaken || !!device.isSold) && device.id !== deviceId;
+
+  const getUnavailableLabel = (device: Device) => device.isSold ? " (sold)" : " (assigned)";
 
   // Quick UX checks only; business rules are enforced by the Assignment entity.
   const validateForm = (): boolean => {
@@ -149,7 +151,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
             </option>
             {allDevices.filter((device) => device.id !== null).map((device) => (
               <option key={device.id!} value={device.id!} disabled={isDeviceUnavailable(device)}>
-                {device.model} - {device.serialNumber}{isDeviceUnavailable(device) ? " (assigned)" : ""}
+                {device.model} - {device.serialNumber}{isDeviceUnavailable(device) ? getUnavailableLabel(device) : ""}
               </option>
             ))}
           </SelectBox>

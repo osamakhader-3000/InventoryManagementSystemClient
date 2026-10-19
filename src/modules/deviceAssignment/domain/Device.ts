@@ -26,6 +26,7 @@ export default class Device {
     soldPrice: number;
     status: DeviceStatus;
     isTaken: boolean;
+    isSold: boolean;
     constructor(
         id: string|null,
         model: string,
@@ -38,6 +39,7 @@ export default class Device {
         soldPrice: number,
         status: DeviceStatus = DeviceStatus.New,
         isTaken: boolean = false,
+        isSold: boolean = false,
     ) {
         this.id = id;
         this.model = model;
@@ -50,6 +52,7 @@ export default class Device {
         this.soldPrice = soldPrice;
         this.status = status;
         this.isTaken = isTaken;
+        this.isSold = isSold;
     }
 
     static create(props: DeviceProps): Device {
@@ -81,7 +84,8 @@ export default class Device {
             changes.price,
             changes.soldPrice,
             changes.status,
-            existing.isTaken
+            existing.isTaken,
+            existing.isSold
         );
     }
 

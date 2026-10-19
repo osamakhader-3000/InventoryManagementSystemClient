@@ -7,4 +7,5 @@ export interface IDeviceRepository {
   CreateDevice(device: Device): Promise<boolean>;
   UpdateDevice(device: Device): Promise<boolean>;
   DeleteDevice(deviceId: string): Promise<boolean>;
+  SellDevice(deviceId: string, price: number): Promise<boolean>;
 }

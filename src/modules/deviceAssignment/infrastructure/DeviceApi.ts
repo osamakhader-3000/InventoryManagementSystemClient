@@ -44,6 +44,12 @@ export class DeviceApi extends GeneralApi{
         return result;
     }
 
+    async SellDevice(deviceId: string, price: number): Promise<GeneralApiResult<boolean>> {
+        let url = `${this.baseUrl}${urls['device-sell']}`;
+        let result = await this.SecureApiCaller<boolean>('PUT', url, { deviceId, price });
+        return result;
+    }
+
     async GetDevice(deviceId: string): Promise<GeneralApiResult<Device>> {
         let url = `${this.baseUrl}${urls['device-get']}/${deviceId}`;
         let result = await this.SecureApiCaller<Device>('GET', url);

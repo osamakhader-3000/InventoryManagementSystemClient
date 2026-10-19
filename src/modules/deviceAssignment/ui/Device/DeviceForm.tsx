@@ -46,7 +46,8 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
   const [devicePurchasedDate, setDevicePurchasedDate] = useState(toDateInputValue(purchasedDate));
   const [deviceRetirementDate, setDeviceRetirementDate] = useState(toDateInputValue(retirementDate));
   const [devicePrice, setDevicePrice] = useState(price.toString());
-  const [deviceSoldPrice, setDeviceSoldPrice] = useState(soldPrice.toString());
+  // Sold price is set only by selling the device from the devices list.
+  const deviceSoldPrice = soldPrice.toString();
   const [deviceStatus, setDeviceStatus] = useState<DeviceStatus>(status);
   const { createDevice, isSaving: isCreating } = useCreateDevice();
   const { updateDevice, isSaving: isUpdating } = useUpdateDevice();
@@ -62,8 +63,8 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
       errorHandlingBus.ErrorOccured("Please enter a model");
       return false;
     }
-    if (isNaN(Number(devicePrice)) || isNaN(Number(deviceSoldPrice))) {
-      errorHandlingBus.ErrorOccured("Prices must be numbers");
+    if (isNaN(Number(devicePrice))) {
+      errorHandlingBus.ErrorOccured("Price must be a number");
       return false;
     }
 
@@ -177,7 +178,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
 
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
           <span className={styles.deviceformlabel}>Sold Price:</span>
-          <TextBox textInputType="number" onChange={(e) => setDeviceSoldPrice(e.target.value)} value={deviceSoldPrice} placeholder="0" />
+          <TextBox textInputType="number" value={deviceSoldPrice} placeholder="0" readOnly />
         </div>
 
       

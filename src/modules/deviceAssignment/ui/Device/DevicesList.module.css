@@ -194,6 +194,12 @@
 
 }
 
+/* Text buttons need room for the label instead of the fixed icon circle */
+.devicelisttextbutton {
+  width: auto;
+  padding: 10px 14px;
+}
+
 .devicelistbuttonclass:hover {
   background-color: rgb(224, 229, 242);
   cursor: pointer;
@@ -270,6 +276,10 @@
   margin: 0px;
   font-size: 1.25rem;
   font-weight: 700;
+}
+
+.sellpricefield {
+  margin-bottom: 16px;
 }
 
 .confirmationbuttons{

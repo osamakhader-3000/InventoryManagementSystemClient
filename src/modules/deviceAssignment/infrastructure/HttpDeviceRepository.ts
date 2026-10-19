@@ -34,6 +34,11 @@ export class HttpDeviceRepository implements IDeviceRepository {
         return result.success??false;
     }
 
+    async SellDevice(deviceId: string, price: number): Promise<boolean> {
+        let result = await this.deviceApi.SellDevice(deviceId, price);
+        return result.success??false;
+    }
+
     async GetDevice(deviceId: string): Promise<Device|null> {
         let result = await this.deviceApi.GetDevice(deviceId);
         return result.data??null;

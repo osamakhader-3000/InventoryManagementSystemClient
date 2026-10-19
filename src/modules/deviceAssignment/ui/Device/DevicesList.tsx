@@ -7,13 +7,15 @@ import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';
+import { useSellDevice } from '../../application/device/useSellDevice';
+import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { useListOperatingSystems } from '../../application/operatingSystem/useListOperatingSystems';
 import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function DevicesList() {
 
-  const { notificationHandlingBus } = useContext(DependencyContext);
+  const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
 
   const [appliedFilter, setAppliedFilter] = useState<DeviceFilter>({});
   const { data: devices, isLoading, reload } = useListDevices(appliedFilter);
@@ -21,6 +23,10 @@ export default function DevicesList() {
   const { deleteDevice, deletingIds: deletingDeviceIds } = useDeleteDevice();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deviceid, setDeviceId] = useState<string | null>(null);
+  const { sellDevice, sellingIds: sellingDeviceIds } = useSellDevice();
+  const [showSellForm, setShowSellForm] = useState(false);
+  const [sellDeviceId, setSellDeviceId] = useState<string | null>(null);
+  const [sellPrice, setSellPrice] = useState('');
 
   const [modelFilter, setModelFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
@@ -73,6 +79,42 @@ export default function DevicesList() {
 
   }
 
+  const showSellConfirmation = (_deviceid: string | null) => {
+
+    if (!_deviceid) return;
+
+    setSellDeviceId(_deviceid);
+    setSellPrice('');
+    setShowSellForm(true);
+
+  }
+
+  // Digits with an optional decimal point only, so minus signs and exponents can't be typed
+  const handleSellPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (/^\d*\.?\d*$/.test(e.target.value))
+      setSellPrice(e.target.value);
+  }
+
+  const sellDeviceConfirmed = async () => {
+
+    if (!sellDeviceId) return;
+
+    if (sellPrice === '' || sellPrice === '.') {
+      errorHandlingBus.ErrorOccured("Please enter a sold price");
+      return;
+    }
+
+    setShowSellForm(false);
+
+    const result = await sellDevice(sellDeviceId, Number(sellPrice));
+
+    if (result) {
+      notificationHandlingBus.NotificationOccured("Device sold successfully");
+      reload();
+    }
+
+  }
+
   if (isLoading)
     return (
       <div className={styles.loadingcontainer}>
@@ -90,6 +132,20 @@ export default function DevicesList() {
             <div className={styles.confirmationbuttons}>
               <button className={styles.confirmationbutton} onClick={() => deleteDeviceConfirmed()}>Yes</button>
               <button className={styles.confirmationbutton} onClick={() => setShowConfirmation(false)}>No</button>
+            </div>
+          </div>
+        </div>}
+
+      {showSellForm &&
+        <div className={styles.confirmationcontainer} onClick={() => setShowSellForm(false)}>
+          <div className={styles.confirmationbox} onClick={(e) => e.stopPropagation()}>
+            <h3>Are you sure you want to sell this device?</h3>
+            <div className={styles.sellpricefield}>
+              <TextBox onChange={handleSellPriceChange} value={sellPrice} placeholder="Sold price (AED)" />
+            </div>
+            <div className={styles.confirmationbuttons}>
+              <button className={styles.confirmationbutton} onClick={() => sellDeviceConfirmed()}>Ok</button>
+              <button className={styles.confirmationbutton} onClick={() => setShowSellForm(false)}>Cancel</button>
             </div>
           </div>
         </div>}
@@ -190,7 +246,11 @@ export default function DevicesList() {
                     </svg>
                   </button>
                 </Link>
-                {!device.isTaken &&
+                {!device.isTaken && !device.isSold &&
+                <button className={`${styles.devicelistbuttonclass} ${styles.devicelisttextbutton}`} onClick={() => showSellConfirmation(device.id)}>
+                  {sellingDeviceIds.has(device.id!) ? <ButtonPreloader /> : "Sell"}
+                </button>}
+                {!device.isTaken && !device.isSold &&
                 <button className={styles.devicelistbuttonclass} onClick={() => showDeleteConfirmation(device.id)}>
                   {deletingDeviceIds.has(device.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
