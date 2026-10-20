@@ -3,9 +3,10 @@ import { createSharedDependencies, SharedDependencies } from '../shared/composit
 import { createSecurityDependencies, SecurityDependencies } from '../modules/Security/composition';
 import { createNavigationDependencies, NavigationDependencies } from '../modules/Navigation/composition';
 import { createDeviceAssignmentDependencies, DeviceAssignmentDependencies } from '../modules/deviceAssignment/composition';
+import { createDeploymentRegistryDependencies, DeploymentRegistryDependencies } from '../modules/deploymentRegistry/composition';
 
 // Composition root: each module wires its own dependencies, this file only combines them.
-type DependencyContextType = SharedDependencies & SecurityDependencies & NavigationDependencies & DeviceAssignmentDependencies;
+type DependencyContextType = SharedDependencies & SecurityDependencies & NavigationDependencies & DeviceAssignmentDependencies & DeploymentRegistryDependencies;
 
 const shared = createSharedDependencies();
 const security = createSecurityDependencies(shared);
@@ -15,6 +16,7 @@ const dependencies: DependencyContextType = {
   ...security,
   ...createNavigationDependencies(security.authService),
   ...createDeviceAssignmentDependencies(),
+  ...createDeploymentRegistryDependencies(),
 };
 
 export const DependencyContext = createContext<DependencyContextType>(dependencies);

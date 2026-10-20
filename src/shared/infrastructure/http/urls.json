@@ -72,17 +72,20 @@
     "suspend-user":"/suspend",
     "activate-user":"/activate",
     "list-users-by-ids":"/listbyids",
-    "build-create":"/builds/create",
-    "build-get":"/builds/get",
-    "build-update":"/builds/update",
-    "build-delete":"/builds/delete",
-    "build-list":"/builds/list",
     "change-user-role":"/changerole",
-    "client-create":"/clients/create",
-    "client-get":"/clients/get",
-    "client-update":"/clients/update",
-    "client-delete":"/clients/delete",
-    "client-list":"/clients/list"
+    "deployment-registry-domain":"/deploymentregistry",
+    "build":"/build",
+    "build-create":"/create",
+    "build-get":"/get",
+    "build-update":"/update",
+    "build-delete":"/delete",
+    "build-list":"/list",
+    "client":"/client",
+    "client-create":"/create",
+    "client-get":"/get",
+    "client-update":"/update",
+    "client-delete":"/delete",
+    "client-list":"/list"
 
 
 }

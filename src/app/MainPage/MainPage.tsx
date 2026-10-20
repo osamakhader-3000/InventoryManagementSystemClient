@@ -34,6 +34,12 @@ import OperatingSystemsList from '../../modules/deviceAssignment/ui/OperatingSys
 import AddOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/AddOperatingSystemForm.tsx';
 import EditOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/EditOperatingSystemForm.tsx';
 import TrialLogList from '../../modules/deviceAssignment/ui/TrialLog/TrialLogList.tsx';
+import BuildsList from '../../modules/deploymentRegistry/ui/Build/BuildsList.tsx';
+import AddBuildForm from '../../modules/deploymentRegistry/ui/Build/AddBuildForm.tsx';
+import EditBuildForm from '../../modules/deploymentRegistry/ui/Build/EditBuildForm.tsx';
+import ClientsList from '../../modules/deploymentRegistry/ui/Client/ClientsList.tsx';
+import AddClientForm from '../../modules/deploymentRegistry/ui/Client/AddClientForm.tsx';
+import EditClientForm from '../../modules/deploymentRegistry/ui/Client/EditClientForm.tsx';
 
 
 function MainPage() {
@@ -93,6 +99,12 @@ function MainPage() {
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />
                               <Route path="/triallog" element={<TrialLogList />} />
+                              <Route path="/builds" element={<BuildsList />} />
+                              <Route path="/addbuild" element={<AddBuildForm />} />
+                              <Route path="/editbuild/:id" element={<EditBuildForm />} />
+                              <Route path="/clients" element={<ClientsList />} />
+                              <Route path="/addclient" element={<AddClientForm />} />
+                              <Route path="/editclient/:id" element={<EditClientForm />} />
                               <Route element={<TechnicalSupportAccountRoute />}>                             
                               </Route>
                             </Route>
