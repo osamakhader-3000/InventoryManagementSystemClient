@@ -44,6 +44,8 @@ export default function MainSidebarMenu() {
   }
 
 
+  const groups = [...new Set(realms.map((realm: Realm) => realm.group))];
+
   return (
 
     <div>
@@ -58,18 +60,22 @@ export default function MainSidebarMenu() {
             <SearchBox placeholder="Search" keyUpFunc={RealmSearch} />
           </div>
           <div className={styles.realmsmenucontainer}>
-            <table className={styles.realmsmenutable}>
-              <tbody>
-                {realms.length > 0 &&
-                  realms.map((realm: Realm) => (
-                    <tr key={realm.id} className={styles.realmsmenuelement}>
-                      <td>
-                        <MainSidebarMenuItem ID={realm.id} Name={realm.name} />
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+            {groups.map((group) => (
+              <div key={group} className={styles.realmsmenugroup}>
+                <div className={styles.realmsmenugroupheader}>{group}</div>
+                <table className={styles.realmsmenutable}>
+                  <tbody>
+                    {realms.filter((realm: Realm) => realm.group == group).map((realm: Realm) => (
+                      <tr key={realm.id} className={styles.realmsmenuelement}>
+                        <td>
+                          <MainSidebarMenuItem ID={realm.id} Name={realm.name} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
           </div>
         </>}
     </div>
