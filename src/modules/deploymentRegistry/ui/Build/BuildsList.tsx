@@ -57,9 +57,7 @@ export default function BuildsList() {
       {buildToDelete &&
         <DeleteConfirmation
           title="Are you sure you want to delete this build?"
-          message={buildToDelete.clients.length > 0
-            ? `Build ${buildToDelete.version} is related to ${buildToDelete.clients.length} client(s) and cannot be deleted until they are removed from it.`
-            : `Build ${buildToDelete.version} will be permanently deleted.`}
+          message={`Build ${buildToDelete.version} will be permanently deleted.`}
           onConfirm={deleteBuildConfirmed}
           onCancel={() => setBuildToDelete(null)} />}
 
@@ -122,9 +120,10 @@ export default function BuildsList() {
                               <EditIconSvg />
                             </button>
                           </Link>
-                          <button className={styles.buildlistbuttonclass} onClick={() => setBuildToDelete(build)}>
-                            {deletingBuildIds.has(build.id!) ? <ButtonPreloader /> : <DeleteIconSvg />}
-                          </button>
+                          {build.clients.length == 0 &&
+                            <button className={styles.buildlistbuttonclass} onClick={() => setBuildToDelete(build)}>
+                              {deletingBuildIds.has(build.id!) ? <ButtonPreloader /> : <DeleteIconSvg />}
+                            </button>}
                         </div>
                       </td>
                     </tr>
