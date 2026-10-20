@@ -287,6 +287,12 @@
 }
 
 .linkcell a {
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
   color: rgb(43, 54, 116);
 }
 

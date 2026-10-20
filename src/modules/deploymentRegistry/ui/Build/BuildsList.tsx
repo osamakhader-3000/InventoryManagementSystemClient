@@ -10,6 +10,8 @@ import { DeleteIconSvg } from '../../../../shared/ui/GeneralComponents/DeleteIco
 import { useListBuilds } from '../../application/build/useListBuilds';
 import { useDeleteBuild } from '../../application/build/useDeleteBuild';
 
+const MAX_VISIBLE_CLIENTS = 3;
+
 export default function BuildsList() {
 
   const { notificationHandlingBus } = useContext(DependencyContext);
@@ -106,12 +108,16 @@ export default function BuildsList() {
                         {build.version}
                       </td>
                       <td className={styles.linkcell}>
-                        {build.link ? <a href={build.link} target="_blank" rel="noopener noreferrer">{build.link}</a> : '-'}
+                        {build.link ? <a href={build.link} target="_blank" rel="noopener noreferrer" title={build.link}>{build.link}</a> : '-'}
                       </td>
                       <td className={styles.relatedcell}>
-                        {build.clients.length == 0 ? '-' : build.clients.map(client => (
+                        {build.clients.length == 0 ? '-' : build.clients.slice(0, MAX_VISIBLE_CLIENTS).map(client => (
                           <span key={client.id} className={styles.relatedchip}>{client.name}</span>
                         ))}
+                        {build.clients.length > MAX_VISIBLE_CLIENTS &&
+                          <span className={styles.relatedchip} title={build.clients.slice(MAX_VISIBLE_CLIENTS).map(client => client.name).join(', ')}>
+                            +{build.clients.length - MAX_VISIBLE_CLIENTS}
+                          </span>}
                       </td>
                       <td className={styles.actionscolumn}>
                         <div className={styles.buildbuttonspan}>
