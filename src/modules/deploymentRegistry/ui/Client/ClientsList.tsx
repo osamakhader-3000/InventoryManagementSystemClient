@@ -57,9 +57,7 @@ export default function ClientsList() {
       {clientToDelete &&
         <DeleteConfirmation
           title="Are you sure you want to delete this client?"
-          message={clientToDelete.builds.length > 0
-            ? `${clientToDelete.name} is related to ${clientToDelete.builds.length} build(s) and cannot be deleted until it is removed from them.`
-            : `${clientToDelete.name} will be permanently deleted.`}
+          message={`${clientToDelete.name} will be permanently deleted.`}
           onConfirm={deleteClientConfirmed}
           onCancel={() => setClientToDelete(null)} />}
 
@@ -122,9 +120,10 @@ export default function ClientsList() {
                               <EditIconSvg />
                             </button>
                           </Link>
-                          <button className={styles.clientlistbuttonclass} onClick={() => setClientToDelete(client)}>
-                            {deletingClientIds.has(client.id!) ? <ButtonPreloader /> : <DeleteIconSvg />}
-                          </button>
+                          {client.builds.length == 0 &&
+                            <button className={styles.clientlistbuttonclass} onClick={() => setClientToDelete(client)}>
+                              {deletingClientIds.has(client.id!) ? <ButtonPreloader /> : <DeleteIconSvg />}
+                            </button>}
                         </div>
                       </td>
                     </tr>
