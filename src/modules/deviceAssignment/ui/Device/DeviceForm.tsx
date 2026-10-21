@@ -98,7 +98,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
 
   const handleAdd = () => save(
     () => createDevice(buildDeviceProps()),
-    "Device added successfully"
+    "Device added to stock successfully"
   );
 
   const handleUpdate = () => {
@@ -108,7 +108,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
     }
     return save(
       () => updateDevice({ deviceId, ...buildDeviceProps() }),
-      "Device updated successfully"
+      "Device updated in stock successfully"
     );
   };
 
@@ -120,7 +120,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
     <div className={styles.maincontainer}>
       <div className={styles.deviceformcontainer}>
         <h2>
-          {editMode ? "Edit Device" : "Add Device"}
+          {editMode ? "Edit Device In Stock" : "Add Device To Stock"}
         </h2>
 
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>

@@ -119,7 +119,7 @@ export default function DevicesList() {
     return (
       <div className={styles.loadingcontainer}>
         <h3>Please wait</h3>
-        <h3>Loading devices ...</h3>
+        <h3>Loading stock ...</h3>
       </div>
     )
 
@@ -167,7 +167,7 @@ export default function DevicesList() {
             <input id="serialNumberFilter" type="text" placeholder="Search serial no." className={styles.filterinput} value={serialNumberFilter} onChange={(e) => setSerialNumberFilter(e.target.value)} />
           </div>
           <div className={styles.filterfield}>
-            <label htmlFor="osFilter">OS</label>
+            <label htmlFor="osFilter">Operating System</label>
             <select id="osFilter" className={styles.filterinput} value={osFilter} onChange={(e) => setOsFilter(e.target.value)}>
               <option value="">All</option>
               {operatingSystems.map((os) => (
@@ -187,10 +187,10 @@ export default function DevicesList() {
 
         <div className={styles.devicespanel}>
           <h5 className={styles.devicestatustitle}>
-            Devices
+            Stock
           </h5>
 
-          {devices.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.devicestatustitle}>No devices</h5></div>}
+          {devices.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.devicestatustitle}>Empty stock</h5></div>}
 
           {devices.length > 0 &&
             <div className={styles.tablewrapper}>

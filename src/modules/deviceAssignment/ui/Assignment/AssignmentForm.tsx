@@ -127,7 +127,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
     <div className={styles.maincontainer}>
       <div className={styles.assignmentformcontainer}>
         <h2>
-          {editMode ? "Edit Assignment" : "Add Assignment"}
+          {editMode ? "Edit Stock Assignment" : "Add Stock Assignment"}
         </h2>
          <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
           <span style={{ width: "20%" }}>Assigned User:</span>

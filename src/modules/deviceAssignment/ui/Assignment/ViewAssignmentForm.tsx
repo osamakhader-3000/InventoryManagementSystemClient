@@ -44,7 +44,7 @@ export default function ViewAssignmentForm() {
     return (
         <div className={formStyles.maincontainer}>
             <div className={formStyles.assignmentformcontainer}>
-                <h2>View Assignment</h2>
+                <h2>View Stock Assignment</h2>
 
                 <Field label="Assigned User" value={assignedUser.name} />
                 <Field label="Department" value={assignedUser.department?.name} />

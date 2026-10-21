@@ -86,7 +86,7 @@ export default function AssignmentsList() {
     return (
       <div className={styles.loadingcontainer}>
         <h3>Please wait</h3>
-        <h3>Loading assignments ...</h3>
+        <h3>Loading stock assignments ...</h3>
       </div>
     )
 
@@ -106,7 +106,7 @@ export default function AssignmentsList() {
       <div className={styles.maincontainer}>
         <div className={styles.assignmentpagebuttonspanel}>
           <Link to={'../addassignment/'} >
-            <button type="button" className={styles.addassignmentbuttonclass}>+ Add</button>
+            <button type="button" className={styles.addassignmentbuttonclass}>+ Assign to user</button>
           </Link>
         </div>
 
@@ -161,7 +161,7 @@ export default function AssignmentsList() {
 
         <div className={styles.assignmentspanel}>
           <h5 className={styles.assignmentstatustitle}>
-            Assignments
+            Stock Assignments
           </h5>
 
           {assignments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.assignmentstatustitle}>No assignments</h5></div>}

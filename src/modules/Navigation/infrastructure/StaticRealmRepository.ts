@@ -10,8 +10,8 @@ export class StaticRealmRepository implements IRealmRepository {
 
         if (user != null && user.emailVerificationStatus == UserEmailVerificationStatus.Verified && user.accountStatus == UserAccountStatus.Active) {
             
-            realms.push(new Realm("assignments", "Assignments", "List of Devices and users assinged to them", "Inventory"));
-            realms.push(new Realm("devices", "Devices", "List of all available Devices", "Inventory"));
+            realms.push(new Realm("assignments", "Stock Assignments", "List of Devices and users assinged to them", "Inventory"));
+            realms.push(new Realm("devices", "Stock", "List of all available Devices", "Inventory"));
             realms.push(new Realm("accessories", "Accessories", "List of all available Accessories", "Inventory"));
             realms.push(new Realm("departments", "Departments", "List of all Departments", "Inventory"));
             realms.push(new Realm("locations", "Locations", "List of all Locations", "Inventory"));
