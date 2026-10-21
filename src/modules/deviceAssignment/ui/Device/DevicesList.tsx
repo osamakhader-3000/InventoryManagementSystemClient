@@ -9,7 +9,6 @@ import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';
 import { useSellDevice } from '../../application/device/useSellDevice';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
-import { useListOperatingSystems } from '../../application/operatingSystem/useListOperatingSystems';
 import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
@@ -19,7 +18,6 @@ export default function DevicesList() {
 
   const [appliedFilter, setAppliedFilter] = useState<DeviceFilter>({});
   const { data: devices, isLoading, reload } = useListDevices(appliedFilter);
-  const { data: operatingSystems } = useListOperatingSystems();
   const { deleteDevice, deletingIds: deletingDeviceIds } = useDeleteDevice();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deviceid, setDeviceId] = useState<string | null>(null);
@@ -30,16 +28,14 @@ export default function DevicesList() {
 
   const [modelFilter, setModelFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
-  const [osFilter, setOsFilter] = useState('');
   const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
 
-  const hasActiveFilter = modelFilter !== '' || serialNumberFilter !== '' || osFilter !== '' || purchasedDateFilter !== '';
+  const hasActiveFilter = modelFilter !== '' || serialNumberFilter !== '' || purchasedDateFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
       model: modelFilter.trim(),
       serialNumber: serialNumberFilter.trim(),
-      operatingSystem: osFilter,
       purchasedDate: purchasedDateFilter,
     });
   }
@@ -47,7 +43,6 @@ export default function DevicesList() {
   const clearFilters = () => {
     setModelFilter('');
     setSerialNumberFilter('');
-    setOsFilter('');
     setPurchasedDateFilter('');
     setAppliedFilter({});
   }
@@ -167,15 +162,6 @@ export default function DevicesList() {
             <input id="serialNumberFilter" type="text" placeholder="Search serial no." className={styles.filterinput} value={serialNumberFilter} onChange={(e) => setSerialNumberFilter(e.target.value)} />
           </div>
           <div className={styles.filterfield}>
-            <label htmlFor="osFilter">Operating System</label>
-            <select id="osFilter" className={styles.filterinput} value={osFilter} onChange={(e) => setOsFilter(e.target.value)}>
-              <option value="">All</option>
-              {operatingSystems.map((os) => (
-                <option key={os.id} value={os.name ?? ""}>{os.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.filterfield}>
             <label htmlFor="purchasedDateFilter">Purchased Date</label>
             <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
           </div>
@@ -199,7 +185,6 @@ export default function DevicesList() {
                   <tr>
                     <th>Model</th>
                     <th>Serial No.</th>
-                    <th>Operating System</th>
                     <th>Specs</th>
                     <th>Purchased Date</th>
                     <th>Retirement Date</th>
@@ -216,9 +201,6 @@ export default function DevicesList() {
               </td>
               <td>
                 {device.serialNumber}
-              </td>
-              <td>
-                {device.operatingSystem?.name}
               </td>
               <td className={styles.specscell}>
                 {device.specs}

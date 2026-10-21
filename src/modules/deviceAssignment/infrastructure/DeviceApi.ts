@@ -17,7 +17,6 @@ export class DeviceApi extends GeneralApi{
         const params = new URLSearchParams();
         if (filter?.model) params.append('model', filter.model);
         if (filter?.serialNumber) params.append('sn', filter.serialNumber);
-        if (filter?.operatingSystem) params.append('os', filter.operatingSystem);
         if (filter?.purchasedDate) params.append('purDate', filter.purchasedDate);
 
         const query = params.toString();

@@ -30,9 +30,6 @@ import DepartmentsList from '../../modules/deviceAssignment/ui/Department/Depart
 import LocationsList from '../../modules/deviceAssignment/ui/Location/LocationsList.tsx';
 import AddLocationForm from '../../modules/deviceAssignment/ui/Location/AddLocationForm.tsx';
 import EditLocationForm from '../../modules/deviceAssignment/ui/Location/EditLocationForm.tsx';
-import OperatingSystemsList from '../../modules/deviceAssignment/ui/OperatingSystem/OperatingSystemsList.tsx';
-import AddOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/AddOperatingSystemForm.tsx';
-import EditOperatingSystemForm from '../../modules/deviceAssignment/ui/OperatingSystem/EditOperatingSystemForm.tsx';
 import TrialLogList from '../../modules/deviceAssignment/ui/TrialLog/TrialLogList.tsx';
 import BuildsList from '../../modules/deploymentRegistry/ui/Build/BuildsList.tsx';
 import AddBuildForm from '../../modules/deploymentRegistry/ui/Build/AddBuildForm.tsx';
@@ -92,9 +89,6 @@ function MainPage() {
                               <Route path="/locations" element={<LocationsList />} />
                               <Route path="/addlocation" element={<AddLocationForm />} />
                               <Route path="/editlocation/:id" element={<EditLocationForm />} />
-                              <Route path="/operatingsystems" element={<OperatingSystemsList />} />
-                              <Route path="/addoperatingsystem" element={<AddOperatingSystemForm />} />
-                              <Route path="/editoperatingsystem/:id" element={<EditOperatingSystemForm />} />
                               <Route path="/users" element={<UsersList />} />
                               <Route path="/adduser" element={<AddUserForm />} />
                               <Route path="/edituser/:id" element={<EditUserForm />} />

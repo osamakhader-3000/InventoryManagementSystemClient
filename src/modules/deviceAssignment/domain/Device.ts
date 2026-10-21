@@ -1,11 +1,9 @@
 import DeviceValidationError from "./DeviceValidationError";
 import { DeviceStatus } from "./DeviceStatus";
-import OperatingSystem from "./OperatingSystem";
 
 export interface DeviceProps {
     model: string;
     serialNumber: string;
-    operatingSystem: OperatingSystem|null;
     specs: string;
     purchasedDate: Date|null;
     retirementDate: Date|null;
@@ -18,7 +16,6 @@ export default class Device {
     id: string|null;
     model: string;
     serialNumber: string;    
-    operatingSystem: OperatingSystem|null;
     specs: string;
     purchasedDate: Date|null;
     retirementDate: Date|null;
@@ -31,7 +28,6 @@ export default class Device {
         id: string|null,
         model: string,
         serialNumber: string,        
-        operatingSystem: OperatingSystem|null,
         specs: string,
         purchasedDate: Date|null,
         retirementDate: Date|null,
@@ -44,7 +40,6 @@ export default class Device {
         this.id = id;
         this.model = model;
         this.serialNumber = serialNumber;
-        this.operatingSystem = operatingSystem;
         this.specs = specs;
         this.purchasedDate = purchasedDate;
         this.retirementDate = retirementDate;
@@ -61,7 +56,6 @@ export default class Device {
             "00000000-0000-0000-0000-000000000000",
             props.model.trim(),
             props.serialNumber.trim(),
-            props.operatingSystem,
             props.specs,
             props.purchasedDate,
             props.retirementDate,
@@ -77,7 +71,6 @@ export default class Device {
             existing.id,
             changes.model.trim(),
             changes.serialNumber.trim(),
-            changes.operatingSystem,
             changes.specs,
             changes.purchasedDate,
             changes.retirementDate,
@@ -94,8 +87,6 @@ export default class Device {
             throw new DeviceValidationError("A device must have a serial number");
         if (!props.model.trim())
             throw new DeviceValidationError("A device must have a model");
-        if (!props.operatingSystem?.id)
-            throw new DeviceValidationError("An OS must be selected");
         if (!props.purchasedDate)
             throw new DeviceValidationError("A purchase date must be selected");
         if (props.price < 0 || props.soldPrice < 0)
@@ -106,6 +97,6 @@ export default class Device {
 
     // Reference to an existing device known only by its id.
     static fromId(id: string, isTaken: boolean = false): Device {
-        return new Device(id, "", "", null, "", null, null, 0, 0, DeviceStatus.New, isTaken);
+        return new Device(id, "", "", "", null, null, 0, 0, DeviceStatus.New, isTaken);
     }
 }

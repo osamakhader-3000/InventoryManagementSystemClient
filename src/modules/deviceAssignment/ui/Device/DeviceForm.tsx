@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import DeviceValidationError from '../../domain/DeviceValidationError';
-import OperatingSystem from '../../domain/OperatingSystem';
 import { DeviceStatus, deviceStatusOptions, getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import styles from './DeviceForm.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
@@ -10,14 +9,12 @@ import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiL
 import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
 import { useCreateDevice } from '../../application/device/useCreateDevice';
 import { useUpdateDevice } from '../../application/device/useUpdateDevice';
-import { useListOperatingSystems } from '../../application/operatingSystem/useListOperatingSystems';
 import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 interface DeviceFormProps {
     deviceId?: string | null;
     serialNumber?: string | null;
     model?: string;
-    operatingSystem?: OperatingSystem | null;
     specs?: string;
     purchasedDate?: Date | null;
     retirementDate?: Date | null;
@@ -34,14 +31,12 @@ const toDateInputValue = (date: Date | null): string =>
 const fromDateInputValue = (value: string): Date | null =>
   value ? new Date(value) : null;
 
-export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", operatingSystem = null, specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, status = DeviceStatus.New, editMode = false }: DeviceFormProps) {
+export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, status = DeviceStatus.New, editMode = false }: DeviceFormProps) {
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
   const [deviceSerialNumber, setDeviceSerialNumber] = useState(serialNumber ?? "");
   const [deviceModel, setDeviceModel] = useState(model);
-  const [selectedOperatingSystemId, setSelectedOperatingSystemId] = useState(operatingSystem?.id ?? "");
-  const { data: operatingSystems } = useListOperatingSystems();
   const [deviceSpecs, setDeviceSpecs] = useState(specs);
   const [devicePurchasedDate, setDevicePurchasedDate] = useState(toDateInputValue(purchasedDate));
   const [deviceRetirementDate, setDeviceRetirementDate] = useState(toDateInputValue(retirementDate));
@@ -74,7 +69,6 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
   const buildDeviceProps = () => ({
     serialNumber: deviceSerialNumber,
     model: deviceModel,
-    operatingSystem: operatingSystems.find((os) => os.id === selectedOperatingSystemId) ?? null,
     specs: deviceSpecs,
     purchasedDate: fromDateInputValue(devicePurchasedDate),
     retirementDate: fromDateInputValue(deviceRetirementDate),
@@ -138,18 +132,6 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
           <MultiLineTextBox rows={10} onChange={(e) => setDeviceSpecs(e.target.value)} value={deviceSpecs} placeholder="Specifications" />
         </div>
       
-        <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
-          <span className={styles.deviceformlabel}>Operating System:</span>
-          <div className="selectBoxContainer">
-            <SelectBox name="operatingSystem" className="selectBox" onChange={(e) => setSelectedOperatingSystemId(e.target.value)} value={selectedOperatingSystemId}>
-              <option value="" disabled>Select an operating system</option>
-              {operatingSystems.map((operatingSystem) => (
-                <option key={operatingSystem.id} value={operatingSystem.id ?? ""}>{operatingSystem.name}</option>
-              ))}
-            </SelectBox>
-          </div>
-        </div>
-
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
           <span className={styles.deviceformlabel}>Status:</span>
           <div className="selectBoxContainer">

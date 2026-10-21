@@ -174,7 +174,6 @@ export default function AssignmentsList() {
                     <th>User</th>
                     <th>Model</th>
                     <th>Serial No.</th>
-                    <th>Operating System</th>
                     <th>Specs</th>
                     <th>Purchase Date</th>
                     <th>Is Returned</th>
@@ -195,9 +194,6 @@ export default function AssignmentsList() {
               <td>
                 {assignment.device.serialNumber}
               </td>             
-              <td>
-                {assignment.device.operatingSystem?.name}
-              </td>
               <td>
                 {assignment.device.specs}
               </td>

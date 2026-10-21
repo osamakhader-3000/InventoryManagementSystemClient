@@ -23,7 +23,6 @@ export default function EditDeviceForm() {
       deviceId={device ? deviceId : null}
       serialNumber={device?.serialNumber ?? null}
       model={device?.model}
-      operatingSystem={device?.operatingSystem ?? null}
       specs={device?.specs}
       purchasedDate={device?.purchasedDate ?? null}
       retirementDate={device?.retirementDate ?? null}

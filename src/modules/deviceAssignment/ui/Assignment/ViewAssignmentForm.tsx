@@ -51,7 +51,6 @@ export default function ViewAssignmentForm() {
                 <Field label="Location" value={assignedUser.location?.name} />
                 <Field label="Previous User" value={assignment.oldUser?.name} />
                 <Field label="Device" value={`${device.model} - ${device.serialNumber}`} />
-                <Field label="Operating System" value={device.operatingSystem?.name} />
                 <Field label="Specs" value={device.specs} />
                 <Field label="Assignment Date" value={formatDate(assignment.assignmentDate)} />
                 <Field label="Return Date" value={formatDate(assignment.returnDate)} />
