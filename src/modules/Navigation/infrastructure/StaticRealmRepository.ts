@@ -22,7 +22,7 @@ export class StaticRealmRepository implements IRealmRepository {
 
 
             if (isAdministrator(user))
-                realms.push(new Realm("admin/users","Users", "Manage system accounts", "Administration"));
+                realms.push(new Realm("admin/users","Users", "Manage system accounts", "Security"));
         }
 
         return Promise.resolve(realms.filter(r => r.name.toLowerCase().includes(name.toLowerCase())));
