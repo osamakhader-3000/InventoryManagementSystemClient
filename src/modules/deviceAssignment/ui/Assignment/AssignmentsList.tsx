@@ -25,30 +25,24 @@ export default function AssignmentsList() {
   const { data: departments } = useListDepartments();
   const [userFilter, setUserFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
-  const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
-  const [isReturnedFilter, setIsReturnedFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
-  const hasActiveFilter = userFilter !== '' || departmentFilter !== '' || purchasedDateFilter !== ''
-    || modelFilter !== '' || isReturnedFilter !== '' || serialNumberFilter !== '';
+  const hasActiveFilter = userFilter !== '' || departmentFilter !== ''
+    || modelFilter !== '' || serialNumberFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
       userId: userFilter,
       departmentId: departmentFilter,
-      purchasedDate: purchasedDateFilter,
       model: modelFilter.trim(),
       serialNumber: serialNumberFilter.trim(),
-      isReturned: isReturnedFilter === '' ? undefined : isReturnedFilter === 'true',
     });
   }
 
   const clearFilters = () => {
     setUserFilter('');
     setDepartmentFilter('');
-    setPurchasedDateFilter('');
     setModelFilter('');
-    setIsReturnedFilter('');
     setSerialNumberFilter('');
     setAppliedFilter({});
   }
@@ -129,20 +123,6 @@ export default function AssignmentsList() {
             <label htmlFor="serialNumberFilter">Serial No.</label>
             <input id="serialNumberFilter" type="text" placeholder="Search serial no." className={styles.filterinput} value={serialNumberFilter} onChange={(e) => setSerialNumberFilter(e.target.value)} />
           </div>
-          <div className={styles.filterfield}>
-            <label htmlFor="purchasedDateFilter">Purchased Date</label>
-            <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
-          </div>
-
-          <div className={styles.filterfield}>
-            <label htmlFor="isReturnedFilter">Is Returned</label>
-            <select id="isReturnedFilter" className={styles.filterinput} value={isReturnedFilter} onChange={(e) => setIsReturnedFilter(e.target.value)}>
-              <option value="">All</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
- 
            <div className={styles.filterfield}>
             <label htmlFor="departmentFilter">Department</label>
             <select id="departmentFilter" className={styles.filterinput} value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)}>
@@ -175,8 +155,6 @@ export default function AssignmentsList() {
                     <th>Model</th>
                     <th>Serial No.</th>
                     <th>Specs</th>
-                    <th>Purchase Date</th>
-                    <th>Is Returned</th>
                     <th>Department</th>
                     <th>Last Update</th>
                     <th className={styles.actionscolumn}>Actions</th>
@@ -196,12 +174,6 @@ export default function AssignmentsList() {
               </td>             
               <td>
                 {assignment.device.specs}
-              </td>
-              <td>
-                {formatDate(assignment.device.purchasedDate)}
-              </td>           
-              <td>
-                {assignment.isReturned ? 'Yes' : 'No'}
               </td>
               <td>
                 {assignment.assignedUser.department.name}
