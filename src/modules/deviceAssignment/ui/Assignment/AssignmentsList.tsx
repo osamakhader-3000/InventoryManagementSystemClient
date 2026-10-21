@@ -9,6 +9,7 @@ import { useListAssignments } from '../../application/assignment/useListAssignme
 import { useReturnAssignment } from '../../application/assignment/useReturnAssignment';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useListDepartments } from '../../application/department/useListDepartments';
+import { useListLocations } from '../../application/location/useListLocations';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function AssignmentsList() {
@@ -23,17 +24,20 @@ export default function AssignmentsList() {
 
   const { data: users } = useListUsers();
   const { data: departments } = useListDepartments();
+  const { data: locations } = useListLocations();
   const [userFilter, setUserFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
+  const [locationFilter, setLocationFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
-  const hasActiveFilter = userFilter !== '' || departmentFilter !== ''
+  const hasActiveFilter = userFilter !== '' || departmentFilter !== '' || locationFilter !== ''
     || modelFilter !== '' || serialNumberFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
       userId: userFilter,
       departmentId: departmentFilter,
+      locationId: locationFilter,
       model: modelFilter.trim(),
       serialNumber: serialNumberFilter.trim(),
     });
@@ -42,6 +46,7 @@ export default function AssignmentsList() {
   const clearFilters = () => {
     setUserFilter('');
     setDepartmentFilter('');
+    setLocationFilter('');
     setModelFilter('');
     setSerialNumberFilter('');
     setAppliedFilter({});
@@ -132,6 +137,15 @@ export default function AssignmentsList() {
               ))}
             </select>
           </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="locationFilter">Location</label>
+            <select id="locationFilter" className={styles.filterinput} value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
+              <option value="">All locations</option>
+              {locations.map((location) => (
+                <option key={location.id} value={location.id ?? ''}>{location.name}</option>
+              ))}
+            </select>
+          </div>
 
           <div className={styles.filterbuttons}>
             <button type="button" className={styles.filterbutton} onClick={applyFilters}>Apply</button>
@@ -156,6 +170,7 @@ export default function AssignmentsList() {
                     <th>Serial No.</th>
                     <th>Specs</th>
                     <th>Department</th>
+                    <th>Location</th>
                     <th>Last Update</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
@@ -177,7 +192,10 @@ export default function AssignmentsList() {
               </td>
               <td>
                 {assignment.assignedUser.department.name}
-              </td> 
+              </td>
+              <td>
+                {assignment.assignedUser.location?.name}
+              </td>
               <td>
                 {formatDate(assignment.lastUpdateDate)}
               </td>

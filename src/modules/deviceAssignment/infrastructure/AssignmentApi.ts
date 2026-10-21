@@ -16,6 +16,7 @@ export class AssignmentApi extends GeneralApi {
         const params = new URLSearchParams();
         if (filter?.userId) params.append('userid', filter.userId);
         if (filter?.departmentId) params.append('depid', filter.departmentId);
+        if (filter?.locationId) params.append('lctnId', filter.locationId);
         if (filter?.purchasedDate) params.append('purDate', filter.purchasedDate);
         if (filter?.model) params.append('model', filter.model);
         if (filter?.serialNumber) params.append('sn', filter.serialNumber);
