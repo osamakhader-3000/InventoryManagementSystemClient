@@ -1,5 +1,4 @@
 import DeviceValidationError from "./DeviceValidationError";
-import { DeviceStatus } from "./DeviceStatus";
 
 export interface DeviceProps {
     model: string;
@@ -9,7 +8,7 @@ export interface DeviceProps {
     retirementDate: Date|null;
     price: number;
     soldPrice: number;
-    status: DeviceStatus;
+    status: string;
 }
 
 export default class Device {
@@ -21,7 +20,7 @@ export default class Device {
     retirementDate: Date|null;
     price: number;
     soldPrice: number;
-    status: DeviceStatus;
+    status: string;
     isTaken: boolean;
     isSold: boolean;
     constructor(
@@ -33,7 +32,7 @@ export default class Device {
         retirementDate: Date|null,
         price: number,
         soldPrice: number,
-        status: DeviceStatus = DeviceStatus.New,
+        status: string = "",
         isTaken: boolean = false,
         isSold: boolean = false,
     ) {
@@ -97,6 +96,6 @@ export default class Device {
 
     // Reference to an existing device known only by its id.
     static fromId(id: string, isTaken: boolean = false): Device {
-        return new Device(id, "", "", "", null, null, 0, 0, DeviceStatus.New, isTaken);
+        return new Device(id, "", "", "", null, null, 0, 0, "", isTaken);
     }
 }

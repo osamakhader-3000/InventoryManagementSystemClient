@@ -9,7 +9,6 @@ import { useListDevices } from '../../application/device/useListDevices';
 import { useDeleteDevice } from '../../application/device/useDeleteDevice';
 import { useSellDevice } from '../../application/device/useSellDevice';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
-import { getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function DevicesList() {
@@ -215,7 +214,7 @@ export default function DevicesList() {
                 {device.price}
               </td>  
               <td>
-                {getDeviceStatusLabel(device.status)}
+                {device.status}
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.devicebuttonspan}>

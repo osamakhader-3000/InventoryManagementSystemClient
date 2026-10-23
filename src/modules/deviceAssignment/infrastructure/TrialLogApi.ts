@@ -20,7 +20,7 @@ export default class TrialLogApi extends GeneralApi {
         if (filter?.transactionType !== undefined) params.append('ta', filter.transactionType.toString());
         if (filter?.serialNumber) params.append('sn', filter.serialNumber);
         if (filter?.model) params.append('model', filter.model);
-        if (filter?.status !== undefined) params.append('status', filter.status.toString());
+        if (filter?.status) params.append('status', filter.status);
         if (filter?.locationId) params.append('lctnId', filter.locationId);
 
         const query = params.toString();

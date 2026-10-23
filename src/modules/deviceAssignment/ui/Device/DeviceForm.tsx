@@ -2,14 +2,12 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import DeviceValidationError from '../../domain/DeviceValidationError';
-import { DeviceStatus, deviceStatusOptions, getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import styles from './DeviceForm.module.css';
 import { TextBox } from '../../../../shared/ui/GeneralComponents/TextBox';
 import { MultiLineTextBox } from '../../../../shared/ui/GeneralComponents/MultiLineTextBox';
 import { LoadingButton } from '../../../../shared/ui/GeneralComponents/LoadingButton';
 import { useCreateDevice } from '../../application/device/useCreateDevice';
 import { useUpdateDevice } from '../../application/device/useUpdateDevice';
-import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 
 interface DeviceFormProps {
     deviceId?: string | null;
@@ -20,7 +18,7 @@ interface DeviceFormProps {
     retirementDate?: Date | null;
     price?: number;
     soldPrice?: number;
-    status?: DeviceStatus;
+    status?: string;
     editMode?: boolean;
 }
 
@@ -31,7 +29,7 @@ const toDateInputValue = (date: Date | null): string =>
 const fromDateInputValue = (value: string): Date | null =>
   value ? new Date(value) : null;
 
-export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, status = DeviceStatus.New, editMode = false }: DeviceFormProps) {
+export default function DeviceForm({ deviceId = null, serialNumber = null, model = "", specs = "", purchasedDate = null, retirementDate = null, price = 0, soldPrice = 0, status = "", editMode = false }: DeviceFormProps) {
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
@@ -43,7 +41,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
   const [devicePrice, setDevicePrice] = useState(price.toString());
   // Sold price is set only by selling the device from the devices list.
   const deviceSoldPrice = soldPrice.toString();
-  const [deviceStatus, setDeviceStatus] = useState<DeviceStatus>(status);
+  const [deviceStatus, setDeviceStatus] = useState<string>(status);
   const { createDevice, isSaving: isCreating } = useCreateDevice();
   const { updateDevice, isSaving: isUpdating } = useUpdateDevice();
   const isSaving = isCreating || isUpdating;
@@ -134,13 +132,7 @@ export default function DeviceForm({ deviceId = null, serialNumber = null, model
       
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>
           <span className={styles.deviceformlabel}>Status:</span>
-          <div className="selectBoxContainer">
-            <SelectBox name="status" className="selectBox" onChange={(e) => setDeviceStatus(Number(e.target.value) as DeviceStatus)} value={deviceStatus}>
-              {deviceStatusOptions.map((deviceStatusOption) => (
-                <option key={deviceStatusOption} value={deviceStatusOption}>{getDeviceStatusLabel(deviceStatusOption)}</option>
-              ))}
-            </SelectBox>
-          </div>
+          <TextBox onChange={(e) => setDeviceStatus(e.target.value)} value={deviceStatus} placeholder="Status" />
         </div>
 
         <div className={`${styles.deviceformelementcontainer} ${styles.deviceformlabeledrow}`}>

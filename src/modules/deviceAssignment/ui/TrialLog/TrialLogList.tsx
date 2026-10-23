@@ -2,7 +2,6 @@ import { useState } from 'react';
 import TrialLog from '../../domain/TrialLog';
 import TrialLogFilter from '../../domain/TrialLogFilter';
 import { transactionTypeLabel, transactionTypeOptions } from '../../domain/TransactionType';
-import { deviceStatusOptions, getDeviceStatusLabel } from '../../domain/DeviceStatus';
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
@@ -37,7 +36,7 @@ export default function TrialLogList() {
       serialNumber: serialNumberFilter.trim(),
       userId: userFilter,
       departmentId: departmentFilter,
-      status: statusFilter === '' ? undefined : Number(statusFilter),
+      status: statusFilter,
       locationId: locationFilter,
     });
   }
@@ -122,12 +121,7 @@ export default function TrialLogList() {
 
         <div className={styles.filterfield}>
           <label htmlFor="statusFilter">Device Condition</label>
-          <select id="statusFilter" className={styles.filterinput} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-            <option value="">All conditions</option>
-            {deviceStatusOptions.map((status) => (
-              <option key={status} value={status}>{getDeviceStatusLabel(status)}</option>
-            ))}
-          </select>
+          <input id="statusFilter" type="text" placeholder="Status" className={styles.filterinput} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />        
         </div>
 
         <div className={styles.filterbuttons}>
@@ -183,7 +177,7 @@ export default function TrialLogList() {
                       {trialLog.locationName}
                     </td>
                     <td>
-                      {getDeviceStatusLabel(trialLog.status)}
+                      {trialLog.status}
                     </td>
                   </tr>
                 ))}
