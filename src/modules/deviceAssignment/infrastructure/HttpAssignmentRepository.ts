@@ -21,11 +21,6 @@ export class HttpAssignmentRepository implements IAssignmentRepository {
         return result.success;
     }
 
-    async UpdateAssignment(assignment: Assignment): Promise<boolean> {
-        var result = await this.assignmentApi.UpdateAssignment(assignment);
-        return result.success;
-    }
-
     async ReturnAssignment(assignmentId: number): Promise<boolean> {
         var result = await this.assignmentApi.ReturnAssignment(assignmentId);
         return result.success;

@@ -1,7 +1,7 @@
 import AssignmentForm from './AssignmentForm.tsx';
 
 function AddAssignmentForm() {
-    return <AssignmentForm editMode={false}  />;
+    return <AssignmentForm />;
 }
 
 export default AddAssignmentForm;

@@ -41,12 +41,6 @@ export class AssignmentApi extends GeneralApi {
         return result;
     }
 
-    async UpdateAssignment(assignment: Assignment): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}${urls['assignment-update']}`;
-        let result = await this.SecureApiCaller<boolean>('PUT', url, this.toRequestBody(assignment));
-        return result;
-    }
-
     // Only the fields the server reads. Nulls for non-nullable server types (Guid, DateTime, bool)
     // fail JSON binding, so unknown values are left out instead of sent as null.
     private toRequestBody(assignment: Assignment) {

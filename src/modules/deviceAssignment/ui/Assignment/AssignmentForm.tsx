@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import AssignmentValidationError from '../../domain/AssignmentValidationError';
@@ -9,44 +9,24 @@ import { useListUsers } from '../../application/user/useListUsers';
 import { useListAccessories } from '../../application/accessory/useListAccessories';
 import { useListDevices } from '../../application/device/useListDevices';
 import { useCreateAssignment } from '../../application/assignment/useCreateAssignment';
-import { useUpdateAssignment } from '../../application/assignment/useUpdateAssignment';
 import SelectBox from '../../../../shared/ui/GeneralComponents/SelectBox';
 import Device from '../../domain/Device';
 
 
-interface AssignmentFormProps {
-  assignmentId?: number | null;
-  deviceId?: string | null;
-  assignmentRemarks?: string | null;
-  assignedUserId?: string | null;
-  accessoryIds?: string[];
-  editMode?: boolean;
-}
-
-
-export default function AssignmentForm({ assignmentId = null, deviceId = null, assignmentRemarks = null, assignedUserId = null,accessoryIds = [], editMode: editMode = false }: AssignmentFormProps) {
+export default function AssignmentForm() {
 
   const { notificationHandlingBus, errorHandlingBus } = useContext(DependencyContext);
   const navigate = useNavigate();
 
-  const [remarks, setRemarks] = useState(assignmentRemarks ?? "");
-  const [selectedUserId, setSelectedUserId] = useState(assignedUserId ?? "");
+  const [remarks, setRemarks] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState("");
   const { data: users, isLoading: isLoadingUsers } = useListUsers();
   const { data: allAccessories, isLoading: isLoadingAccessories } = useListAccessories();
   const { data: allDevices, isLoading: isLoadingDevices } = useListDevices();
-  const { createAssignment, isSaving: isCreating } = useCreateAssignment();
-  const { updateAssignment, isSaving: isUpdating } = useUpdateAssignment();  
-  const isSaving = isCreating || isUpdating;
-  const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<string[]>(accessoryIds ?? []);
-  const [selectedDeviceId, setSelectedDeviceId] = useState(deviceId ?? "");
+  const { createAssignment, isSaving } = useCreateAssignment();
+  const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<string[]>([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState("");
 
-
-  useEffect(() => {
-    setRemarks(assignmentRemarks ?? "");
-    setSelectedUserId(assignedUserId ?? "");
-    setSelectedAccessoryIds(accessoryIds ?? []);
-    setSelectedDeviceId(deviceId ?? "");
-  }, []);
 
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -69,8 +49,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
     setSelectedDeviceId(e.target.value);
   };
 
-  // The device already held by this assignment stays selectable.
-  const isDeviceUnavailable = (device: Device) => (!!device.isTaken || !!device.isSold) && device.id !== deviceId;
+  const isDeviceUnavailable = (device: Device) => !!device.isTaken || !!device.isSold;
 
   const getUnavailableLabel = (device: Device) => device.isSold ? " (sold)" : " (assigned)";
 
@@ -105,17 +84,6 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
     "Assignment added successfully"
   );
 
-  const handleUpdate = () => {
-    if (assignmentId === null) {
-      errorHandlingBus.ErrorOccured("Assignment not found");
-      return;
-    }
-    return save(
-      () => updateAssignment({ assignmentId, assignedUserId: selectedUserId,deviceId: selectedDeviceId, isDeviceTaken: isSelectedDeviceTaken(), remarks: remarks, accessoryIds: selectedAccessoryIds??[] }),
-      "Assignment updated successfully"
-    );
-  };
-
   const handleCancel = () => {
     navigate('/assignments');
 
@@ -127,7 +95,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
     <div className={styles.maincontainer}>
       <div className={styles.assignmentformcontainer}>
         <h2>
-          {editMode ? "Edit Stock Assignment" : "Add Stock Assignment"}
+          Add Stock Assignment
         </h2>
          <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformlabeledrow}`}>
           <span style={{ width: "20%" }}>Assigned User:</span>
@@ -163,8 +131,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
           <div className={styles.accessoryList}>
               {isLoadingAccessories && <p>Loading accessories...</p>}
               {!isLoadingAccessories && allAccessories.filter(accessory => accessory.id !== null).map(accessory => {
-                  // Accessories already held by this assignment stay toggleable so they can be released.
-                  const isUnavailable = accessory.availableQuantity <= 0 && !accessoryIds.includes(accessory.id!);
+                  const isUnavailable = accessory.availableQuantity <= 0;
                   return (
                     <div key={accessory.id!} className={`${styles.accessoryListItem} ${isUnavailable ? styles.accessoryListItemDisabled : ''}`} title={isUnavailable ? "Out of stock" : undefined}>
                         <input type="checkbox" checked={selectedAccessoryIds.includes(accessory.id!)} disabled={isUnavailable} onChange={() => handleAccessorySelectChange(accessory.id!)} />
@@ -185,8 +152,7 @@ export default function AssignmentForm({ assignmentId = null, deviceId = null, a
 
         <div className={`${styles.assignmentformelementcontainer} ${styles.assignmentformelementbuttoncontainer}`}>
 
-          {!editMode && <LoadingButton cssClass={`${styles.assignmentformbutton} ${styles.assignmentformokbutton}`} onClick={handleAdd} label='Add' isLoading={isSaving} />}
-          {editMode && <LoadingButton cssClass={`${styles.assignmentformbutton} ${styles.assignmentformokbutton}`} onClick={handleUpdate} label='Save' isLoading={isSaving} />}
+          <LoadingButton cssClass={`${styles.assignmentformbutton} ${styles.assignmentformokbutton}`} onClick={handleAdd} label='Add' isLoading={isSaving} />
 
           <button className={styles.assignmentformbutton} onClick={handleCancel}>Cancel</button>
         </div>

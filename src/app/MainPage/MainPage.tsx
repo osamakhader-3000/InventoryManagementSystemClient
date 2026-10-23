@@ -12,7 +12,6 @@ import { AdminAccountRoute } from '../../modules/Security/ui/routes/AdminAccount
 import { TechnicalSupportAccountRoute } from '../../modules/Security/ui/routes/TechnicalSupportAccountRoute.tsx';
 import { ForbiddenMessage } from '../../modules/Security/ui/ForbiddenMessage.tsx';
 import AddAssignmentForm from '../../modules/deviceAssignment/ui/Assignment/AddAssignmentForm.tsx';
-import EditAssignmentForm from '../../modules/deviceAssignment/ui/Assignment/EditAssignmentForm.tsx';
 import ViewAssignmentForm from '../../modules/deviceAssignment/ui/Assignment/ViewAssignmentForm.tsx';
 import AddDeviceForm from '../../modules/deviceAssignment/ui/Device/AddDeviceForm.tsx';
 import EditDeviceForm from '../../modules/deviceAssignment/ui/Device/EditDeviceForm.tsx';
@@ -75,7 +74,6 @@ function MainPage() {
                               </Route>
                               <Route path="/assignments" element={<AssignmentsList />} />
                               <Route path="/addassignment" element={<AddAssignmentForm />} />
-                              <Route path="/assignment/:id" element={<EditAssignmentForm />} />
                               <Route path="/viewassignment/:id" element={<ViewAssignmentForm />} />
                               <Route path="/adddevice" element={<AddDeviceForm />} />
                               <Route path="/editdevice/:id" element={<EditDeviceForm />} />

@@ -65,32 +65,6 @@ export default class Assignment {
         );
     }
 
-    static update(existing: Assignment, changes: {
-        assignedUser: User;
-        device: Device;
-        remarks: string;
-        accessories?: Accessory[];
-    }): Assignment {
-        Assignment.ensureValid(changes.assignedUser, changes.device);
-        // The device this assignment already holds is taken by itself, so only check a newly chosen one.
-        if (existing.device.id !== changes.device.id)
-            Assignment.ensureDeviceAvailable(changes.device);
-        const isReassigned = existing.assignedUser.id !== changes.assignedUser.id;
-        return new Assignment(
-            existing.id,
-            changes.device,
-            changes.assignedUser,
-            existing.assignmentDate,
-            existing.returnDate,
-            isReassigned ? existing.assignedUser : existing.oldUser,
-            changes.accessories ?? [],
-            changes.remarks,
-            existing.headset,
-            existing.isReturned,
-            new Date()
-        );
-    }
-
     private static ensureValid(assignedUser: User, device: Device) {
         if (!assignedUser.id)
             throw new AssignmentValidationError("An assignment must have a user");

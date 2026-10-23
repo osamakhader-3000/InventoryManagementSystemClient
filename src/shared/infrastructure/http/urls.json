@@ -11,7 +11,6 @@
     "assignment":"/assignment",
     "assignments-list":"/list",
     "assignment-create":"/create",
-    "assignment-update":"/update",
     "assignment-return":"/return",
     "assignment-get":"/get",
     "realms-domain":"http://localhost:85",

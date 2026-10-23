@@ -72,7 +72,6 @@ export default function ViewAssignmentForm() {
                 <Field label="Remarks" value={<span className={styles.remarks}>{assignment.remarks}</span>} />
 
                 <div className={`${formStyles.assignmentformelementcontainer} ${formStyles.assignmentformelementbuttoncontainer}`}>
-                    <button className={formStyles.assignmentformbutton} onClick={() => navigate(`/assignment/${assignment.id}`)}>Edit</button>
                     <button className={formStyles.assignmentformbutton} onClick={() => navigate('/assignments')}>Back</button>
                 </div>
             </div>
