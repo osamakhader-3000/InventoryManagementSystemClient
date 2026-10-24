@@ -1,3 +1,4 @@
+import { LogEntityType } from "./LogEntityType";
 import { TransactionType } from "./TransactionType";
 
 export default class TrialLog {
@@ -14,6 +15,7 @@ export default class TrialLog {
     agentName: string;
     locationName: string;
     status: string;
+    entityType: LogEntityType;
     constructor(
         id: number,
         deviceId: string,
@@ -26,7 +28,8 @@ export default class TrialLog {
         agentId: string,
         agentName: string,
         locationName: string,
-        status: string
+        status: string,
+        entityType: LogEntityType
     ) {
         this.id = id;
         this.deviceId = deviceId;
@@ -40,5 +43,6 @@ export default class TrialLog {
         this.agentName = agentName;
         this.locationName = locationName;
         this.status = status;
+        this.entityType = entityType;
     }
 }

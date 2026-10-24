@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TrialLog from '../../domain/TrialLog';
 import TrialLogFilter from '../../domain/TrialLogFilter';
 import { transactionTypeLabel, transactionTypeOptions } from '../../domain/TransactionType';
+import { logEntityTypeLabel } from '../../domain/LogEntityType';
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
@@ -138,6 +139,7 @@ export default function TrialLogList() {
                 <tr>
                   <th>Event Date</th>
                   <th>Transaction</th>
+                  <th>Entity Type</th>
                   <th>Model</th>
                   <th>Serial No.</th>
                   <th>User</th>
@@ -154,6 +156,9 @@ export default function TrialLogList() {
                     </td>
                     <td>
                       {transactionTypeLabel(trialLog.transactionType)}
+                    </td>
+                    <td>
+                      {logEntityTypeLabel(trialLog.entityType)}
                     </td>
                     <td>
                       {trialLog.deviceModel}
