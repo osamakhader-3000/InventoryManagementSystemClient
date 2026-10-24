@@ -98,7 +98,7 @@ export default function TrialLogList() {
         </div>
 
         <div className={styles.filterfield}>
-          <label htmlFor="statusFilter">Device Condition</label>
+          <label htmlFor="statusFilter">Status</label>
           <input id="statusFilter" type="text" placeholder="Status" className={styles.filterinput} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />        
         </div>
 
@@ -127,7 +127,7 @@ export default function TrialLogList() {
                   <th>User</th>
                   <th>Agent</th>
                   <th>Location</th>
-                  <th>Device Condition</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
