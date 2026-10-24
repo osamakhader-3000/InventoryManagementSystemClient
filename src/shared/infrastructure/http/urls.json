@@ -52,6 +52,7 @@
     "location-get":"/get",
     "trial-log":"/triallog",
     "trial-log-list":"/list",
+    "trial-log-agents":"/agents",
     "exchange-code-for-token":"/exchange",
     "refresh-token":"/refresh",
     "test":"/verificationrequired",

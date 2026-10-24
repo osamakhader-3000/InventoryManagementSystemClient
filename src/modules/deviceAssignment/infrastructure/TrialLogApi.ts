@@ -1,4 +1,5 @@
 import TrialLog from '../domain/TrialLog';
+import TrialLogAgent from '../domain/TrialLogAgent';
 import TrialLogFilter from '../domain/TrialLogFilter';
 import urls from '../../../shared/infrastructure/http/urls.json'
 import { GeneralApi } from "../../../shared/infrastructure/http/GeneralApi";
@@ -21,10 +22,16 @@ export default class TrialLogApi extends GeneralApi {
         if (filter?.model) params.append('model', filter.model);
         if (filter?.status) params.append('status', filter.status);
         if (filter?.location) params.append('lctn', filter.location);
+        if (filter?.agentId) params.append('agentId', filter.agentId);
 
         const query = params.toString();
         let url = `${this.baseUrl}${urls['trial-log-list']}${query ? `?${query}` : ''}`;
         let result = await this.SecureApiCaller<TrialLog[]>('GET',url);
         return result;
+    }
+
+    async ListAgents(): Promise<GeneralApiResult<TrialLogAgent[]>> {
+        const url = `${this.baseUrl}${urls['trial-log-agents']}`;
+        return await this.SecureApiCaller<TrialLogAgent[]>('GET',url);
     }
 }

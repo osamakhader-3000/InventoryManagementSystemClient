@@ -6,4 +6,5 @@ export default interface TrialLogFilter {
   userId?: string;
   status?: string;
   location?: string;
+  agentId?: string;
 }

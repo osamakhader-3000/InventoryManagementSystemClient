@@ -5,6 +5,7 @@ import { transactionTypeLabel, transactionTypeOptions } from '../../domain/Trans
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
+import { useListTrialLogAgents } from '../../application/trialLog/useListTrialLogAgents';
 import { formatDate } from '../../../../shared/ui/formatting/formatDate';
 
 export default function TrialLogList() {
@@ -13,6 +14,7 @@ export default function TrialLogList() {
   const { data: trialLogs, isLoading } = useListTrialLogs(appliedFilter);
 
   const { data: users } = useListUsers();
+  const { data: agents } = useListTrialLogAgents();
   const [eventDateFilter, setEventDateFilter] = useState('');
   const [transactionTypeFilter, setTransactionTypeFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
@@ -20,8 +22,10 @@ export default function TrialLogList() {
   const [userFilter, setUserFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
+  const [agentFilter, setAgentFilter] = useState('');
   const hasActiveFilter = eventDateFilter !== '' || transactionTypeFilter !== '' || modelFilter !== ''
-    || serialNumberFilter !== '' || userFilter !== '' || statusFilter !== '' || locationFilter !== '';
+    || serialNumberFilter !== '' || userFilter !== '' || statusFilter !== '' || locationFilter !== ''
+    || agentFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
@@ -32,6 +36,7 @@ export default function TrialLogList() {
       userId: userFilter,
       status: statusFilter,
       location: locationFilter.trim(),
+      agentId: agentFilter,
     });
   }
 
@@ -43,6 +48,7 @@ export default function TrialLogList() {
     setUserFilter('');
     setStatusFilter('');
     setLocationFilter('');
+    setAgentFilter('');
     setAppliedFilter({});
   }
 
@@ -88,6 +94,16 @@ export default function TrialLogList() {
             <option value="">All users</option>
             {users.map((user) => (
               <option key={user.id} value={user.id ?? ''}>{user.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.filterfield}>
+          <label htmlFor="agentFilter">Agent</label>
+          <select id="agentFilter" className={styles.filterinput} value={agentFilter} onChange={(e) => setAgentFilter(e.target.value)}>
+            <option value="">All agents</option>
+            {agents.map((agent) => (
+              <option key={agent.agentId} value={agent.agentId}>{agent.agentName || 'Unknown agent'}</option>
             ))}
           </select>
         </div>
