@@ -43,9 +43,15 @@ export class UserApi extends GeneralApi {
         return result;
     }
 
-    async DeleteUser(userID: string): Promise<GeneralApiResult<boolean>> {
-        let url = `${this.baseUrl}${urls['user-delete']}/${userID}`;
-        let result = await this.SecureApiCaller<boolean>('DELETE', url);
+    async SuspendUser(userID: string): Promise<GeneralApiResult<boolean>> {
+        let url = `${this.baseUrl}${urls['user-suspend']}/${userID}`;
+        let result = await this.SecureApiCaller<boolean>('PUT', url);
+        return result;
+    }
+
+    async UnsuspendUser(userID: string): Promise<GeneralApiResult<boolean>> {
+        let url = `${this.baseUrl}${urls['user-unsuspend']}/${userID}`;
+        let result = await this.SecureApiCaller<boolean>('PUT', url);
         return result;
     }
 }

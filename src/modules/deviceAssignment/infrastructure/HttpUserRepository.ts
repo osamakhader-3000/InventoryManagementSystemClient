@@ -34,8 +34,13 @@ export class HttpUserRepository implements IUserRepository {
         return result.success;
     }
 
-    async DeleteUser(userID: string): Promise<boolean> {
-        let result = await this.userApi.DeleteUser(userID);
+    async SuspendUser(userID: string): Promise<boolean> {
+        let result = await this.userApi.SuspendUser(userID);
+        return result.success;
+    }
+
+    async UnsuspendUser(userID: string): Promise<boolean> {
+        let result = await this.userApi.UnsuspendUser(userID);
         return result.success;
     }
 

@@ -13,16 +13,19 @@ export default class User {
     name: string;
     department: Department;
     location: Location;
+    isSuspended: number;
     constructor(
     id: string|null,
     name: string,
     department: Department,
     location: Location,
+    isSuspended: number = 0,
     ) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.location = location;
+        this.isSuspended = isSuspended;
     }
 
     static create(props: UserProps): User {

@@ -11,5 +11,6 @@ export interface IUserRepository {
     GetUser(userID: string): Promise<User|null>;
     CreateUser(user: User): Promise<boolean>;
     UpdateUser(user: User): Promise<boolean>;
-    DeleteUser(userID: string): Promise<boolean>;
+    SuspendUser(userID: string): Promise<boolean>;
+    UnsuspendUser(userID: string): Promise<boolean>;
 }

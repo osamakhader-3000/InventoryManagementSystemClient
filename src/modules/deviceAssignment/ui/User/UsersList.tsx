@@ -6,7 +6,7 @@ import styles from './UsersList.module.css'
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListUsers } from '../../application/user/useListUsers';
-import { useDeleteUser } from '../../application/user/useDeleteUser';
+import { useSuspendUser } from '../../application/user/useSuspendUser';
 import { useListDepartments } from '../../application/department/useListDepartments';
 import { useListLocations } from '../../application/location/useListLocations';
 
@@ -16,7 +16,7 @@ export default function UsersList() {
 
   const [appliedFilter, setAppliedFilter] = useState<UserFilter>({});
   const { data: users, isLoading, reload } = useListUsers(appliedFilter);
-  const { deleteUser, deletingIds: deletingUserIds } = useDeleteUser();
+  const { suspendUser, unsuspendUser, pendingIds: pendingUserIds } = useSuspendUser();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [userid, setUserId] = useState<string | null>(null);
 
@@ -43,7 +43,7 @@ export default function UsersList() {
     setAppliedFilter({});
   }
 
-  const showDeleteConfirmation = (_userid: string | null) => {
+  const showSuspendConfirmation = (_userid: string | null) => {
 
     if (!_userid) return;
 
@@ -52,19 +52,32 @@ export default function UsersList() {
 
   }
 
-  const deleteUserConfirmed = () => {
+  const suspendUserConfirmed = () => {
     setShowConfirmation(false);
-    handleDeleteUser(userid);
+    handleSuspendUser(userid);
   }
 
-  const handleDeleteUser = async (userid: string | null) => {
+  const handleSuspendUser = async (userid: string | null) => {
 
     if (!userid) return;
 
-    let result = await deleteUser(userid);
+    let result = await suspendUser(userid);
 
     if (result) {
-      notificationHandlingBus.NotificationOccured("User deleted successfully");
+      notificationHandlingBus.NotificationOccured("User suspended successfully");
+      reload();
+    }
+
+  }
+
+  const handleUnsuspendUser = async (userid: string | null) => {
+
+    if (!userid) return;
+
+    let result = await unsuspendUser(userid);
+
+    if (result) {
+      notificationHandlingBus.NotificationOccured("User unsuspended successfully");
       reload();
     }
 
@@ -83,9 +96,10 @@ export default function UsersList() {
       {showConfirmation &&
         <div className={styles.confirmationcontainer} onClick={() => setShowConfirmation(false)}>
           <div className={styles.confirmationbox} onClick={(e) => e.stopPropagation()}>
-            <h3>Are you sure you want to delete this user?</h3>
+            <h3>Are you sure you want to suspend this user?</h3>
+            <p>All devices and accessories assigned to this user will be returned to stock.</p>
             <div className={styles.confirmationbuttons}>
-              <button className={styles.confirmationbutton} onClick={() => deleteUserConfirmed()}>Yes</button>
+              <button className={styles.confirmationbutton} onClick={() => suspendUserConfirmed()}>Yes</button>
               <button className={styles.confirmationbutton} onClick={() => setShowConfirmation(false)}>No</button>
             </div>
           </div>
@@ -142,6 +156,7 @@ export default function UsersList() {
                     <th>Name</th>
                     <th>Department</th>
                     <th>Location</th>
+                    <th>Status</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
                 </thead>
@@ -157,6 +172,9 @@ export default function UsersList() {
               <td>
                 {user.location?.name}
               </td>
+              <td>
+                {user.isSuspended ? "Suspended" : "Active"}
+              </td>
               <td className={styles.actionscolumn}>
               <div className={styles.userbuttonspan}>
                 <Link to={`/edituser/${user.id}`}>
@@ -168,14 +186,24 @@ export default function UsersList() {
                     </svg>
                   </button>
                 </Link>
-                <button className={styles.userlistbuttonclass} onClick={() => showDeleteConfirmation(user.id)}>
-                  {deletingUserIds.has(user.id!) ? <ButtonPreloader /> : (
+                {!user.isSuspended &&
+                <button className={styles.userlistbuttonclass} title="Suspend user" onClick={() => showSuspendConfirmation(user.id)}>
+                  {pendingUserIds.has(user.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
-                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                      <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708" />
                     </svg>
                   )}
-                </button>
+                </button>}
+                {!!user.isSuspended &&
+                <button className={styles.userlistbuttonclass} title="Unsuspend user" onClick={() => handleUnsuspendUser(user.id)}>
+                  {pendingUserIds.has(user.id!) ? <ButtonPreloader /> : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
+                      <path fillRule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
+                      <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
+                    </svg>
+                  )}
+                </button>}
               </div>
               </td>
             </tr>
