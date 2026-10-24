@@ -20,7 +20,7 @@ export default function AssignmentForm() {
 
   const [remarks, setRemarks] = useState("");
   const [selectedUserId, setSelectedUserId] = useState("");
-  const { data: users, isLoading: isLoadingUsers } = useListUsers();
+  const { data: users, isLoading: isLoadingUsers } = useListUsers({ isSuspended: false });
   const { data: allAccessories, isLoading: isLoadingAccessories } = useListAccessories();
   const { data: allDevices, isLoading: isLoadingDevices } = useListDevices();
   const { createAssignment, isSaving } = useCreateAssignment();
