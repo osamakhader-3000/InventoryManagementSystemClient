@@ -21,8 +21,8 @@ export default class Device {
     price: number;
     soldPrice: number;
     status: string;
-    isTaken: boolean;
-    isSold: boolean;
+    isAssigned: number;
+    isSold: number;
     constructor(
         id: string|null,
         model: string,
@@ -33,8 +33,8 @@ export default class Device {
         price: number,
         soldPrice: number,
         status: string = "",
-        isTaken: boolean = false,
-        isSold: boolean = false,
+        isAssigned: number = 0,
+        isSold: number = 0,
     ) {
         this.id = id;
         this.model = model;
@@ -45,7 +45,7 @@ export default class Device {
         this.price = price;
         this.soldPrice = soldPrice;
         this.status = status;
-        this.isTaken = isTaken;
+        this.isAssigned = isAssigned;
         this.isSold = isSold;
     }
 
@@ -76,7 +76,7 @@ export default class Device {
             changes.price,
             changes.soldPrice,
             changes.status,
-            existing.isTaken,
+            existing.isAssigned,
             existing.isSold
         );
     }
@@ -95,7 +95,7 @@ export default class Device {
     }
 
     // Reference to an existing device known only by its id.
-    static fromId(id: string, isTaken: boolean = false): Device {
-        return new Device(id, "", "", "", null, null, 0, 0, "", isTaken);
+    static fromId(id: string, isAssigned: number = 0): Device {
+        return new Device(id, "", "", "", null, null, 0, 0, "", isAssigned);
     }
 }

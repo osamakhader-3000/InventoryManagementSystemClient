@@ -49,7 +49,7 @@ export default function AssignmentForm() {
     setSelectedDeviceId(e.target.value);
   };
 
-  const isDeviceUnavailable = (device: Device) => !!device.isTaken || !!device.isSold;
+  const isDeviceUnavailable = (device: Device) => !!device.isAssigned || !!device.isSold;
 
   const getUnavailableLabel = (device: Device) => device.isSold ? " (sold)" : " (assigned)";
 
@@ -64,7 +64,7 @@ export default function AssignmentForm() {
   };
 
   const isSelectedDeviceTaken = () =>
-    !!allDevices.find(device => device.id === selectedDeviceId)?.isTaken;
+    !!allDevices.find(device => device.id === selectedDeviceId)?.isAssigned;
 
   const save = async (saveAssignment: () => Promise<boolean>, successMessage: string) => {
     if (!validateForm()) return;

@@ -28,14 +28,16 @@ export default function DevicesList() {
   const [modelFilter, setModelFilter] = useState('');
   const [serialNumberFilter, setSerialNumberFilter] = useState('');
   const [purchasedDateFilter, setPurchasedDateFilter] = useState('');
+  const [isAssignedFilter, setIsAssignedFilter] = useState('');
 
-  const hasActiveFilter = modelFilter !== '' || serialNumberFilter !== '' || purchasedDateFilter !== '';
+  const hasActiveFilter = modelFilter !== '' || serialNumberFilter !== '' || purchasedDateFilter !== '' || isAssignedFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
       model: modelFilter.trim(),
       serialNumber: serialNumberFilter.trim(),
       purchasedDate: purchasedDateFilter,
+      isAssigned: isAssignedFilter === '' ? undefined : isAssignedFilter === 'yes',
     });
   }
 
@@ -43,6 +45,7 @@ export default function DevicesList() {
     setModelFilter('');
     setSerialNumberFilter('');
     setPurchasedDateFilter('');
+    setIsAssignedFilter('');
     setAppliedFilter({});
   }
 
@@ -164,6 +167,14 @@ export default function DevicesList() {
             <label htmlFor="purchasedDateFilter">Purchased Date</label>
             <input id="purchasedDateFilter" type="date" className={styles.filterinput} value={purchasedDateFilter} onChange={(e) => setPurchasedDateFilter(e.target.value)} />
           </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="isAssignedFilter">Assigned</label>
+            <select id="isAssignedFilter" className={styles.filterinput} value={isAssignedFilter} onChange={(e) => setIsAssignedFilter(e.target.value)}>
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
           <div className={styles.filterbuttons}>
             <button type="button" className={styles.filterbutton} onClick={applyFilters}>Apply</button>
             <button type="button" className={styles.filterbutton} onClick={clearFilters} disabled={!hasActiveFilter}>Clear</button>
@@ -189,6 +200,7 @@ export default function DevicesList() {
                     <th>Retirement Date</th>
                     <th>Price (AED)</th>
                     <th>Status</th>
+                    <th>Is Assigned</th>
                     <th className={styles.actionscolumn}>Actions</th>
                   </tr>
                 </thead>
@@ -216,6 +228,9 @@ export default function DevicesList() {
               <td>
                 {device.status}
               </td>
+              <td>
+                {device.isAssigned ? "Yes" : "No"}
+              </td>
               <td className={styles.actionscolumn}>
               <div className={styles.devicebuttonspan}>
                 <Link to={`/editdevice/${device.id}`}>
@@ -227,11 +242,11 @@ export default function DevicesList() {
                     </svg>
                   </button>
                 </Link>
-                {!device.isTaken && !device.isSold &&
+                {!device.isAssigned && !device.isSold &&
                 <button className={`${styles.devicelistbuttonclass} ${styles.devicelisttextbutton}`} onClick={() => showSellConfirmation(device.id)}>
                   {sellingDeviceIds.has(device.id!) ? <ButtonPreloader /> : "Sell"}
                 </button>}
-                {!device.isTaken && !device.isSold &&
+                {!device.isAssigned && !device.isSold &&
                 <button className={styles.devicelistbuttonclass} onClick={() => showDeleteConfirmation(device.id)}>
                   {deletingDeviceIds.has(device.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >

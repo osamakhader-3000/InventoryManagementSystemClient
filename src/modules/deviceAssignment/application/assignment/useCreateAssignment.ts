@@ -27,7 +27,7 @@ export function useCreateAssignment() {
         try {
             const assignment = Assignment.create({
                 assignedUser: User.fromId(command.assignedUserId),
-                device: Device.fromId(command.deviceId, command.isDeviceTaken),
+                device: Device.fromId(command.deviceId, command.isDeviceTaken ? 1 : 0),
                 remarks: command.remarks,
                 accessories: command.accessoryIds?.map(id => Accessory.fromId(id)) ?? []
             });

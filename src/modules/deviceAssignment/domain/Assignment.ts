@@ -73,7 +73,7 @@ export default class Assignment {
     }
 
     private static ensureDeviceAvailable(device: Device) {
-        if (device.isTaken)
+        if (device.isAssigned)
             throw new AssignmentValidationError("The selected device is already assigned");
     }
 }

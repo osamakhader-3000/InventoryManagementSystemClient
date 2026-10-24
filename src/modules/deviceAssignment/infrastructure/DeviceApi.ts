@@ -18,6 +18,7 @@ export class DeviceApi extends GeneralApi{
         if (filter?.model) params.append('model', filter.model);
         if (filter?.serialNumber) params.append('sn', filter.serialNumber);
         if (filter?.purchasedDate) params.append('purDate', filter.purchasedDate);
+        if (filter?.isAssigned !== undefined) params.append('asign', filter.isAssigned ? '1' : '0');
 
         const query = params.toString();
         let url = `${this.baseUrl}${urls['devices-list']}${query ? `?${query}` : ''}`;
