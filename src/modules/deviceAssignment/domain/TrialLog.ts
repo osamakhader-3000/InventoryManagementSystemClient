@@ -5,7 +5,8 @@ export default class TrialLog {
     deviceId: string;
     deviceModel: string;
     deviceSerialNumber: string;
-    userId: string;
+    // Null for device events, which have no inventory user
+    userId: string | null;
     userName: string;
     eventDate: Date;
     transactionType: TransactionType;
@@ -18,7 +19,7 @@ export default class TrialLog {
         deviceId: string,
         deviceModel: string,
         deviceSerialNumber: string,
-        userId: string,
+        userId: string | null,
         userName: string,
         eventDate: Date,
         transactionType: TransactionType,
