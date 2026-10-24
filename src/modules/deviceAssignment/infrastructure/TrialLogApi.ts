@@ -23,6 +23,7 @@ export default class TrialLogApi extends GeneralApi {
         if (filter?.status) params.append('status', filter.status);
         if (filter?.location) params.append('lctn', filter.location);
         if (filter?.agentId) params.append('agentId', filter.agentId);
+        if (filter?.entityType !== undefined) params.append('entyTpe', filter.entityType.toString());
 
         const query = params.toString();
         let url = `${this.baseUrl}${urls['trial-log-list']}${query ? `?${query}` : ''}`;

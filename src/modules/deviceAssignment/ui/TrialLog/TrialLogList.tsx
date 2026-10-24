@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TrialLog from '../../domain/TrialLog';
 import TrialLogFilter from '../../domain/TrialLogFilter';
 import { transactionTypeLabel, transactionTypeOptions } from '../../domain/TransactionType';
-import { logEntityTypeLabel } from '../../domain/LogEntityType';
+import { logEntityTypeLabel, logEntityTypeOptions } from '../../domain/LogEntityType';
 import styles from './TrialLogList.module.css'
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
@@ -24,9 +24,10 @@ export default function TrialLogList() {
   const [statusFilter, setStatusFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
   const [agentFilter, setAgentFilter] = useState('');
+  const [entityTypeFilter, setEntityTypeFilter] = useState('');
   const hasActiveFilter = eventDateFilter !== '' || transactionTypeFilter !== '' || modelFilter !== ''
     || serialNumberFilter !== '' || userFilter !== '' || statusFilter !== '' || locationFilter !== ''
-    || agentFilter !== '';
+    || agentFilter !== '' || entityTypeFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
@@ -38,6 +39,7 @@ export default function TrialLogList() {
       status: statusFilter,
       location: locationFilter.trim(),
       agentId: agentFilter,
+      entityType: entityTypeFilter === '' ? undefined : Number(entityTypeFilter),
     });
   }
 
@@ -50,6 +52,7 @@ export default function TrialLogList() {
     setStatusFilter('');
     setLocationFilter('');
     setAgentFilter('');
+    setEntityTypeFilter('');
     setAppliedFilter({});
   }
 
@@ -75,6 +78,16 @@ export default function TrialLogList() {
             <option value="">All transactions</option>
             {transactionTypeOptions.map((transactionType) => (
               <option key={transactionType} value={transactionType}>{transactionTypeLabel(transactionType)}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.filterfield}>
+          <label htmlFor="entityTypeFilter">Entity Type</label>
+          <select id="entityTypeFilter" className={styles.filterinput} value={entityTypeFilter} onChange={(e) => setEntityTypeFilter(e.target.value)}>
+            <option value="">All entity types</option>
+            {logEntityTypeOptions.map((entityType) => (
+              <option key={entityType} value={entityType}>{logEntityTypeLabel(entityType)}</option>
             ))}
           </select>
         </div>

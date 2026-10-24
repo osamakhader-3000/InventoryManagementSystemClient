@@ -7,3 +7,10 @@ export enum LogEntityType {
 }
 
 export const logEntityTypeLabel = (value: LogEntityType): string => LogEntityType[value] ?? '';
+
+export const logEntityTypeOptions: LogEntityType[] = [
+    LogEntityType.Assignment,
+    LogEntityType.Accessory,
+    LogEntityType.Device,
+    LogEntityType.User
+];
