@@ -92,7 +92,7 @@ export default function AccessoriesList() {
       <div className={styles.maincontainer}>
         <div className={styles.accessorypagebuttonspanel}>
           <Link to={'/addaccessory'} >
-            <button type="button" className={styles.addaccessorybuttonclass}>+ Add</button>
+            <button type="button" className={styles.addaccessorybuttonclass}>+ Add Accessory</button>
           </Link>
         </div>
 

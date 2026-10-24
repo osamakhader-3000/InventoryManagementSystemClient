@@ -150,7 +150,7 @@ export default function DevicesList() {
       <div className={styles.maincontainer}>
         <div className={styles.devicepagebuttonspanel}>
           <Link to={'/adddevice'} >
-            <button type="button" className={styles.adddevicebuttonclass}>+ Add</button>
+            <button type="button" className={styles.adddevicebuttonclass}>+ Add Device</button>
           </Link>
         </div>
 
