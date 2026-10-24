@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Location from '../../domain/Location';
 import styles from './LocationsList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListLocations } from '../../application/location/useListLocations';
@@ -116,7 +117,7 @@ export default function LocationsList() {
           {locations.map((location: Location, index) => (
             <tr key={location.id ?? index} className={styles.locationrow}>
               <td className={styles.namecell}>
-                {location.name}
+                <TruncatedText text={location.name} />
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.locationbuttonspan}>

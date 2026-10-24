@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Assignment from '../../domain/Assignment';
 import AssignmentFilter from '../../domain/AssignmentFilter';
 import styles from './AssignmentsList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAssignments } from '../../application/assignment/useListAssignments';
@@ -179,10 +180,10 @@ export default function AssignmentsList() {
           {assignments.map((assignment: Assignment, index) => (
             <tr key={index} className={styles.assignmentrow}>
               <td className={styles.usercell}>
-                {assignment.assignedUser.name}
+                <TruncatedText text={assignment.assignedUser.name} />
               </td>
               <td>
-                {assignment.device.model}
+                <TruncatedText text={assignment.device.model} />
               </td>
               <td>
                 {assignment.device.serialNumber}
@@ -191,10 +192,10 @@ export default function AssignmentsList() {
                 {assignment.device.specs}
               </td>
               <td>
-                {assignment.assignedUser.department.name}
+                <TruncatedText text={assignment.assignedUser.department.name} />
               </td>
               <td>
-                {assignment.assignedUser.location?.name}
+                <TruncatedText text={assignment.assignedUser.location?.name} />
               </td>
               <td>
                 {formatDate(assignment.lastUpdateDate)}

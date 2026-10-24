@@ -4,6 +4,7 @@ import TrialLogFilter from '../../domain/TrialLogFilter';
 import { transactionTypeLabel, transactionTypeOptions } from '../../domain/TransactionType';
 import { logEntityTypeLabel, logEntityTypeOptions } from '../../domain/LogEntityType';
 import styles from './TrialLogList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
 import { useListTrialLogAgents } from '../../application/trialLog/useListTrialLogAgents';
@@ -174,19 +175,19 @@ export default function TrialLogList() {
                       {logEntityTypeLabel(trialLog.entityType)}
                     </td>
                     <td>
-                      {trialLog.deviceModel}
+                      <TruncatedText text={trialLog.deviceModel} />
                     </td>
                     <td>
                       {trialLog.deviceSerialNumber}
                     </td>
                     <td>
-                      {trialLog.userName}
+                      <TruncatedText text={trialLog.userName} />
                     </td>
                     <td>
-                      {trialLog.agentName}
+                      <TruncatedText text={trialLog.agentName} />
                     </td>
                     <td>
-                      {trialLog.locationName}
+                      <TruncatedText text={trialLog.locationName} />
                     </td>
                     <td>
                       {trialLog.status}

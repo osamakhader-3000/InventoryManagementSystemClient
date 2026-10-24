@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Accessory from '../../domain/Accessory';
 import AccessoryFilter from '../../domain/AccessoryFilter';
 import styles from './AccessoriesList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListAccessories } from '../../application/accessory/useListAccessories';
@@ -143,7 +144,7 @@ export default function AccessoriesList() {
           {accessories.map((accessory: Accessory, index) => (
             <tr key={accessory.id ?? index} className={styles.accessoryrow}>
               <td className={styles.namecell}>
-                {accessory.name}
+                <TruncatedText text={accessory.name} />
               </td>
               <td>
                 <span className={`${styles.quantitybadge} ${accessory.quantity <= 0 ? styles.outofstock : ''}`}>

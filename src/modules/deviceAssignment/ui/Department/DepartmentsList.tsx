@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Department from '../../domain/Department';
 import styles from './DepartmentsList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDepartments } from '../../application/department/useListDepartments';
@@ -116,7 +117,7 @@ export default function DepartmentsList() {
           {departments.map((department: Department, index) => (
             <tr key={department.id ?? index} className={styles.departmentrow}>
               <td className={styles.namecell}>
-                {department.name}
+                <TruncatedText text={department.name} />
               </td>
               <td className={styles.actionscolumn}>
               <div className={styles.departmentbuttonspan}>

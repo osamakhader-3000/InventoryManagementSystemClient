@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Device from '../../domain/Device';
 import DeviceFilter from '../../domain/DeviceFilter';
 import styles from './DevicesList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListDevices } from '../../application/device/useListDevices';
@@ -208,7 +209,7 @@ export default function DevicesList() {
           {devices.map((device: Device, index) => (
             <tr key={device.id ?? index} className={styles.devicerow}>
               <td className={styles.modelcell}>
-                {device.model}
+                <TruncatedText text={device.model} />
               </td>
               <td>
                 {device.serialNumber}

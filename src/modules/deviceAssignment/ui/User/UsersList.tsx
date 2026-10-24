@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import User from '../../domain/User';
 import { UserFilter } from '../../domain/IUserRepository';
 import styles from './UsersList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { useListUsers } from '../../application/user/useListUsers';
@@ -201,13 +202,13 @@ export default function UsersList() {
           {users.map((user: User, index) => (
             <tr key={user.id ?? index} className={styles.userrow}>
               <td className={styles.namecell}>
-                {user.name}
+                <TruncatedText text={user.name} />
               </td>
               <td>
-                {user.department?.name}
+                <TruncatedText text={user.department?.name} />
               </td>
               <td>
-                {user.location?.name}
+                <TruncatedText text={user.location?.name} />
               </td>
               <td>
                 {user.isSuspended ? "Suspended" : "Active"}

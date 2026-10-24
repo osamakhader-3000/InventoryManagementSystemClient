@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Build from '../../domain/Build';
 import styles from './BuildsList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import { ButtonPreloader } from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { DeleteConfirmation } from '../../../../shared/ui/GeneralComponents/DeleteConfirmation';
@@ -105,10 +106,10 @@ export default function BuildsList() {
                   {builds.map((build: Build, index) => (
                     <tr key={build.id ?? index} className={styles.buildrow}>
                       <td className={styles.namecell}>
-                        {build.version}
+                        <TruncatedText text={build.version} />
                       </td>
                       <td className={styles.linkcell}>
-                        {build.link ? <a href={build.link} target="_blank" rel="noopener noreferrer" title={build.link}>{build.link}</a> : '-'}
+                        <TruncatedText text={build.link}><a href={build.link!} target="_blank" rel="noopener noreferrer">{build.link}</a></TruncatedText>
                       </td>
                       <td className={styles.relatedcell}>
                         {build.clients.length == 0 ? '-' : build.clients.slice(0, MAX_VISIBLE_CLIENTS).map(client => (

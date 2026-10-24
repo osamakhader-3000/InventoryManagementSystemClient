@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Client from '../../domain/Client';
 import styles from './ClientsList.module.css'
+import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import { ButtonPreloader } from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
 import { DeleteConfirmation } from '../../../../shared/ui/GeneralComponents/DeleteConfirmation';
@@ -105,7 +106,7 @@ export default function ClientsList() {
                   {clients.map((client: Client, index) => (
                     <tr key={client.id ?? index} className={styles.clientrow}>
                       <td className={styles.namecell}>
-                        {client.name}
+                        <TruncatedText text={client.name} />
                       </td>
                       <td className={styles.relatedcell}>
                         {client.description ?? '-'}
