@@ -11,13 +11,20 @@ export enum TransactionType {
     Delete = 8
 }
 
-export const transactionTypeLabel = (value: TransactionType): string => TransactionType[value] ?? '';
+// The backend calls unsuspending a user Activate; the UI calls it Unsuspend.
+const labelOverrides: Partial<Record<TransactionType, string>> = {
+    [TransactionType.Activate]: 'Unsuspend'
+};
+
+export const transactionTypeLabel = (value: TransactionType): string => labelOverrides[value] ?? TransactionType[value] ?? '';
 
 export const transactionTypeOptions: TransactionType[] = [
     TransactionType.Assign,
     TransactionType.Update,
     TransactionType.Relocate,
     TransactionType.Return,
+    TransactionType.Suspend,
+    TransactionType.Activate,
     TransactionType.Sell,
     TransactionType.Create,
     TransactionType.Delete
