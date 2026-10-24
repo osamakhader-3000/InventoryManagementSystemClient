@@ -18,6 +18,7 @@ export default function UsersList() {
   const { data: users, isLoading, reload } = useListUsers(appliedFilter);
   const { suspendUser, unsuspendUser, pendingIds: pendingUserIds } = useSuspendUser();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showUnsuspendConfirmationBox, setShowUnsuspendConfirmationBox] = useState(false);
   const [userid, setUserId] = useState<string | null>(null);
 
   const { data: departments } = useListDepartments();
@@ -70,6 +71,20 @@ export default function UsersList() {
 
   }
 
+  const showUnsuspendConfirmation = (_userid: string | null) => {
+
+    if (!_userid) return;
+
+    setUserId(_userid);
+    setShowUnsuspendConfirmationBox(true);
+
+  }
+
+  const unsuspendUserConfirmed = () => {
+    setShowUnsuspendConfirmationBox(false);
+    handleUnsuspendUser(userid);
+  }
+
   const handleUnsuspendUser = async (userid: string | null) => {
 
     if (!userid) return;
@@ -101,6 +116,17 @@ export default function UsersList() {
             <div className={styles.confirmationbuttons}>
               <button className={styles.confirmationbutton} onClick={() => suspendUserConfirmed()}>Yes</button>
               <button className={styles.confirmationbutton} onClick={() => setShowConfirmation(false)}>No</button>
+            </div>
+          </div>
+        </div>}
+
+      {showUnsuspendConfirmationBox &&
+        <div className={styles.confirmationcontainer} onClick={() => setShowUnsuspendConfirmationBox(false)}>
+          <div className={styles.confirmationbox} onClick={(e) => e.stopPropagation()}>
+            <h3>Are you sure you want to unsuspend this user?</h3>
+            <div className={styles.confirmationbuttons}>
+              <button className={styles.confirmationbutton} onClick={() => unsuspendUserConfirmed()}>Yes</button>
+              <button className={styles.confirmationbutton} onClick={() => setShowUnsuspendConfirmationBox(false)}>No</button>
             </div>
           </div>
         </div>}
@@ -196,7 +222,7 @@ export default function UsersList() {
                   )}
                 </button>}
                 {!!user.isSuspended &&
-                <button className={styles.userlistbuttonclass} title="Unsuspend user" onClick={() => handleUnsuspendUser(user.id)}>
+                <button className={styles.userlistbuttonclass} title="Unsuspend user" onClick={() => showUnsuspendConfirmation(user.id)}>
                   {pendingUserIds.has(user.id!) ? <ButtonPreloader /> : (
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16" >
                       <path fillRule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
