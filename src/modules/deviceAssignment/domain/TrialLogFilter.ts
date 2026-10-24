@@ -4,7 +4,6 @@ export default interface TrialLogFilter {
   model?: string;
   serialNumber?: string;
   userId?: string;
-  departmentId?: string;
   status?: string;
-  locationId?: string;
+  location?: string;
 }

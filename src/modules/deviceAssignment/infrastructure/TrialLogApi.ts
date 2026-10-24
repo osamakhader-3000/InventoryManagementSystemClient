@@ -15,13 +15,12 @@ export default class TrialLogApi extends GeneralApi {
     async ListTrialLogs(filter?: TrialLogFilter): Promise<GeneralApiResult<TrialLog[]>> {
         const params = new URLSearchParams();
         if (filter?.userId) params.append('userid', filter.userId);
-        if (filter?.departmentId) params.append('depid', filter.departmentId);
         if (filter?.eventDate) params.append('eventDate', filter.eventDate);
         if (filter?.transactionType !== undefined) params.append('ta', filter.transactionType.toString());
         if (filter?.serialNumber) params.append('sn', filter.serialNumber);
         if (filter?.model) params.append('model', filter.model);
         if (filter?.status) params.append('status', filter.status);
-        if (filter?.locationId) params.append('lctnId', filter.locationId);
+        if (filter?.location) params.append('lctn', filter.location);
 
         const query = params.toString();
         let url = `${this.baseUrl}${urls['trial-log-list']}${query ? `?${query}` : ''}`;
