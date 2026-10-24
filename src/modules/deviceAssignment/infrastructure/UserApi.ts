@@ -18,6 +18,7 @@ export class UserApi extends GeneralApi {
         if (filter?.name) params.append('name', filter.name);
         if (filter?.departmentId) params.append('dptId', filter.departmentId);
         if (filter?.locationId) params.append('locId', filter.locationId);
+        if (filter?.isSuspended !== undefined) params.append('stus', filter.isSuspended ? '1' : '0');
         let query = params.toString();
         let url = `${this.baseUrl}${urls['users-list']}${query ? `?${query}` : ''}`;
         let result = await this.SecureApiCaller<User[]>('GET', url);

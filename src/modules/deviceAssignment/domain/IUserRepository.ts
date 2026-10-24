@@ -4,6 +4,7 @@ export interface UserFilter {
     name?: string;
     departmentId?: string;
     locationId?: string;
+    isSuspended?: boolean;
 }
 
 export interface IUserRepository {

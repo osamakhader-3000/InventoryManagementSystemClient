@@ -10,11 +10,11 @@ export function useListUsers(filter?: UserFilter) {
     const [error, setError] = useState<unknown>(null);
     const [reloadKey, setReloadKey] = useState(0);
     // Depend on the individual fields so a new filter object with the same values doesn't refetch.
-    const { name, departmentId, locationId } = filter ?? {};
+    const { name, departmentId, locationId, isSuspended } = filter ?? {};
 
     useEffect(() => {
         let cancelled = false;
-        assignmentUserRepository.ListUsers({ name, departmentId, locationId })
+        assignmentUserRepository.ListUsers({ name, departmentId, locationId, isSuspended })
             .then((users) => {
                 if (!cancelled) setData(users);
             })
@@ -28,7 +28,7 @@ export function useListUsers(filter?: UserFilter) {
         return () => {
             cancelled = true;
         };
-    }, [assignmentUserRepository, reloadKey, name, departmentId, locationId]);
+    }, [assignmentUserRepository, reloadKey, name, departmentId, locationId, isSuspended]);
 
     const reload = useCallback(() => setReloadKey((k) => k + 1), []);
 

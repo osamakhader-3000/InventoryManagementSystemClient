@@ -26,14 +26,16 @@ export default function UsersList() {
   const [nameFilter, setNameFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
 
-  const hasActiveFilter = nameFilter !== '' || departmentFilter !== '' || locationFilter !== '';
+  const hasActiveFilter = nameFilter !== '' || departmentFilter !== '' || locationFilter !== '' || statusFilter !== '';
 
   const applyFilters = () => {
     setAppliedFilter({
       name: nameFilter.trim() || undefined,
       departmentId: departmentFilter || undefined,
       locationId: locationFilter || undefined,
+      isSuspended: statusFilter === '' ? undefined : statusFilter === 'suspended',
     });
   }
 
@@ -41,6 +43,7 @@ export default function UsersList() {
     setNameFilter('');
     setDepartmentFilter('');
     setLocationFilter('');
+    setStatusFilter('');
     setAppliedFilter({});
   }
 
@@ -159,6 +162,14 @@ export default function UsersList() {
               {locations.map((location) => (
                 <option key={location.id} value={location.id ?? ''}>{location.name}</option>
               ))}
+            </select>
+          </div>
+          <div className={styles.filterfield}>
+            <label htmlFor="statusFilter">Status</label>
+            <select id="statusFilter" className={styles.filterinput} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <option value="">All statuses</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
             </select>
           </div>
           <div className={styles.filterbuttons}>
