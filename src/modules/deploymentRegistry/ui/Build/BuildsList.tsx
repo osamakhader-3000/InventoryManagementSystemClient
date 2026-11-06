@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Build from '../../domain/Build';
 import styles from './BuildsList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import { ButtonPreloader } from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -85,9 +86,7 @@ export default function BuildsList() {
         </div>
 
         <div className={styles.buildspanel}>
-          <h5 className={styles.buildstatustitle}>
-            Builds
-          </h5>
+          <PanelHeader title="Builds" icon="builds" count={builds.length} />
 
           {builds.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.buildstatustitle}>No builds</h5></div>}
 

@@ -36,4 +36,11 @@
   .loginButtonWrap button
   {
     width: 50%;
+    background-color: var(--accent);
+    color: var(--text-strong);
+  }
+
+  .loginButtonWrap button:hover
+  {
+    background-color: var(--accent-hover);
   }

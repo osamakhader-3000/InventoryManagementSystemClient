@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Client from '../../domain/Client';
 import styles from './ClientsList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import { ButtonPreloader } from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -85,9 +86,7 @@ export default function ClientsList() {
         </div>
 
         <div className={styles.clientspanel}>
-          <h5 className={styles.clientstatustitle}>
-            Clients
-          </h5>
+          <PanelHeader title="Clients" icon="clients" count={clients.length} />
 
           {clients.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.clientstatustitle}>No clients</h5></div>}
 

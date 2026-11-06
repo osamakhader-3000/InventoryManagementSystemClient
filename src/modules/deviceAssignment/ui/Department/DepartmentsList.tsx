@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Department from '../../domain/Department';
 import styles from './DepartmentsList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -98,9 +99,7 @@ export default function DepartmentsList() {
         </div>
 
         <div className={styles.departmentspanel}>
-          <h5 className={styles.departmentstatustitle}>
-            Departments
-          </h5>
+          <PanelHeader title="Departments" icon="departments" count={departments.length} />
 
           {departments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.departmentstatustitle}>No departments</h5></div>}
 

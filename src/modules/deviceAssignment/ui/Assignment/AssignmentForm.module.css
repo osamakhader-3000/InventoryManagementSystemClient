@@ -16,25 +16,25 @@
 .formtextboxdiv {
   width: 100%;
   font-weight: 400;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font);
   line-height: 1.4375em;
   box-sizing: border-box;
   cursor: text;
   display: inline-flex;
   align-items: center;
   font-size: 0.875rem;
-  color: rgb(112, 126, 174);
+  color: var(--text);
   letter-spacing: 0.5px;
   position: relative;
-  background-color: rgb(255, 255, 255) !important;
+  background-color: var(--input-bg) !important;
   border-width: 1px;
   border-image: initial;
   border-style: solid;
-  border-color: rgb(244, 247, 254);
+  border-color: var(--border);
   padding: 11.6px 12px 11.6px 16px;
   transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
-  border-radius: 13px;
-  border-color: #00ffff;
+  border-radius: var(--radius);
+  border-color: var(--border);
 }
 
 .formtextbox {
@@ -62,30 +62,30 @@
 }
 
 .taskformbutton {
-  font-weight: bold;
-  font-size: large;
-  border: 0px;
-  border-radius: 13px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
   height: 44px;
   width: 150px;
   object-fit: cover;
   cursor: pointer;
-  background-color: rgb(224, 229, 242);
-  color: rgb(43, 54, 116);
+  background-color: var(--surface-strong);
+  color: var(--text-strong);
   margin: 0px 4px;
 }
 
 .taskformbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--surface-hover);
 }
 
 .taskformokbutton {
-  background-color: rgb(253 135 135);
+  background-color: var(--accent);
 }
 
 .taskformokbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--accent-hover);
 }
 
 
@@ -110,8 +110,8 @@
 
 .accessoryListItem {
   width: 80%;
-  background-color: rgb(224, 229, 242);
-  border-radius: 13px;
+  background-color: var(--surface-strong);
+  border-radius: var(--radius);
   padding: 10px;
   margin: 10px;
   text-align: left;
@@ -131,8 +131,12 @@
 .assignmentformcontainer {
   margin: 20px;
   width: 50%;
-  background-color: white;
-  border-radius: 13px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: var(--panel-blur);
+  -webkit-backdrop-filter: var(--panel-blur);
+  box-shadow: var(--panel-shadow);
+  border-radius: var(--radius);
 
   display: flex;
   flex-direction: column;
@@ -159,28 +163,28 @@
 }
 
 .assignmentformbutton {
-  font-weight: bold;
-  font-size: large;
-  border: 0px;
-  border-radius: 13px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
   height: 44px;
   width: 150px;
   object-fit: cover;
   cursor: pointer;
-  background-color: rgb(224, 229, 242);
-  color: rgb(43, 54, 116);
+  background-color: var(--surface-strong);
+  color: var(--text-strong);
   margin: 0px 4px;
 }
 
 .assignmentformbuttonformbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--surface-hover);
 }
 
 .assignmentformokbutton {
-  background-color: rgb(253, 135, 135);
+  background-color: var(--accent);
 }
 
 .assignmentformokbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--accent-hover);
 }

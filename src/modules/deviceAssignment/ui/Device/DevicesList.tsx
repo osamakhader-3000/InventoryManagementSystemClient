@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Device from '../../domain/Device';
 import DeviceFilter from '../../domain/DeviceFilter';
 import styles from './DevicesList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -183,9 +184,7 @@ export default function DevicesList() {
         </div>
 
         <div className={styles.devicespanel}>
-          <h5 className={styles.devicestatustitle}>
-            Stock
-          </h5>
+          <PanelHeader title="Stock" icon="devices" count={devices.length} />
 
           {devices.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.devicestatustitle}>Empty stock</h5></div>}
 

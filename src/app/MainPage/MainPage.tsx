@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router';
 import MainSidebarMenu from '../../modules/Navigation/ui/MainSidebarMenu.tsx'
 import MainViewHeader from '../../modules/Navigation/ui/MainViewHeader.tsx';
+import PageTitle from '../../modules/Navigation/ui/PageTitle.tsx';
 import styles from './MainPage.module.css'
 import { EmailVerifiedRoute } from '../../modules/Security/ui/routes/EmailVerifiedRoute.tsx';
 import { TempAccountRoute } from '../../modules/Security/ui/routes/TempAccountRoute.tsx';
@@ -61,6 +62,7 @@ function MainPage() {
                     </tr>
                     <tr>
                       <td>
+                        <PageTitle />
                         <Routes>
                           <Route path="/emailverification" element={<EmailUnverifiedMessage />} />
                           <Route path="/tempaccount" element={<TempAccountMessage />} />

@@ -1,53 +1,53 @@
   
   .innerDivStyle {
     font-weight: 400;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font);
     line-height: 1.4375em;
     box-sizing: border-box;
     cursor: text;
     display: inline-flex;
     align-items: center;
     font-size: 0.875rem;
-    color: rgb(112, 126, 174);
+    color: var(--text);
     letter-spacing: 0.5px;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--input-bg);
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(244, 247, 254);
+    border-color: var(--border);
     padding: 11.6px 12px 11.6px 16px;
     transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
-    border-radius: 13px;
+    border-radius: var(--radius);
     gap: 5px;
     
     
   }
 
   .innerDivStyleInvalid{
-    border-color:salmon;
-    border: 2px solid;
+    border-color: var(--danger);
+    border: 1px solid var(--danger);
    
   }
   
   .innerDivStyleActive {
     font-weight: 400;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font);
     line-height: 1.4375em;
     box-sizing: border-box;
     cursor: text;
     display: inline-flex;
     align-items: center;
     font-size: 0.875rem;
-    color: rgb(112, 126, 174);
+    color: var(--text);
     letter-spacing: 0.5px;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--input-bg);
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(188, 108, 241); 
+    border-color: var(--accent); 
     padding: 11.6px 12px 11.6px 16px;
     transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
-    border-radius: 13px;
+    border-radius: var(--radius);
     gap: 5px;
   }
 
@@ -82,7 +82,7 @@
   }
 
     .divTextboxInvalid{
-    background-color: salmon;
+    background-color: var(--danger-soft);
    
   }
 
@@ -90,9 +90,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: salmon;
+    background-color: var(--danger-soft);
     min-height:100%;
-    border-radius: 10px;
+    border-radius: var(--radius);
     box-shadow: rgba(10, 10, 10, 0.2) 2px 2px 10px 2px;
   }
 
@@ -100,9 +100,9 @@
     top: 0;
     left: 100%;
     width: 100%;
-    background-color: salmon;
+    background-color: var(--danger-soft);
     height:100%;
-    border-radius: 10px;
+    border-radius: var(--radius);
   }
 
   .textbox{    
@@ -118,16 +118,16 @@
     outline: 0px;
     border-style: solid;    
     font-size: 0.875rem;
-    color: rgb(112, 126, 174);
+    color: var(--text);
     letter-spacing: 0.5px;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--input-bg);
     border-width: 1px;
-    border-color: rgb(204 208 217);
+    border-color: var(--border);
     padding: 11.6px 12px 11.6px 16px;    
     transition: background-color 200ms 
     cubic-bezier(0, 0, 0.2, 1);
-    border-radius: 13px;
+    border-radius: var(--radius);
     width: 80%;
   }
 
@@ -136,19 +136,19 @@
   }
 
   .textbox:focus {
-    border-color: rgb(188, 108, 241); 
+    border-color: var(--accent); 
   }
 
   .readonly,
   .readonly:focus {
-    background-color: rgb(244, 247, 254);
-    border-color: rgb(204 208 217);
+    background-color: var(--surface-strong);
+    border-color: var(--border);
     cursor: default;
   }
 
   .invalid{
-    border-color: salmon;
-    border: 2px solid;
+    border-color: var(--danger);
+    border: 1px solid var(--danger);
   }
 
   .outerDivStyle {

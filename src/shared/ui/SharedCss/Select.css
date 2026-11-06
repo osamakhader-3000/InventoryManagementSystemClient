@@ -12,15 +12,15 @@
     outline: 0px;
     border-style: solid;
     font-size: 0.875rem;
-    color: rgb(112, 126, 174);
+    color: var(--text);
     letter-spacing: 0.5px;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--input-bg);
     border-width: 1px;
-    border-color: rgb(204 208 217);
+    border-color: var(--border);
     padding: 11.6px 12px 11.6px 16px;
     transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
-    border-radius: 13px;
+    border-radius: var(--radius);
     width: 80%;
     }
     .selectBoxContainer

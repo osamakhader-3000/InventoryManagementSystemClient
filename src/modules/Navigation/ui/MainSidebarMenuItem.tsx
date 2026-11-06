@@ -1,5 +1,6 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import styles from './MainSidebarMenuItem.module.css'
+import { AppIcon } from '../../../shared/ui/GeneralComponents/AppIcon';
 
 interface MainSidebarMenuItemProps{
   ID:string,
@@ -10,16 +11,14 @@ export default function MainSidebarMenuItem({ID,Name}:MainSidebarMenuItemProps){
 
 return(
 <div>
-    <Link to={'/'+ID}  className={styles.realmsmenurelmlink}>
+    <NavLink to={'/'+ID}  className={styles.realmsmenurelmlink}>
             <div>
-                <div className={styles.realmsmenurealmimg}>
-                  <img src="/realmicon.svg" alt=''></img>                    
-                    </div>
+                <span className={styles.realmsmenurealmimg}><AppIcon name={ID} /></span>
                 <div className={styles.realmsmenurealmtext}>
                   <span className={styles.realmsmenurealmtextspan}>{Name}</span> 
                 </div>
             </div>              
-    </Link>            
+    </NavLink>            
 </div>
 );
 }

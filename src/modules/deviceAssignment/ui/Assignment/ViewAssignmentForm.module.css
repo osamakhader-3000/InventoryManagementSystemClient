@@ -12,10 +12,10 @@
 }
 
 .value {
-    background-color: rgb(244, 247, 254);
-    border-radius: 13px;
+    background-color: var(--surface-strong);
+    border-radius: var(--radius);
     padding: 10px 16px;
-    color: rgb(43, 54, 116);
+    color: var(--text-strong);
     text-align: left;
 }
 

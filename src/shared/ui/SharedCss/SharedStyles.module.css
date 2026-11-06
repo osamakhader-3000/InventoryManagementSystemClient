@@ -1,6 +1,6 @@
 .disablebutton {
-    background-color: #ccc;
-    color: #666;
+    background-color: var(--surface);
+    color: var(--text-muted);
     cursor: not-allowed;
 }
 

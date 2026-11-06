@@ -29,6 +29,12 @@
 
   .buttonStyle{
     width: 100%;
+    background-color: var(--accent);
+    color: var(--text-strong);
+  }
+
+  .buttonStyle:hover{
+    background-color: var(--accent-hover);
   }
 
   .buttonWrap{

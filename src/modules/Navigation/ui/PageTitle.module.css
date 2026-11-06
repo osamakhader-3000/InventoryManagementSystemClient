@@ -1,0 +1,45 @@
+.pagetitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 20px 0px 20px;
+  text-align: left;
+  font-family: var(--font);
+}
+
+.pageicon {
+  display: inline-flex;
+  color: var(--text-strong);
+}
+
+.pagetitletext {
+  margin: 0px;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-strong);
+}
+
+.breadcrumb {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb a {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--text-strong);
+}
+
+.separator {
+  margin: 0px 6px;
+  opacity: 0.6;
+}
+
+.current {
+  color: var(--text);
+}

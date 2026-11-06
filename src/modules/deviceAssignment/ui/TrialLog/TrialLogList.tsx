@@ -4,6 +4,7 @@ import TrialLogFilter from '../../domain/TrialLogFilter';
 import { transactionTypeLabel, transactionTypeOptions } from '../../domain/TransactionType';
 import { logEntityTypeLabel, logEntityTypeOptions } from '../../domain/LogEntityType';
 import styles from './TrialLogList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { useListTrialLogs } from '../../application/trialLog/useListTrialLogs';
 import { useListUsers } from '../../application/user/useListUsers';
@@ -140,9 +141,7 @@ export default function TrialLogList() {
       </div>
 
       <div className={styles.triallogspanel}>
-        <h5 className={styles.triallogstatustitle}>
-          Trial Log
-        </h5>
+        <PanelHeader title="Trial Log" icon="triallog" count={trialLogs.length} />
 
         {trialLogs.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.triallogstatustitle}>No trial logs</h5></div>}
 

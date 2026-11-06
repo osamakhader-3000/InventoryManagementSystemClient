@@ -1,13 +1,14 @@
 .profileimagemenu .menu {
-    box-shadow: rgba(10, 10, 10, 0.2) 2px 2px 10px 0px;
-    border-radius: 10px;
+    box-shadow: var(--panel-shadow);
+    border-radius: var(--radius);
     position: absolute;
     z-index:1;
     padding: 8px;
     width: 230px;
     right: 0;
     top: calc(100% + 10px);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--popup-bg);
+    border: 1px solid var(--panel-border);
 }
 
 .profileimagemenu{
@@ -20,10 +21,11 @@
 .menuitem{
     padding: 8px 10px;
     cursor: pointer;
-    color: rgb(163, 174, 208);
+    color: var(--text);
+    border-bottom: 1px solid var(--divider);
 }
 .menuitem:hover{
-    background-color: #e0e5f2;
+    background-color: var(--surface-hover);
 }
 
 .userbuttonclass{
@@ -34,8 +36,9 @@
   .userimgclass{
     border-radius: 50%;
     overflow: hidden;
-    height: 44px;
-    width: 44px;
+    height: 38px;
+    width: 38px;
+    border: 2px solid var(--border);
     object-fit: cover;
       color: transparent;
   }

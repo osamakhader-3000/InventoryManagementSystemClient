@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import User from '../../domain/User';
 import { UserFilter } from '../../domain/IUserRepository';
 import styles from './UsersList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -180,9 +181,7 @@ export default function UsersList() {
         </div>
 
         <div className={styles.userspanel}>
-          <h5 className={styles.userstatustitle}>
-            Users
-          </h5>
+          <PanelHeader title="Users" icon="users" count={users.length} />
 
           {users.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.userstatustitle}>No users</h5></div>}
 

@@ -9,8 +9,8 @@
 
 .clientlistitem {
   width: 80%;
-  background-color: rgb(224, 229, 242);
-  border-radius: 13px;
+  background-color: var(--surface-strong);
+  border-radius: var(--radius);
   padding: 10px;
   margin: 6px;
   text-align: left;

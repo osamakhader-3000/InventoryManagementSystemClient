@@ -7,8 +7,12 @@
 .formcontainer {
   margin: 20px;
   width: 50%;
-  background-color: white;
-  border-radius: 13px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: var(--panel-blur);
+  -webkit-backdrop-filter: var(--panel-blur);
+  box-shadow: var(--panel-shadow);
+  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,27 +43,27 @@
 }
 
 .formbutton {
-  font-weight: bold;
-  font-size: large;
-  border: 0px;
-  border-radius: 13px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
   height: 44px;
   width: 150px;
   cursor: pointer;
-  background-color: rgb(224, 229, 242);
-  color: rgb(43, 54, 116);
+  background-color: var(--surface-strong);
+  color: var(--text-strong);
   margin: 0px 4px;
 }
 
 .formbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--surface-hover);
 }
 
 .formokbutton {
-  background-color: rgb(253, 135, 135);
+  background-color: var(--accent);
 }
 
 .formokbutton:hover {
-  background-color: rgb(224, 229, 242);
+  background-color: var(--accent-hover);
 }

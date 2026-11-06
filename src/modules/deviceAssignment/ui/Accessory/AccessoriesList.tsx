@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Accessory from '../../domain/Accessory';
 import AccessoryFilter from '../../domain/AccessoryFilter';
 import styles from './AccessoriesList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -121,9 +122,7 @@ export default function AccessoriesList() {
         </div>
 
         <div className={styles.accessoriespanel}>
-          <h5 className={styles.accessorystatustitle}>
-            Accessories
-          </h5>
+          <PanelHeader title="Accessories" icon="accessories" count={accessories.length} />
 
           {accessories.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.accessorystatustitle}>No accessories</h5></div>}
 

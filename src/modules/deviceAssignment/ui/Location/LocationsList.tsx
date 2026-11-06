@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import Location from '../../domain/Location';
 import styles from './LocationsList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -98,9 +99,7 @@ export default function LocationsList() {
         </div>
 
         <div className={styles.locationspanel}>
-          <h5 className={styles.locationstatustitle}>
-            Locations
-          </h5>
+          <PanelHeader title="Locations" icon="locations" count={locations.length} />
 
           {locations.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.locationstatustitle}>No locations</h5></div>}
 

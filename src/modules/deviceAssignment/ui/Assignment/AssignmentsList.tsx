@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Assignment from '../../domain/Assignment';
 import AssignmentFilter from '../../domain/AssignmentFilter';
 import styles from './AssignmentsList.module.css'
+import PanelHeader from '../../../../shared/ui/GeneralComponents/PanelHeader';
 import { TruncatedText } from '../../../../shared/ui/GeneralComponents/TruncatedText';
 import { DependencyContext } from '../../../../app/DependencyContext';
 import {ButtonPreloader} from '../../../../shared/ui/GeneralComponents/ButtonPreloader';
@@ -155,9 +156,7 @@ export default function AssignmentsList() {
         </div>
 
         <div className={styles.assignmentspanel}>
-          <h5 className={styles.assignmentstatustitle}>
-            Stock Assignments
-          </h5>
+          <PanelHeader title="Stock Assignments" icon="assignments" count={assignments.length} />
 
           {assignments.length == 0 && <div className={styles.emptycontainer}><h5 className={styles.assignmentstatustitle}>No assignments</h5></div>}
 

@@ -1,6 +1,7 @@
 .realmsmenuelement{
+    border-bottom: 1px solid var(--divider);
     font: inherit;
-    color: rgb(67, 24, 255);
+    color: var(--text);
     text-decoration: none;
     -webkit-box-align: center;
     align-items: center;
@@ -8,14 +9,15 @@
 }
 
 .realmsmenuelement:hover{
-    background-color: #e0e5f2;
+    background-color: var(--surface-hover);
     cursor: pointer;
     
   }
 
   
 .realmsmenusearch{
-    padding: 40px 36px 36px;
+    padding:  16px 20px;
+    border-bottom: 1px solid var(--divider);
   }
   
   .realmsmenusearchbox{
@@ -25,13 +27,13 @@
   
   .realmsmenusearchlogofont{
      margin: 0px;
-     font-size: 1.75rem;
-      font-weight: 700;
+     font-size: 1.15rem;
+      color: var(--text-strong);
       line-height: 1.167;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-family: Poppins, sans-serif;
-      font-weight: 800;
+      letter-spacing: 2px;
+      font-family: var(--font);
+      font-weight: 300;
   }
 
   .homebuttonlink{
@@ -59,15 +61,17 @@
   }
 
   .homebutton{
-    padding: 40px 36px 36px;
+    padding:  28px 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--divider);
   }
 
   
 .realmsmenucontainer {
     list-style: none;
-    margin: 20px 0px 80px;
+    margin: 0px 0px 80px;
     position: relative;
-    padding: 0px 0px 0px 24px;
+    padding: 0px;
   }
 
   .realmsmenutable{
@@ -82,15 +86,16 @@
 
 
   .realmsmenugroup{
-    margin-bottom: 24px;
+    margin-bottom: 0px;
   }
 
   .realmsmenugroupheader{
-    padding: 0px 10px 8px 44px;
+    padding: 18px 20px 8px;
+    border-bottom: 1px solid var(--divider);
     text-align: left;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #a3aed0;
+    color: var(--text-muted);
   }
